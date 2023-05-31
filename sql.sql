@@ -1,6 +1,16 @@
 ------------------------------------------------------------
 --        Script Postgre
 ------------------------------------------------------------
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS artiste CASCADE;
+DROP TABLE IF EXISTS musique CASCADE;
+DROP TABLE IF EXISTS playlist CASCADE;
+DROP TABLE IF EXISTS contenir CASCADE ;
+DROP TABLE IF EXISTS creer CASCADE;
+DROP TABLE IF EXISTS album CASCADE;
+
+
+
 
 
 
@@ -18,7 +28,7 @@ CREATE TABLE public.artiste(
 ------------------------------------------------------------
 -- Table: user
 ------------------------------------------------------------
-CREATE TABLE public.user(
+CREATE TABLE public.users(
                             id_user        SERIAL NOT NULL ,
                             prenom_user    VARCHAR (20) NOT NULL ,
                             nom_user       VARCHAR (20) NOT NULL ,
@@ -77,29 +87,29 @@ CREATE TABLE public.musique(
 
 
 ------------------------------------------------------------
--- Table: contenir
+-- Table: playlist_musique
 ------------------------------------------------------------
-CREATE TABLE public.contenir(
+CREATE TABLE public.playlist_musique(
                                 id_musique                    INT  NOT NULL ,
                                 id_playlist                   INT  NOT NULL ,
                                 date_ajout_musique_playlist   DATE  NOT NULL  ,
-                                CONSTRAINT contenir_PK PRIMARY KEY (id_musique,id_playlist)
+                                CONSTRAINT playlist_musique_PK PRIMARY KEY (id_musique,id_playlist)
 
-    ,CONSTRAINT contenir_musique_FK FOREIGN KEY (id_musique) REFERENCES public.musique(id_musique)
-    ,CONSTRAINT contenir_playlist0_FK FOREIGN KEY (id_playlist) REFERENCES public.playlist(id_playlist)
+    ,CONSTRAINT playlist_musique_musique_FK FOREIGN KEY (id_musique) REFERENCES public.musique(id_musique)
+    ,CONSTRAINT playlist_musique_playlist0_FK FOREIGN KEY (id_playlist) REFERENCES public.playlist(id_playlist)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
--- Table: creer
+-- Table: musique_artiste
 ------------------------------------------------------------
-CREATE TABLE public.creer(
+CREATE TABLE public.musique_artiste(
                              id_artiste   INT  NOT NULL ,
                              id_musique   INT  NOT NULL  ,
-                             CONSTRAINT creer_PK PRIMARY KEY (id_artiste,id_musique)
+                             CONSTRAINT musique_artiste_PK PRIMARY KEY (id_artiste,id_musique)
 
-    ,CONSTRAINT creer_artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.artiste(id_artiste)
-    ,CONSTRAINT creer_musique0_FK FOREIGN KEY (id_musique) REFERENCES public.musique(id_musique)
+    ,CONSTRAINT musique_artiste_artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.artiste(id_artiste)
+    ,CONSTRAINT musique_artiste_musique0_FK FOREIGN KEY (id_musique) REFERENCES public.musique(id_musique)
 )WITHOUT OIDS;
 
 
