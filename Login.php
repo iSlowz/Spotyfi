@@ -22,40 +22,41 @@
 
 </head>
 
-<body class="form">
+<body>
 
-  <nav class="navbar">
-    <div class="container-fluid align-content-center justify-content-center">
-     <a>Spotyfi++</a>
-    </div>
-  </nav>
+  <div class="form">
+    <nav class="navbar">
+      <div class="container-fluid align-content-center justify-content-center">
+      <a>Spotyfi++</a>
+      </div>
+    </nav>
 
-  <div class="rectangle-login">
-    <label class="trait">Login</label>
+    <div class="rectangle-login">
+      <label class="trait">Login</label>
 
-    <div class="login-form">
-      <form action="Login.php" method="post" class="g-3" id="LoginForm">
-        
-        <div class="mb-3">
-          <div class="texte-email">
-            <label for="userInput" class="form-label">Email :</label>
-            <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+      <div class="login-form">
+        <form action="Login.php" method="post" class="g-3" id="LoginForm">
+          
+          <div class="mb-3">
+            <div class="texte-email">
+              <label for="userInput" class="form-label">Email :</label>
+              <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+            </div>
           </div>
-        </div>
 
-        <div class="mb-3">
-          <div class="texte-mdp">
-            <label for="passwordInput" class="form-label">Mot de passe :</label>
-            <input type="password" class="form-control" id="passwordInput" name="password">
+          <div class="mb-3">
+            <div class="texte-mdp">
+              <label for="passwordInput" class="form-label">Mot de passe :</label>
+              <input type="password" class="form-control" id="passwordInput" name="password">
+            </div>
           </div>
-        </div>
 
-        <button type="button" class="btn">Créer compte</button>
-        <button type="button" class="btn">Se connecter</button>
-        
-      </form>
+          <button type="button" class="btn">Créer compte</button>
+          <button type="button" class="btn">Se connecter</button>
+          
+        </form>
+      </div>
     </div>
   </div>
-
 </body>
 </html>
