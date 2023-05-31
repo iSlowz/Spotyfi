@@ -20,6 +20,17 @@
 
     <title>Spotyfi</title>
 
+    <style>
+
+      .navbar{
+
+        border: solid rgb(28, 64, 155);
+        background: rgb(28, 64, 155);
+
+      }
+
+    </style>
+
 </head>
 
 <body class="page-login">
