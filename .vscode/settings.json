@@ -5,7 +5,7 @@
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
-            "name": "spotyfi",
+            "name": "spotyfiDB",
             "database": "spotyfi",
             "username": "spotyfi_admin"
         }
