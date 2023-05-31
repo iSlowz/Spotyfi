@@ -20,131 +20,43 @@
 
     <title>Spotyfi</title>
 
-    <style>
-
-      .navbar{
-
-        background-color: rgb(2, 97, 103);
-        border-bottom: solid white;
-        color: white;
-
-        align-items: center;
-
-        font-size: 3.5em;
-
-      }
-
-
-      .form{
-
-        background-color: rgb(25, 157, 166);
-        
-      }
-
-      .rectangle-login{
-      
-        border: rgb(2, 97, 103);
-        background-color: rgb(2, 97, 103);
-
-        color: white;
-
-        text-align: center;
-        font-size: 2em;
-
-        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
-
-        margin-top: 2em;
-        margin-left: 17em;
-        margin-right: 17em;
-        margin-bottom: 2em;
-
-        padding: 0.2em 3em;
-      
-      }
-
-      .trait{
-
-        border-bottom : solid white;
-
-        padding-bottom: 0.5em;
-        padding-right: 1.5em;
-        padding-left: 1.5em;
-        padding-top: 0.5em;
-
-      }
-
-      .texte-email{
-
-        text-align: left;
-
-        font-size: 0.7em;
-
-        padding-top: 1em;
-
-      }
-
-      .texte-mdp{
-
-        text-align: left;
-
-        font-size: 0.7em;
-
-        padding-top: 0.5em;
-
-      }
-
-      .btn{
-
-        background-color: rgb(25, 157, 166);
-
-        color: white;
-        font-style: italic;
-
-        margin-bottom: 1em;
-        margin-top: 1em;
-
-        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
-
-      }
-
-    </style>
-
 </head>
 
-<body class="form">
+<body>
 
-  <nav class="navbar">
-    <div class="container-fluid align-content-center justify-content-center">
-     <a>Spotyfi++</a>
-    </div>
-  </nav>
+  <div class="form">
+    <nav class="navbar">
+      <div class="container-fluid align-content-center justify-content-center">
+      <a>Spotyfi++</a>
+      </div>
+    </nav>
 
-  <div class="rectangle-login">
-    <label class="trait">Login</label>
+    <div class="rectangle-login">
+      <label class="trait">Login</label>
 
-    <div class="login-form">
-      <form action="Login.php" method="post" class="g-3" id="LoginForm">
-        
-        <div class="mb-3">
-          <div class="texte-email">
-            <label for="userInput" class="form-label">Email :</label>
-            <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+      <div class="login-form">
+        <form action="Login.php" method="post" class="g-3" id="LoginForm">
+          
+          <div class="mb-3">
+            <div class="texte-email">
+              <label for="userInput" class="form-label">Email :</label>
+              <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+            </div>
           </div>
-        </div>
 
-        <div class="mb-3">
-          <div class="texte-mdp">
-            <label for="passwordInput" class="form-label">Mot de passe :</label>
-            <input type="password" class="form-control" id="passwordInput" name="password">
+          <div class="mb-3">
+            <div class="texte-mdp">
+              <label for="passwordInput" class="form-label">Mot de passe :</label>
+              <input type="password" class="form-control" id="passwordInput" name="password">
+            </div>
           </div>
-        </div>
 
-        <button type="button" class="btn">Créer compte</button>
-        <button type="button" class="btn">Se connecter</button>
-        
-      </form>
+          <button type="button" class="btn">Créer compte</button>
+          <button type="button" class="btn">Se connecter</button>
+          
+        </form>
+      </div>
     </div>
   </div>
-
 </body>
 </html>
