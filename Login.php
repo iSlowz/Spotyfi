@@ -41,12 +41,6 @@
 
       }
 
-      .trait{
-
-        border-bottom: solid white;
-
-      }
-
       .rectangle-login{
       
         border: rgb(2, 97, 103);
@@ -57,24 +51,50 @@
         text-align: center;
         font-size: 2em;
 
-        border-radius: 15px 15px 15px 15px / 15px 15px 15px 15px;
+        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
         margin-top: 2em;
-        margin-left: 15em;
-        margin-right: 15em;
+        margin-left: 18em;
+        margin-right: 18em;
         margin-bottom: 1em;
 
         padding: 0.2em 3em;
       
       }
 
+      .trait{
+
+        border-bottom : solid white;
+
+        padding-bottom: 0.5em;
+        padding-right: 1.5em;
+        padding-left: 1.5em;
+
+      }
+
       .texte-email{
 
         text-align: left;
 
-        border-radius: 15px 15px 15px 15px / 15px 15px 15px 15px;
+        font-size: 0.7em;
+
+        padding-top: 1em;
+
+      }
+
+      .texte-mdp{
+
+        text-align: left;
 
         font-size: 0.7em;
+
+        padding-top: 1em;
+
+      }
+
+      .btn-connect{
+        
+        padding-left: 2em;
 
       }
 
@@ -91,12 +111,11 @@
   </nav>
 
   <div class="rectangle-login">
-    <label>Login</label>
-
-    <hr class="trait">
+    <label class="trait">Login</label>
 
     <div class="login-form">
       <form action="Login.php" method="post" class="g-3" id="LoginForm">
+        
         <div class="mb-3">
           <div class="texte-email">
             <label for="userInput" class="form-label">Email :</label>
@@ -111,7 +130,12 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary submit" name="sendData">Se connecter</button>
+        <div class="btn-connect">
+          <button type="submit" class="btn btn-primary submit" name="sendData">
+            <label>Se connecter</span>
+          </button>
+        </div>
+        
       </form>
     </div>
   </div>
