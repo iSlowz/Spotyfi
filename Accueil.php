@@ -5,6 +5,8 @@ $fileName = array_pop($fileName);
 ?>
 
 <!-- /-------------------- HTML --------------------/ -->
+<!doctype html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +21,6 @@ $fileName = array_pop($fileName);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
     <!-- Custom CSS -->
-    
    
     <link rel="stylesheet" href="style/Accueil.css">
 
@@ -29,37 +30,20 @@ $fileName = array_pop($fileName);
 
 <body>
 
-  <!--
-  <div class="form">
-    <nav class="navbar">
-      <div class="container-fluid">
-        <label class="accueil">Accueil</label>
-        <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
-      </div>
-    </nav>
-  </div>
-
-  <nav class="navbar">
-     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="index.php" class="a-title">
-          <h1>WebOrion</h1>
-        </a>
-        <a class="btn btn-secondary" href="logout.php" role="button">Logout</a>
-        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+        Column
         </div>
-     </div>
-  </nav>
-  -->
-
-  <div class="grid text-center">
-    <div id="grind">Navbar</div>
-  </div>
-
+        <div class="col">
+        Column
+        </div>
+        <div class="col">
+        Column
+        </div>
+      </div>
+    </div>
+  
 </body>
+
+</html>
