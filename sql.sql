@@ -54,7 +54,7 @@ CREATE TABLE public.playlist(
 ------------------------------------------------------------
 CREATE TABLE public.style(
                              id_style   SERIAL NOT NULL ,
-                             style      VARCHAR (50) NOT NULL  ,
+                             nom_style      VARCHAR (50) NOT NULL  ,
                              CONSTRAINT style_PK PRIMARY KEY (id_style)
 )WITHOUT OIDS;
 

@@ -23,6 +23,12 @@
 </head>
 
 <body>
+<?php
+require_once ('Classes/Utilisateur.php');
+$a=Utilisateur::Connexion();
+var_dump($a);
+print_r($_POST);
+?>
 
   <div class="form">
     <nav class="navbar">
@@ -35,12 +41,12 @@
       <label class="trait">Login</label>
 
       <div class="login-form">
-        <form action="Login.php" method="post" class="g-3" id="LoginForm">
+        <form action="#" method="post" class="g-3" id="LoginForm">
           
           <div class="mb-3">
             <div class="texte-email">
               <label for="userInput" class="form-label">Email :</label>
-              <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+              <input type="text" class="form-control" id="mail" aria-describedby="userInput" name="mail">
             </div>
           </div>
 
@@ -51,12 +57,14 @@
             </div>
           </div>
 
-          <button type="button" class="btn">Créer compte</button>
-          <button type="button" class="btn">Se connecter</button>
+            <a href="Register.php"><button type="button" class="btn">Créer compte</button></a>
+          <button type="submit" class="btn">Se connecter</button>
           
         </form>
       </div>
     </div>
   </div>
+
 </body>
 </html>
+
