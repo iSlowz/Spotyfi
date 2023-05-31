@@ -1,6 +1,3 @@
 # Spotyfi
 
-
-test
-
-test2
+yes
