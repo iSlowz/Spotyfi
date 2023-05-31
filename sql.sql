@@ -35,7 +35,7 @@ CREATE TABLE public.users(
                             age_user       INT  NOT NULL ,
                             mail_user      VARCHAR (50) NOT NULL ,
                             mot_de_passe   VARCHAR (50) NOT NULL  ,
-                            CONSTRAINT user_PK PRIMARY KEY (id_user)
+                            CONSTRAINT users_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 
 
