@@ -39,7 +39,6 @@
 
         background-color: rgb(25, 157, 166);
         
-
       }
 
       .rectangle-login{
@@ -70,6 +69,7 @@
         padding-bottom: 0.5em;
         padding-right: 1.5em;
         padding-left: 1.5em;
+        padding-top: 0.5em;
 
       }
 
@@ -98,6 +98,7 @@
         background-color: rgb(25, 157, 166);
 
         color: white;
+        font-style: italic;
 
         margin-bottom: 1em;
         margin-top: 1em;
