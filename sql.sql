@@ -1,22 +1,19 @@
 ------------------------------------------------------------
 --        Script Postgre
 ------------------------------------------------------------
+
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS artiste CASCADE;
 DROP TABLE IF EXISTS musique CASCADE;
 DROP TABLE IF EXISTS playlist CASCADE;
-DROP TABLE IF EXISTS contenir CASCADE ;
-DROP TABLE IF EXISTS creer CASCADE;
+DROP TABLE IF EXISTS musique_playlist CASCADE;
 DROP TABLE IF EXISTS album CASCADE;
-
-
-
-
 
 
 ------------------------------------------------------------
 -- Table: artiste
 ------------------------------------------------------------
+
 CREATE TABLE public.artiste(
                                id_artiste     SERIAL NOT NULL ,
                                nom_artiste    VARCHAR (20) NOT NULL ,
@@ -26,16 +23,16 @@ CREATE TABLE public.artiste(
 
 
 ------------------------------------------------------------
--- Table: user
+-- Table: users
 ------------------------------------------------------------
 CREATE TABLE public.users(
-                            id_user        SERIAL NOT NULL ,
-                            prenom_user    VARCHAR (20) NOT NULL ,
-                            nom_user       VARCHAR (20) NOT NULL ,
-                            age_user       INT  NOT NULL ,
-                            mail_user      VARCHAR (50) NOT NULL ,
-                            mot_de_passe   VARCHAR (50) NOT NULL  ,
-                            CONSTRAINT users_PK PRIMARY KEY (id_user)
+                             id_user        SERIAL NOT NULL ,
+                             prenom_user    VARCHAR (20) NOT NULL ,
+                             nom_user       VARCHAR (20) NOT NULL ,
+                             age_user       INT  NOT NULL ,
+                             mail_user      VARCHAR (50) NOT NULL ,
+                             mot_de_passe   VARCHAR (50) NOT NULL  ,
+                             CONSTRAINT users_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 
 
@@ -49,7 +46,7 @@ CREATE TABLE public.playlist(
                                 id_user                  INT  NOT NULL  ,
                                 CONSTRAINT playlist_PK PRIMARY KEY (id_playlist)
 
-    ,CONSTRAINT playlist_user_FK FOREIGN KEY (id_user) REFERENCES public.user(id_user)
+    ,CONSTRAINT playlist_users_FK FOREIGN KEY (id_user) REFERENCES public.users(id_user)
 )WITHOUT OIDS;
 
 
@@ -79,37 +76,26 @@ CREATE TABLE public.musique(
                                lien_musique            VARCHAR (100) NOT NULL ,
                                duree_musique           TIMETZ  NOT NULL ,
                                date_parution_musique   DATE  NOT NULL ,
+                               id_artiste              INT  NOT NULL ,
                                id_album                INT  NOT NULL  ,
                                CONSTRAINT musique_PK PRIMARY KEY (id_musique)
 
-    ,CONSTRAINT musique_album_FK FOREIGN KEY (id_album) REFERENCES public.album(id_album)
+    ,CONSTRAINT musique_artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.artiste(id_artiste)
+    ,CONSTRAINT musique_album0_FK FOREIGN KEY (id_album) REFERENCES public.album(id_album)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
--- Table: playlist_musique
+-- Table: musique_playlist
 ------------------------------------------------------------
-CREATE TABLE public.playlist_musique(
-                                id_musique                    INT  NOT NULL ,
-                                id_playlist                   INT  NOT NULL ,
-                                date_ajout_musique_playlist   DATE  NOT NULL  ,
-                                CONSTRAINT playlist_musique_PK PRIMARY KEY (id_musique,id_playlist)
+CREATE TABLE public.musique_playlist(
+                                        id_musique                    INT  NOT NULL ,
+                                        id_playlist                   INT  NOT NULL ,
+                                        date_ajout_musique_playlist   DATE  NOT NULL  ,
+                                        CONSTRAINT musique_playlist_PK PRIMARY KEY (id_musique,id_playlist)
 
-    ,CONSTRAINT playlist_musique_musique_FK FOREIGN KEY (id_musique) REFERENCES public.musique(id_musique)
-    ,CONSTRAINT playlist_musique_playlist0_FK FOREIGN KEY (id_playlist) REFERENCES public.playlist(id_playlist)
-)WITHOUT OIDS;
-
-
-------------------------------------------------------------
--- Table: musique_artiste
-------------------------------------------------------------
-CREATE TABLE public.musique_artiste(
-                             id_artiste   INT  NOT NULL ,
-                             id_musique   INT  NOT NULL  ,
-                             CONSTRAINT musique_artiste_PK PRIMARY KEY (id_artiste,id_musique)
-
-    ,CONSTRAINT musique_artiste_artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.artiste(id_artiste)
-    ,CONSTRAINT musique_artiste_musique0_FK FOREIGN KEY (id_musique) REFERENCES public.musique(id_musique)
+    ,CONSTRAINT musique_playlist_musique_FK FOREIGN KEY (id_musique) REFERENCES public.musique(id_musique)
+    ,CONSTRAINT musique_playlist_playlist0_FK FOREIGN KEY (id_playlist) REFERENCES public.playlist(id_playlist)
 )WITHOUT OIDS;
 
 
