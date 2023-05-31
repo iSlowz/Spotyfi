@@ -6,14 +6,13 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS artiste CASCADE;
 DROP TABLE IF EXISTS musique CASCADE;
 DROP TABLE IF EXISTS playlist CASCADE;
+DROP TABLE IF EXISTS style CASCADE ;
 DROP TABLE IF EXISTS musique_playlist CASCADE;
 DROP TABLE IF EXISTS album CASCADE;
-
 
 ------------------------------------------------------------
 -- Table: artiste
 ------------------------------------------------------------
-
 CREATE TABLE public.artiste(
                                id_artiste     SERIAL NOT NULL ,
                                nom_artiste    VARCHAR (20) NOT NULL ,
@@ -51,18 +50,29 @@ CREATE TABLE public.playlist(
 
 
 ------------------------------------------------------------
+-- Table: style
+------------------------------------------------------------
+CREATE TABLE public.style(
+                             id_style   SERIAL NOT NULL ,
+                             style      VARCHAR (50) NOT NULL  ,
+                             CONSTRAINT style_PK PRIMARY KEY (id_style)
+)WITHOUT OIDS;
+
+
+------------------------------------------------------------
 -- Table: album
 ------------------------------------------------------------
 CREATE TABLE public.album(
                              id_album              SERIAL NOT NULL ,
                              title_album           VARCHAR (20) NOT NULL ,
                              photo_album           VARCHAR (100) NOT NULL ,
-                             type_album            VARCHAR (20) NOT NULL ,
                              date_creation_album   DATE  NOT NULL ,
-                             id_artiste            INT  NOT NULL  ,
+                             id_artiste            INT  NOT NULL ,
+                             id_style              INT  NOT NULL  ,
                              CONSTRAINT album_PK PRIMARY KEY (id_album)
 
     ,CONSTRAINT album_artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.artiste(id_artiste)
+    ,CONSTRAINT album_style0_FK FOREIGN KEY (id_style) REFERENCES public.style(id_style)
 )WITHOUT OIDS;
 
 
@@ -71,17 +81,18 @@ CREATE TABLE public.album(
 ------------------------------------------------------------
 CREATE TABLE public.musique(
                                id_musique              SERIAL NOT NULL ,
-                               type_musique            VARCHAR (20) NOT NULL ,
                                titre_musique           VARCHAR (20) NOT NULL ,
                                lien_musique            VARCHAR (100) NOT NULL ,
                                duree_musique           TIMETZ  NOT NULL ,
                                date_parution_musique   DATE  NOT NULL ,
                                id_artiste              INT  NOT NULL ,
-                               id_album                INT  NOT NULL  ,
+                               id_album                INT  NOT NULL ,
+                               id_style                INT  NOT NULL  ,
                                CONSTRAINT musique_PK PRIMARY KEY (id_musique)
 
     ,CONSTRAINT musique_artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.artiste(id_artiste)
     ,CONSTRAINT musique_album0_FK FOREIGN KEY (id_album) REFERENCES public.album(id_album)
+    ,CONSTRAINT musique_style1_FK FOREIGN KEY (id_style) REFERENCES public.style(id_style)
 )WITHOUT OIDS;
 
 
