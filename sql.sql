@@ -52,10 +52,10 @@ CREATE TABLE public.playlist(
 ------------------------------------------------------------
 -- Table: style
 ------------------------------------------------------------
-CREATE TABLE public.style(
+CREATE TABLE public.styles(
                              id_style   SERIAL NOT NULL ,
                              nom_style      VARCHAR (50) NOT NULL  ,
-                             CONSTRAINT style_PK PRIMARY KEY (id_style)
+                             CONSTRAINT styles_PK PRIMARY KEY (id_style)
 )WITHOUT OIDS;
 
 
@@ -72,7 +72,7 @@ CREATE TABLE public.album(
                              CONSTRAINT album_PK PRIMARY KEY (id_album)
 
     ,CONSTRAINT album_artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.artiste(id_artiste)
-    ,CONSTRAINT album_style0_FK FOREIGN KEY (id_style) REFERENCES public.style(id_style)
+    ,CONSTRAINT album_style0_FK FOREIGN KEY (id_style) REFERENCES public.styles(id_style)
 )WITHOUT OIDS;
 
 
