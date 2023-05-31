@@ -24,8 +24,57 @@
 
       .navbar{
 
-        border: solid rgb(28, 64, 155);
-        background: rgb(28, 64, 155);
+        background-color: rgb(2, 97, 103);
+        border-bottom: solid white;
+        color: white;
+
+        align-items: center;
+
+        font-size: 3.5em;
+
+      }
+
+
+      .form{
+
+        background-color: rgb(25, 157, 166);
+
+      }
+
+      .trait{
+
+        border-bottom: solid white;
+
+      }
+
+      .rectangle-login{
+      
+        border: rgb(2, 97, 103);
+        background-color: rgb(2, 97, 103);
+
+        color: white;
+
+        text-align: center;
+        font-size: 2em;
+
+        border-radius: 15px 15px 15px 15px / 15px 15px 15px 15px;
+
+        margin-top: 2em;
+        margin-left: 15em;
+        margin-right: 15em;
+        margin-bottom: 1em;
+
+        padding: 0.2em 3em;
+      
+      }
+
+      .texte-email{
+
+        text-align: left;
+
+        border-radius: 15px 15px 15px 15px / 15px 15px 15px 15px;
+
+        font-size: 0.7em;
 
       }
 
@@ -33,35 +82,39 @@
 
 </head>
 
-<body class="page-login">
+<body class="form">
 
   <nav class="navbar">
     <div class="container-fluid align-content-center justify-content-center">
-      <h1>Spotyfi</h1>
+     <a>Spotyfi++</a>
     </div>
   </nav>
 
-  <div class>
-    <div>
-      <label>LOGIN</label>
+  <div class="rectangle-login">
+    <label>Login</label>
+
+    <hr class="trait">
+
+    <div class="login-form">
+      <form action="Login.php" method="post" class="g-3" id="LoginForm">
+        <div class="mb-3">
+          <div class="texte-email">
+            <label for="userInput" class="form-label">Email :</label>
+            <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="texte-mdp">
+            <label for="passwordInput" class="form-label">Mot de passe :</label>
+            <input type="password" class="form-control" id="passwordInput" name="password">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary submit" name="sendData">Se connecter</button>
+      </form>
     </div>
-
-    <form action="Login.php" method="post" class="g-3" id="loginForm">
-      <div class="mb-3">
-        <div class="texte-identifiant">
-          <label for="userInput" class="form-label">Username or email address</label>
-          <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <div class="texte-mdp">
-          <label for="passwordInput" class="form-label">Password</label>
-          <input type="password" class="form-control" id="passwordInput" name="password">
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary submit" name="sendData">Submit</button>
-    </form>
   </div>
+
 </body>
 </html>
