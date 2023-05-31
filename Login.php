@@ -38,6 +38,7 @@
       .form{
 
         background-color: rgb(25, 157, 166);
+        
 
       }
 
@@ -54,9 +55,9 @@
         border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
         margin-top: 2em;
-        margin-left: 18em;
-        margin-right: 18em;
-        margin-bottom: 1em;
+        margin-left: 17em;
+        margin-right: 17em;
+        margin-bottom: 2em;
 
         padding: 0.2em 3em;
       
@@ -88,13 +89,20 @@
 
         font-size: 0.7em;
 
-        padding-top: 1em;
+        padding-top: 0.5em;
 
       }
 
-      .btn-connect{
-        
-        padding-left: 2em;
+      .btn{
+
+        background-color: rgb(25, 157, 166);
+
+        color: white;
+
+        margin-bottom: 1em;
+        margin-top: 1em;
+
+        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
       }
 
@@ -130,11 +138,8 @@
           </div>
         </div>
 
-        <div class="btn-connect">
-          <button type="submit" class="btn btn-primary submit" name="sendData">
-            <label>Se connecter</span>
-          </button>
-        </div>
+        <button type="button" class="btn">Créer compte</button>
+        <button type="button" class="btn">Se connecter</button>
         
       </form>
     </div>
