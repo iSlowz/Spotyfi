@@ -38,6 +38,7 @@
       .form{
 
         background-color: rgb(25, 157, 166);
+        
 
       }
 
@@ -88,7 +89,20 @@
 
         font-size: 0.7em;
 
-        padding-top: 1em;
+        padding-top: 0.5em;
+
+      }
+
+      .btn{
+
+        background-color: rgb(25, 157, 166);
+
+        color: white;
+
+        margin-bottom: 1em;
+        margin-top: 1em;
+
+        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
       }
 
@@ -124,9 +138,8 @@
           </div>
         </div>
 
-        
-        <button type="button" class="btn btn-primary">Créer compte</button>
-        <button type="button" class="btn btn-primary">Se connecter</button>
+        <button type="button" class="btn">Créer compte</button>
+        <button type="button" class="btn">Se connecter</button>
         
       </form>
     </div>
