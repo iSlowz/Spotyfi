@@ -3,3 +3,45 @@
     border: solid black;
 
 }
+
+.Navbar-Accueil {
+    grid-column: 1 / 6;
+    grid-row: 1;
+    border-bottom: solid white;
+
+    background-color: rgb(2, 97, 103);
+    border-bottom: solid white;
+    color: white; 
+
+  }
+
+.Bar-playlist{
+
+    grid-column: 1;
+    grid-row: 2 / 6;
+    
+    background-color: rgb(2, 97, 103);
+    border-right: solid white;
+    color: white;
+
+    text-align: center;
+
+  }
+
+  #Accueil{
+
+    border-right : solid white;
+    font-size : 3em;
+
+    padding-top: 0.2em;
+    padding-left: 0.5em;
+
+  }
+
+  #playlist{
+
+
+    border-bottom : solid white;
+    font-size : 2em;
+
+  }
