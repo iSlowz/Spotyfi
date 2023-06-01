@@ -24,6 +24,13 @@
 
 <body>
 
+<?php
+require_once ('Classes/Utilisateur.php');
+$result=Utilisateur::sign_up();
+var_dump($result);
+//print_r($_POST);
+?>
+
   <div class="form">
     
     <nav class="navbar">
@@ -35,8 +42,7 @@
     <div class="rectangle-Sign_up">
 
       <div class="login-form">
-        <form action="Login.php" method="post" class="g-3" id="LoginForm">
-          
+        <form action="#" method="post" class="g-3" id="LoginForm">
           <div class="mb-3">
 
             <table width="100%" cellspacing="0" cellpadding="5">
@@ -48,32 +54,37 @@
                 <td>
                   <div class="texte-gauche">
                     <label for="userInput" class="form-label">Nom :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="nom">
 
                     <label for="userInput" class="form-label">Prénom :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="prenom">
                     
                     <label for="userInput" class="form-label">Age :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="age">
+                      <?php
+                      if (isset($result["age"])){
+                          echo "Veuillez rentrer votre âge";
+                      }
+                      ?>
                   </div>
                 </td>
                 
                 <td>
                   <div class="texte-droit">
                     <label for="userInput" class="form-label">Email :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="mail">
 
                     <label for="userInput" class="form-label">Mot de passe :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="password">
                     
                     <label for="userInput" class="form-label">Vérification mot de passe :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="userInput">
+                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="verif_password">
                   </div>
                 </td>
               </tr>
             </table>
           </div>
-          <button type="button" class="btn">S'inscrire</button>
+          <button type="submit" class="btn">S'inscrire</button>
         </form>
       </div>
     </div>
