@@ -66,6 +66,17 @@ $fileName = array_pop($fileName);
 
     <div class="Page-Central">
       <div class="rectangle-page">
+        <div class="flex-page">
+          <div class="titre-page">
+            <label>Derniers morceaux écoutés</label>
+          </div>
+          <div class="barre-page">
+            <hr>
+          </div>
+          <div class="dernier-morceaux-page">
+            
+          </div>
+        </div>
       </div>
     </div>
 
