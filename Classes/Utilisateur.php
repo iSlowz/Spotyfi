@@ -57,7 +57,7 @@ class Utilisateur
                 $manquant['age']=True;
                 $valide = False;
             }
-            if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
+            if (empty($_POST['mail'])) {
                 $manquant['mail']=True;
                 $valide = False;
             }
@@ -67,12 +67,33 @@ class Utilisateur
                 $valide = False;
             }
             if ($valide and !empty($_POST['verif_password'])){
-                $manquant["verif"]=True;
+                if ($_POST['password']!=$_POST['verif_password']){
+                    $manquant["verif"] = True;
+
+                }
             }
             if (!empty($manquant)){
                 return $manquant;
             }
+            else{
+                try {
+                    $dbh = Database::connexionBD();
+
+                    $statement = $dbh->prepare("SELECT mail_user FROM users
+                                                WHERE mail_user=:mail");
+                    $statement->bindParam(':mail', $_POST['mail']);
+                    $statement->execute();
+                    $result = $statement->fetch(PDO::FETCH_ASSOC);
+                } catch (PDOException $exception) {
+                    error_log('Connection error: '.$exception->getMessage());
+                    return false;
+                }
+                if (!empty($result)) {
+                    return 'Adresse déjà utilisée !';
+                }
+            }
         }
+        //manque des trucs
         return False;
     }
 }
