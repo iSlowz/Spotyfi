@@ -55,15 +55,25 @@ var_dump($result);
                   <div class="texte-gauche">
                     <label for="userInput" class="form-label">Nom :</label>
                     <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="nom">
+                      <?php
+                      if (isset($result["nom"])){
+                          echo "<p id='erreur'>Veuillez rentrer votre nom</p>";
+                      }
+                      ?>
 
                     <label for="userInput" class="form-label">Prénom :</label>
                     <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="prenom">
+                      <?php
+                      if (isset($result["prenom"])){
+                          echo "<p id='erreur'>Veuillez rentrer votre prénom</p>";
+                      }
+                      ?>
                     
                     <label for="userInput" class="form-label">Age :</label>
                     <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="age">
                       <?php
                       if (isset($result["age"])){
-                          echo "Veuillez rentrer votre âge";
+                          echo "<p id='erreur'>Veuillez rentrer votre âge</p>";
                       }
                       ?>
                   </div>
@@ -73,18 +83,38 @@ var_dump($result);
                   <div class="texte-droit">
                     <label for="userInput" class="form-label">Email :</label>
                     <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="mail">
+                      <?php
+                      if (isset($result["mail"])){
+                          echo "<p id='erreur'>Veuillez rentrer votre Email</p>";
+                      }
+                      ?>
 
                     <label for="userInput" class="form-label">Mot de passe :</label>
                     <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="password">
+                      <?php
+                      if (isset($result["password"])){
+                          echo "<p id='erreur'>Veuillez rentrer votre mot de passe</p>";
+                      }
+                      ?>
                     
                     <label for="userInput" class="form-label">Vérification mot de passe :</label>
                     <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="verif_password">
+                      <?php
+                      if (isset($result["verif"])){
+                          echo "<p id='erreur'>Veuillez rentrer le même mot de passe</p>";
+                      }
+                      ?>
                   </div>
                 </td>
               </tr>
             </table>
           </div>
           <button type="submit" class="btn">S'inscrire</button>
+            <?php
+            if ($result=="Adresse déjà utilisée !"){
+                echo "<p id='erreur'>Adresse déjà utilisée !</p>";
+            }
+            ?>
         </form>
       </div>
     </div>
