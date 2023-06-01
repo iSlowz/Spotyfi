@@ -3,6 +3,7 @@ INSERT INTO public.users(prenom_user, nom_user, age_user, mail_user, mot_de_pass
 INSERT INTO public.users(prenom_user, nom_user, age_user, mail_user, mot_de_passe) VALUES('maxime', 'bellenger', 19, 'mbellenger@isen.fr', 'mdp');
 INSERT INTO public.users(prenom_user, nom_user, age_user, mail_user, mot_de_passe) VALUES('ethan', 'le-pan', 19, 'ele-pan@isen.fr', 'mdp');
 INSERT INTO public.users(prenom_user, nom_user, age_user, mail_user, mot_de_passe) VALUES('dorian', 'rena', 19, 'drena@isen.fr', 'mdp');
+INSERT INTO public.users(prenom_user, nom_user, age_user, mail_user, mot_de_passe) VALUES('a', 'a', 19, 'aa@isen.fr', 'mdp');
 
 INSERT INTO public.styles(nom_style) VALUES('pop');
 INSERT INTO public.styles(nom_style) VALUES('rock');
