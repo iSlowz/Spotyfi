@@ -25,7 +25,7 @@ html, body {
 
     text-align: center;
 
-    font-size: 400%;
+    font-size: 370%;
 
 }
 
@@ -71,6 +71,38 @@ html, body {
     background-color: rgb(2, 97, 103);
     color: white;
     border-right : solid white;
+
+    font-size : 200%;
+    text-align: center;
+
+}
+
+#Playlist{
+
+    border-bottom : solid white;
+
+    padding-top: 5%;
+    margin-bottom: 5%;
+
+}
+
+#playlist-like{
+
+    border: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+    color: white;
+    font-size: 75%;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    padding-right: 15%;
+    padding-left: 15%;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
 
 }
   
