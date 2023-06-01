@@ -28,7 +28,7 @@
 require_once ('Classes/Utilisateur.php');
 $result=Utilisateur::sign_up();
 var_dump($result);
-//print_r($_POST);
+print_r($result);
 ?>
 
   <div class="form">
@@ -70,10 +70,10 @@ var_dump($result);
                       ?>
                     
                     <label for="userInput" class="form-label">Date de naissance :</label>
-                    <input type="date" class="form-control" id="userInput" aria-describedby="userInput" name="age">
+                    <input type="date" class="form-control" id="userInput" aria-describedby="userInput" name="naissance">
                       <?php
-                      if (isset($result["age"])){
-                          echo "<p id='erreur'>Veuillez rentrer votre âge</p>";
+                      if (isset($result["naissance"])){
+                          echo "<p id='erreur'>Veuillez rentrer votre date de naissance</p>";
                       }
                       ?>
                   </div>

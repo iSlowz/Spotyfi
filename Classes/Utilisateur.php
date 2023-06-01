@@ -55,8 +55,8 @@ class Utilisateur
                 $valide = False;
             }
 
-            if (empty($_POST['age'])) {
-                $manquant['age']=True;
+            if (empty($_POST['naissance'])) {
+                $manquant['naissance']=True;
                 $valide = False;
             }
             if (empty($_POST['mail'])) {
@@ -94,13 +94,13 @@ class Utilisateur
                     return 'Adresse déjà utilisée !';
                 }
                 try {
-                    $statement = $dbh->prepare("INSERT INTO users(prenom_user, nom_user, age_user, mail_user, mot_de_passe) 
-                                                VALUES (:prenom, :nom, :age, :mail, :mot_de_passe)");
+                    $statement = $dbh->prepare("INSERT INTO users(prenom_user, nom_user, date_naissance_user, mail_user, mot_de_passe) 
+                                                VALUES (:prenom, :nom, :naissance, :mail, :mot_de_passe)");
 
                     //$password = password_hash($_POST['password'], PASSWORD_BCRYPT); plus tard
                     $statement->bindParam(":prenom", $_POST['prenom']);
                     $statement->bindParam(":nom", $_POST['nom']);
-                    $statement->bindParam(":age", $_POST['age']);
+                    $statement->bindParam(":naissance", $_POST['naissance']);
                     $statement->bindParam(":mail", $_POST["mail"]);
                     $statement->bindParam(":mot_de_passe", $_POST['password']);
                     $statement->execute();
@@ -108,7 +108,7 @@ class Utilisateur
                     error_log('Connection error: '.$exception->getMessage());
                     return false;
                 }
-                header('Location: Accueil.php');
+                //header('Location: Accueil.php');
             }
         }
 
