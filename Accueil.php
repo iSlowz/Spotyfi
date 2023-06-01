@@ -26,23 +26,66 @@ $fileName = array_pop($fileName);
 
     <title>Spotyfi</title>
 
+    <style>
+
+      html, body {
+        
+        height: 100%;
+      
+      }
+
+      .disposition {
+        display: grid;
+        grid-template-rows: 100px 100px;
+        grid-template-columns: repeat(5, 2fr);
+        grid-auto-rows: minmax(172.2px, auto);
+        color: darkgreen
+      }
+
+      .Navbar-Accueil {
+        grid-column: 1 / 6;
+        grid-row: 1;
+        border-bottom: solid white;
+
+        background-color: rgb(2, 97, 103);
+        border-bottom: solid white;
+        color: white; 
+
+      }
+
+      .Bar-playlist{
+
+        grid-column: 1;
+        grid-row: 2 / 6;
+        
+        background-color: rgb(2, 97, 103);
+        border-right: solid white;
+        color: white;
+
+      }
+
+      .playlist{
+
+
+        border-bottom : solid white;
+        font-size : 2em;
+
+      }
+
+    </style>
+
 </head>
 
 <body>
 
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-        Column
-        </div>
-        <div class="col">
-        Column
-        </div>
-        <div class="col">
-        Column
-        </div>
-      </div>
+  <div class="disposition">
+    <div class="Navbar-Accueil">
+      <h1>Accueil</h1>
     </div>
+    <div class="Bar-playlist">
+      <label class="playlist" style="text-align:center;">Playlist</label>
+    </div>
+  </div>
   
 </body>
 

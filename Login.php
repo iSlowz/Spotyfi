@@ -18,7 +18,7 @@
    
     <link rel="stylesheet" href="style/Login.css">
 
-    <title>Spotyfi : Sign up</title>
+    <title>Spotyfi : Login</title>
 
 </head>
 
