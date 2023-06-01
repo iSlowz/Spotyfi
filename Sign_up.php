@@ -28,7 +28,7 @@
 require_once ('Classes/Utilisateur.php');
 $result=Utilisateur::sign_up();
 var_dump($result);
-//print_r($_POST);
+print_r($result);
 ?>
 
   <div class="form">
@@ -69,11 +69,11 @@ var_dump($result);
                       }
                       ?>
                     
-                    <label for="userInput" class="form-label">Age :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="age">
+                    <label for="userInput" class="form-label">Date de naissance :</label>
+                    <input type="date" class="form-control" id="userInput" aria-describedby="userInput" name="naissance">
                       <?php
-                      if (isset($result["age"])){
-                          echo "<p id='erreur'>Veuillez rentrer votre âge</p>";
+                      if (isset($result["naissance"])){
+                          echo "<p id='erreur'>Veuillez rentrer votre date de naissance</p>";
                       }
                       ?>
                   </div>
@@ -90,7 +90,8 @@ var_dump($result);
                       ?>
 
                     <label for="userInput" class="form-label">Mot de passe :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="password">
+                    <input type="password" class="form-control" id="userInput" aria-describedby="userInput" name="password">
+
                       <?php
                       if (isset($result["password"])){
                           echo "<p id='erreur'>Veuillez rentrer votre mot de passe</p>";
@@ -98,7 +99,7 @@ var_dump($result);
                       ?>
                     
                     <label for="userInput" class="form-label">Vérification mot de passe :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="verif_password">
+                    <input type="password" class="form-control" id="userInput" aria-describedby="userInput" name="verif_password">
                       <?php
                       if (isset($result["verif"])){
                           echo "<p id='erreur'>Veuillez rentrer le même mot de passe</p>";
