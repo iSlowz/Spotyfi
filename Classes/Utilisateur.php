@@ -81,8 +81,7 @@ class Utilisateur
                 try {
                     $dbh = Database::connexionBD();
 
-                    $statement = $dbh->prepare("SELECT mail_user FROM users
-                                                WHERE mail_user=:mail");
+                    $statement = $dbh->prepare("SELECT mail_user FROM users WHERE mail_user=:mail");
                     $statement->bindParam(':mail', $_POST['mail']);
                     $statement->execute();
                     $result = $statement->fetch(PDO::FETCH_ASSOC);
