@@ -28,6 +28,7 @@ require_once ('Classes/Utilisateur.php');
 $result=Utilisateur::Connexion();
 var_dump($result);
 print_r($_POST);
+
 ?>
 
   <div class="form">
