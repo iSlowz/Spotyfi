@@ -104,44 +104,62 @@ $fileName = array_pop($fileName);
 
     <style>
 
-      #flexbox{
+      html, body{
+
+        height : 100%;
+
+      }
+
+      .flex-container {
         display: flex;
-        flex-wrap: wrap;
-        align-content: stretch;
       }
 
-      .num1{
-
-        border : solid black;
-
+      .flex-item{
+        border: solid black;
+        text-align: center;
+        height: 50%;
       }
-
-      .num2{
-
-        border : solid black;
-        align-items:center;
-
-      }
-      
-      .num3{
-
-        border : solid black;
-        align-items:flex-end;
-
-      }
-
     </style>
 
 </head>
 
 <body>
 
-  <div id="flexbox">
-    <div class="num1">Num1</div>
-    <div class="num3">Num2</div>
-    <div class="num3">Num3</div>
+  <div class="flex-container">
+    <div class="flex-item">
+      <div class="Navbar-Accueil">
+        <label>Accueil</label>
+      </div>
+    </div>
+
+    <div class="flex-item">
+      <div class="Navbar-Recherche">
+        <label id="Recherche">Recherche</label>
+      </div>
+    </div>
   </div>
 
+  <div class="flex-container">
+    <div class="flex-item">
+      <div class="Bar-Playlist">
+        <label id="Playlist">Playlists</label>
+      </div>
+    </div>
+    <div class="flex-item">
+      
+      <div class="flex-item">
+        <div class="Page-Central">
+          <label id="Page">Page</label>
+        </div>
+      </div>
+      
+      <div class="flex-item">
+        <div class="Bar-Footer">
+          <label id="Footer">footer</label>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 
