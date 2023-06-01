@@ -26,6 +26,7 @@
 <?php
 require_once ('Classes/Utilisateur.php');
 $result=Utilisateur::Connexion();
+echo $_SESSION["user"];
 ?>
 
   <div class="form">

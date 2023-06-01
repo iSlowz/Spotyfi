@@ -1,4 +1,4 @@
-ajaxRequest("GET", "../models/request.php/musique/", loadMusique)
+ajaxRequest("GET", "../models/request.php/musique", loadMusique)
 
 function loadMusique(musiques){
     console.log(musiques)
@@ -7,5 +7,4 @@ function loadMusique(musiques){
         console.log(musique)
         $("zzz").append('<p>'+musique["titre_musique"]+'</p>')
     })
-
 }
