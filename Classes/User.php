@@ -18,6 +18,16 @@ class User
         $this->mot_de_passe = $dbRow["mot_de_passe"];
     }
 
+    public function getDbRow(){
+        return array(              
+            "id_user" => $this->id_user,
+            "prenom_user" => $this->prenom_user,
+            "nom_user" => $this->nom_user,
+            "age_user" => $this->age_user,
+            "mail_user" => $this->mail_user,
+            "mot_de_passe" => $this->mot_de_passe
+        );
+    }
     
 }
 
