@@ -12,6 +12,8 @@ class Artiste
         $this->type_artiste = $dbRow["type_artiste"];
     }
 
+    
+
 }
 
 ?>

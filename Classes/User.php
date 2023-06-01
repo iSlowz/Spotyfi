@@ -18,6 +18,8 @@ class User
         $this->mot_de_passe = $dbRow["mot_de_passe"];
     }
 
+    
+
 }
 
 ?>
