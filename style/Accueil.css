@@ -9,7 +9,6 @@ html, body {
     display: grid;
     grid-template-rows: 100px 517px 0px 0px 100px;
     grid-template-columns: repeat(5, 2fr);
-    color: darkgreen
 
 }
 
@@ -65,6 +64,8 @@ html, body {
 
 .Bar-Playlist{
 
+    display: grid;
+
     grid-column: 1;
     grid-row: 2 / 6;
 
@@ -74,6 +75,17 @@ html, body {
 
     font-size : 200%;
     text-align: center;
+
+}
+
+.flex-playlist{
+
+    display: flex;
+
+    flex-direction : column;
+
+    padding-right : 5%;
+    padding-left : 5%;
 
 }
 
@@ -105,7 +117,53 @@ html, body {
     margin-bottom: 5%;
 
 }
+
+#playlist-bouton{
+
+    border: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+    color: white;
+    font-size: 75%;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    padding-right: 15%;
+    padding-left: 15%;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}
   
+.bouton-créer{
+
+    margin-top: auto;
+
+}
+
+#id-bouton-créer{
+
+    color : white;
+    border: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+    font-size: 75%;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    padding-right: 15%;
+    padding-left: 15%;
+
+
+    margin-bottom: 10%;
+
+}
+
 .Bar-Footer{
 
     grid-column: 2 / 6;
@@ -127,6 +185,17 @@ html, body {
 
     color : white;
 
+}
+
+.rectangle-page{
+
+    border: solid rgb(2, 97, 103);
+    background-color: rgb(2, 97, 103);
+
+    margin: 2em;
+    padding: 14em;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 }
 
 
