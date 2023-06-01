@@ -94,14 +94,18 @@ class Utilisateur
                     return 'Adresse déjà utilisée !';
                 }
                 try {
-                    $date_naissance = DateTimeImmutable::createFromFormat('d/m/Y', $_POST['naissance']);
+                    $timestamp = strtotime($_POST["naissance"]);
+
+                    // Formatage du timestamp en SQL DATE
+                    $naissance = date('Y-m-d', $timestamp);
+
                     $statement = $dbh->prepare("INSERT INTO users(prenom_user, nom_user, date_naissance_user, mail_user, mot_de_passe) 
                                                 VALUES (:prenom, :nom, :naissance, :mail, :mot_de_passe)");
 
                     //$password = password_hash($_POST['password'], PASSWORD_BCRYPT); plus tard
                     $statement->bindParam(":prenom", $_POST['prenom']);
                     $statement->bindParam(":nom", $_POST['nom']);
-                    $statement->bindParam(":naissance", $date_naissance->format('Y-m-d'));
+                    $statement->bindParam(":naissance", $naissance);
                     $statement->bindParam(":mail", $_POST["mail"]);
                     $statement->bindParam(":mot_de_passe", $_POST['password']);
                     $statement->execute();
@@ -112,7 +116,6 @@ class Utilisateur
                 //header('Location: Accueil.php');
             }
         }
-
         return False;
     }
 }
