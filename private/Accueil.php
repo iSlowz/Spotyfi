@@ -22,7 +22,7 @@ $fileName = array_pop($fileName);
 
     <!-- Custom CSS -->
    
-    <link rel="stylesheet" href="style/Accueil.css">
+    <link rel="stylesheet" href="../style/Accueil.css">
 
     <title>Spotyfi</title>
 
