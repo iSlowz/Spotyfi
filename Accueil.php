@@ -22,7 +22,7 @@ $fileName = array_pop($fileName);
 
     <!-- Custom CSS -->
    
-    <link rel="stylesheet" href="../style/Accueil.css">
+    <link rel="stylesheet" href="style/Accueil.css">
 
     <title>Spotyfi</title>
 
@@ -36,39 +36,42 @@ $fileName = array_pop($fileName);
 
       .disposition {
         display: grid;
-        grid-template-rows: 100px 100px;
+        grid-template-rows: 100px 100px 180px 180px 100px;
         grid-template-columns: repeat(5, 2fr);
-        grid-auto-rows: minmax(172.2px, auto);
         color: darkgreen
       }
 
       .Navbar-Accueil {
-        grid-column: 1 / 6;
+        grid-column: 1;
         grid-row: 1;
-        border-bottom: solid white;
 
-        background-color: rgb(2, 97, 103);
-        border-bottom: solid white;
-        color: white; 
+        border: solid black; 
 
       }
 
-      .Bar-playlist{
+      .Navbar-Recherche {
+        grid-column: 2 / 6;
+        grid-row: 1;
+
+        border: solid red; 
+
+      }
+
+      .Bar-Playlist{
 
         grid-column: 1;
         grid-row: 2 / 6;
-        
-        background-color: rgb(2, 97, 103);
-        border-right: solid white;
-        color: white;
+
+        border: solid blue;
 
       }
 
-      .playlist{
+      .Bar-Footer{
 
+        grid-column: 2 / 6;
+        grid-row: 5 / 6;
 
-        border-bottom : solid white;
-        font-size : 2em;
+        border: solid green;
 
       }
 
@@ -79,12 +82,23 @@ $fileName = array_pop($fileName);
 <body>
 
   <div class="disposition">
+    
     <div class="Navbar-Accueil">
-      <h1>Accueil</h1>
+      <label id="Accueil">Accueil</label>
     </div>
-    <div class="Bar-playlist">
-      <label class="playlist" style="text-align:center;">Playlist</label>
+
+    <div class="Navbar-Recherche">
+      <label id="Accueil">Recherche</label>
     </div>
+
+    <div class="Bar-Playlist">
+      <label id="playlist">Playlists</label>
+    </div>
+
+    <div class="Bar-Footer">
+      <label id="playlist">footer</label>
+    </div>
+
   </div>
   
 </body>
