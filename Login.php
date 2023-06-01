@@ -25,8 +25,8 @@
 <body>
 <?php
 require_once ('Classes/Utilisateur.php');
-$a=Utilisateur::Connexion();
-var_dump($a);
+$result=Utilisateur::Connexion();
+var_dump($result);
 print_r($_POST);
 ?>
 
@@ -56,7 +56,11 @@ print_r($_POST);
               <input type="password" class="form-control" id="passwordInput" name="password">
             </div>
           </div>
-
+            <?php
+            if ($result=="E-Mail ou Mot de passe invalide !"){
+                echo "<p id='erreur'>".$result."</p>";
+            }
+            ?>
             <a href="Register.php"><button type="button" class="btn">Créer compte</button></a>
           <button type="submit" class="btn">Se connecter</button>
           
