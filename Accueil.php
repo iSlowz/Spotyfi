@@ -20,85 +20,10 @@ $fileName = array_pop($fileName);
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-    <!-- Custom CSS 
-  
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style/Accueil.css">
-  
-    -->
 
     <title>Spotyfi</title>
-  
-    <style>
-
-      html, body {
-        
-        height: 100%;
-      
-      }
-
-      .disposition {
-        display: grid;
-        grid-template-rows: 100px 517px 0px 0px 100px;
-        grid-template-columns: repeat(5, 2fr);
-        color: darkgreen
-      }
-
-      .Navbar-Accueil {
-        grid-column: 1;
-        grid-row: 1;
-
-        background-color: rgb(2, 97, 103);
-        color: white;
-        border-bottom : solid white;
-        border-right : solid white;
-
-      }
-
-      .Navbar-Recherche {
-        grid-column: 2 / 6;
-        grid-row: 1;
-
-        background-color: rgb(2, 97, 103);
-        color: white;
-        border-bottom : solid white;
-
-      }
-
-      .Bar-Playlist{
-
-        grid-column: 1;
-        grid-row: 2 / 6;
-
-        background-color: rgb(2, 97, 103);
-        color: white;
-        border-right : solid white;
-
-      }
-      
-      .Bar-Footer{
-
-        grid-column: 2 / 6;
-        grid-row: 5 / 6;
-
-        background-color: rgb(2, 97, 103);
-
-        color: white;
-        border-top : solid white;
-
-      }
-
-      .Page-Central{
-  
-        grid-column: 2 / 6;
-        grid-row: 2 / 5;
-
-        background-color: rgb(25, 157, 166);
-
-        color : white;
-
-      }
-
-    </style>
 
 </head>
 
