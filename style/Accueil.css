@@ -10,7 +10,6 @@
     border-bottom: solid white;
 
     background-color: rgb(2, 97, 103);
-    border-bottom: solid white;
     color: white; 
 
   }
@@ -21,7 +20,6 @@
     grid-row: 2 / 6;
     
     background-color: rgb(2, 97, 103);
-    border-right: solid white;
     color: white;
 
     text-align: center;
@@ -40,8 +38,6 @@
 
   #playlist{
 
-
-    border-bottom : solid white;
     font-size : 2em;
 
   }
