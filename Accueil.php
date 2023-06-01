@@ -110,59 +110,55 @@ $fileName = array_pop($fileName);
 
       }
 
-      .flex-container {
-        display: flex;
+      #bar-haut{
+        background-color: rgb(2, 97, 103);
+        border-bottom: solid white;
+        color: white;
+
+        align-items: center;
+
+        font-size: 3.5em;
+
       }
 
-      .flex-item{
-        border: solid black;
-        text-align: center;
-        height: 50%;
-      }
+      .
+
     </style>
 
 </head>
 
 <body>
 
-  <div class="flex-container">
-    <div class="flex-item">
-      <div class="Navbar-Accueil">
-        <label>Accueil</label>
-      </div>
-    </div>
-
-    <div class="flex-item">
-      <div class="Navbar-Recherche">
-        <label id="Recherche">Recherche</label>
-      </div>
-    </div>
-  </div>
-
-  <div class="flex-container">
-    <div class="flex-item">
-      <div class="Bar-Playlist">
-        <label id="Playlist">Playlists</label>
-      </div>
-    </div>
-    <div class="flex-item">
+  <div class="d-flex flex-column">
+    <div class="d-flex flex-row" id="bar-haut">
       
-      <div class="flex-item">
+        <div class="Navbar-Accueil">
+          <label>Accueil</label>
+        </div>
+      
+        <div class="Navbar-Recherche">
+          <label>Recherche</label>
+        </div>
+      
+    </div>
+    <div class="d-flex flex-row">
+      
+        <div class="Bar-Playlist">
+          <label id="Playlist">Playlists</label>
+        </div>
+      
         <div class="Page-Central">
           <label id="Page">Page</label>
         </div>
-      </div>
       
-      <div class="flex-item">
+    </div>
+    <div class="d-flex flex-row">
+      <label>Flex item 1</label>
         <div class="Bar-Footer">
           <label id="Footer">footer</label>
         </div>
-      </div>
     </div>
   </div>
 
 </body>
-
-
-
 </html>
