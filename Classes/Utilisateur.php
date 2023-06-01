@@ -94,9 +94,7 @@ class Utilisateur
                     return 'Adresse déjà utilisée !';
                 }
                 try {
-                    $timestamp = strtotime($_POST["naissance"]);
-
-                    // Formatage du timestamp en SQL DATE
+                    $timestamp = strtotime($_POST["naissance"]); // Formatage du timestamp en SQL DATE
                     $naissance = date('Y-m-d', $timestamp);
 
                     $statement = $dbh->prepare("INSERT INTO users(prenom_user, nom_user, date_naissance_user, mail_user, mot_de_passe) 
@@ -113,7 +111,7 @@ class Utilisateur
                     error_log('Connection error: '.$exception->getMessage());
                     return false;
                 }
-                //header('Location: Accueil.php');
+                header('Location: Accueil.php');
             }
         }
         return False;

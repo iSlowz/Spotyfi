@@ -1,8 +1,7 @@
-.col{
 
-    border: solid black;
 
-}
+/*
+
 
 .Navbar-Accueil {
     grid-column: 1 / 6;
@@ -41,3 +40,42 @@
     font-size : 2em;
 
   }
+
+  */
+
+  /*
+  .box1{
+    display: flex;
+  }
+
+  #Accueil{
+    flex: 1 1 auto;
+    border : solid black;
+
+    height: 30%;
+
+  }
+
+  
+
+  #Recherche{
+    flex: 1 1 auto;
+    border : solid black;
+  }
+
+  #Playlist{
+    flex: 1 1 auto;
+    border : solid black;
+  }
+
+  #Page{
+    flex: 1 1 auto;
+    border : solid black;
+  }
+
+  #Footer{
+    flex: 1 1 auto;
+    border : solid black;
+  }
+*/
+

@@ -104,90 +104,47 @@ $fileName = array_pop($fileName);
 
     <style>
 
-      .box{
+      #flexbox{
         display: flex;
-        height: 100%;
+        flex-wrap: wrap;
+        align-content: stretch;
       }
 
-      .Navbar-Accueil{
-        flex: 1 1 auto;
+      .num1{
+
         border : solid black;
+
       }
 
-      .Navbar-Recherche{
-        flex: 1 1 auto;
-        border : solid black;
-      }
+      .num2{
 
-      .Bar-Playlist{
-        flex: 1 1 auto;
         border : solid black;
-      }
+        align-items:center;
 
-      .Page-Central{
-        flex: 1 1 auto;
-        border : solid black;
       }
+      
+      .num3{
 
-      .Bar-Footer{
-        flex: 1 1 auto;
         border : solid black;
+        align-items:flex-end;
+
       }
-    
 
     </style>
 
 </head>
 
 <body>
-  
-  <div class="box">
-    <div class="d-flex flex-column">
-      <div class="d-flex flex-row">
-        
-        <!-- 1ère partie de la flex box, on a donc la box accueil et la box recherche qui seront en haut -->
 
-        <div class="p">
-          <div class="Navbar-Accueil">
-            <label id="Accueil">Accueil</label>
-          </div>
-        </div>
-        
-        <div class="p">
-          <div class="Navbar-Recherche">
-            <label id="Recherche">Recherche</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2ème partie de la flex box, on aura le reste des pages, donc le playlist qui prendra toute la partie gauche-->
-
-      <div class="p">
-        <div class="d-flex flex-row">
-          <div class="Bar-Playlist">
-            <label id="playlist">Playlists</label>
-          </div>
-
-          <div class="d-flex flex-column">  
-            <div class="p">
-              <div class="Page-Central">
-                <label id="Page">Page</label>
-              </div>
-            </div>
-            
-            <div class="p">
-              <div class="Bar-Footer">
-                <label id="Page">footer</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div id="flexbox">
+    <div class="num1">Num1</div>
+    <div class="num3">Num2</div>
+    <div class="num3">Num3</div>
   </div>
-    
-  
-  
+
+
 </body>
+
+
 
 </html>
