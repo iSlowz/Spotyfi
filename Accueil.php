@@ -36,19 +36,29 @@ $fileName = array_pop($fileName);
     </div>
 
     <div class="Navbar-Recherche">
-      <label id="Accueil">Recherche</label>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search" id="bar-recherche">
+
+        <!-- Bouton de recherche trouvé sur bootstrap -->
+
+        <button class="btn btn-outline-success" type="submit" id="bouton-recherche">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
+      </form>
     </div>
 
     <div class="Bar-Playlist">
-      <label id="playlist">Playlists</label>
+      <label id="Playlist">Playlists</label>
     </div>
 
     <div class="Page-Central">
-      <label id="page">Page</label>
+      <label id="Page">Page</label>
     </div>
 
     <div class="Bar-Footer">
-      <label id="playlist">footer</label>
+      <label id="Footer">footer</label>
     </div>
 
   </div>

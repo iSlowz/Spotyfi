@@ -1,18 +1,20 @@
-
 html, body {
         
     height: 100%;
   
-  }
+}
 
-  .disposition {
+.disposition {
+
     display: grid;
     grid-template-rows: 100px 517px 0px 0px 100px;
     grid-template-columns: repeat(5, 2fr);
     color: darkgreen
-  }
 
-  .Navbar-Accueil {
+}
+
+.Navbar-Accueil {
+
     grid-column: 1;
     grid-row: 1;
 
@@ -21,19 +23,47 @@ html, body {
     border-bottom : solid white;
     border-right : solid white;
 
-  }
+    text-align: center;
 
-  .Navbar-Recherche {
+    font-size: 400%;
+
+}
+
+.Navbar-Recherche {
+
     grid-column: 2 / 6;
     grid-row: 1;
 
     background-color: rgb(2, 97, 103);
     color: white;
     border-bottom : solid white;
+    
+    padding-left: 5%;
+    padding-top: 2.5%;
+    padding-right: 50%;
 
-  }
+}
 
-  .Bar-Playlist{
+#bar-recherche{
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+    
+    background-color: rgb(25, 157, 166);
+
+    border: solid white;
+    color : white;
+
+}
+
+#bouton-recherche{
+
+    border : solid white;
+    background-color: rgb(25, 157, 166);
+    color : white;
+
+}
+
+.Bar-Playlist{
 
     grid-column: 1;
     grid-row: 2 / 6;
@@ -42,9 +72,9 @@ html, body {
     color: white;
     border-right : solid white;
 
-  }
+}
   
-  .Bar-Footer{
+.Bar-Footer{
 
     grid-column: 2 / 6;
     grid-row: 5 / 6;
@@ -54,9 +84,9 @@ html, body {
     color: white;
     border-top : solid white;
 
-  }
+}
 
-  .Page-Central{
+.Page-Central{
 
     grid-column: 2 / 6;
     grid-row: 2 / 5;
@@ -65,6 +95,6 @@ html, body {
 
     color : white;
 
-  }
+}
 
 
