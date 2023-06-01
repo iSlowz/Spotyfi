@@ -20,12 +20,15 @@ $fileName = array_pop($fileName);
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-    <!-- Custom CSS -->
-   
+    <!-- Custom CSS 
+  
     <link rel="stylesheet" href="style/Accueil.css">
+  
+    -->
 
     <title>Spotyfi</title>
 
+    <!--
     <style>
 
       html, body {
@@ -36,7 +39,7 @@ $fileName = array_pop($fileName);
 
       .disposition {
         display: grid;
-        grid-template-rows: 100px 100px 180px 180px 100px;
+        grid-template-rows: 100px 517px 0px 0px 100px;
         grid-template-columns: repeat(5, 2fr);
         color: darkgreen
       }
@@ -45,7 +48,10 @@ $fileName = array_pop($fileName);
         grid-column: 1;
         grid-row: 1;
 
-        border: solid black; 
+        background-color: rgb(2, 97, 103);
+        color: white;
+        border-bottom : solid white;
+        border-right : solid white;
 
       }
 
@@ -53,7 +59,9 @@ $fileName = array_pop($fileName);
         grid-column: 2 / 6;
         grid-row: 1;
 
-        border: solid red; 
+        background-color: rgb(2, 97, 103);
+        color: white;
+        border-bottom : solid white;
 
       }
 
@@ -62,18 +70,82 @@ $fileName = array_pop($fileName);
         grid-column: 1;
         grid-row: 2 / 6;
 
-        border: solid blue;
+        background-color: rgb(2, 97, 103);
+        color: white;
+        border-right : solid white;
 
       }
-
+      
       .Bar-Footer{
 
         grid-column: 2 / 6;
         grid-row: 5 / 6;
 
-        border: solid green;
+        background-color: rgb(2, 97, 103);
+
+        color: white;
+        border-top : solid white;
 
       }
+
+      .Page-Central{
+  
+        grid-column: 2 / 6;
+        grid-row: 2 / 5;
+
+        background-color: rgb(25, 157, 166);
+
+        color : white;
+
+      }
+
+    </style>
+    -->
+
+    <style>
+
+      .box {
+        display: flex;
+        height: 100%;
+      }
+
+      .Navbar-Accueil{
+        flex: 1 1 auto;
+        border : solid black;
+
+        height : 100px;
+
+      }
+
+      .Navbar-Recherche{
+        flex: 5 1 auto;
+        border : solid black;
+
+        height : 100px;
+      }
+
+      .Bar-Playlist{
+        flex: 1 1 auto;
+        border : solid black;
+        
+        height : 200px;
+      }
+
+      .Page-Central{
+        flex: 1 1 auto;
+        border : solid black;
+
+        height : 100px;
+
+      }
+
+      .Bar-Footer{
+        flex: 1 1 auto;
+        border : solid black;
+
+        height : 100px;
+      }
+    
 
     </style>
 
@@ -81,25 +153,48 @@ $fileName = array_pop($fileName);
 
 <body>
 
-  <div class="disposition">
-    
-    <div class="Navbar-Accueil">
-      <label id="Accueil">Accueil</label>
+  <!-- 1ère partie de la flex box, on a donc la box accueil et la box recherche qui seront en haut -->
+  <!-- 2ème partie de la flex box, on aura le reste des pages, donc le playlist qui prendra toute la partie gauche-->
+  <!--
+  <div class="box">
+    <div class="d-flex flex-column">
+      <div class="p">
+        <div class="d-flex flex-row">
+          <div class="Navbar-Accueil">
+            <label id="Accueil">Accueil</label>
+          </div>
+          <div class="Navbar-Recherche">
+            <label id="Accueil">Recherche</label>
+          </div>
+        </div>
+      </div>
+      <div class="p">
+        <div class="d-flex flex-row">
+          <div class="Bar-Playlist">
+            <label id="playlist">Playlists</label>
+          </div>
+          <div class="Page-Central">
+            <label id="page">Page</label>
+            <div class="p">
+              <div class="d-flex flex-column">
+                <div class="Bar-Footer">
+                  <label id="playlist">footer</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="Navbar-Recherche">
-      <label id="Accueil">Recherche</label>
-    </div>
-
-    <div class="Bar-Playlist">
-      <label id="playlist">Playlists</label>
-    </div>
-
-    <div class="Bar-Footer">
-      <label id="playlist">footer</label>
-    </div>
-
   </div>
+  -->
+
+  <div class="d-flex flex-column mb-3">
+    <div class="p-2">Flex item 1</div>
+    <div class="p-2">Flex item 2</div>
+    <div class="p-2">Flex item 3</div>
+  </div>
+  
   
 </body>
 
