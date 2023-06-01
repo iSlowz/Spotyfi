@@ -1,5 +1,5 @@
 <?php
-
+require_once('Database.php');
 class User
 {
     public $id_user;
@@ -28,7 +28,20 @@ class User
             "mot_de_passe" => $this->mot_de_passe
         );
     }
-    
+
+    public function getPlaylists(){
+        try {
+            $dbh = Database::connexionBD();
+
+            $statement = $dbh->prepare("SELECT p.id_playlist FROM playlist p JOIN user u on id_playlist JOIN  WHERE ");
+            $statement->bindParam(':mail', $_POST['mail']);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+    }
 }
 
 ?>
