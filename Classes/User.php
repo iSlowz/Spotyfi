@@ -33,7 +33,7 @@ class User
         try {
             $dbh = Database::connexionBD();
 
-            $statement = $dbh->prepare("SELECT id_playlist FROM playlist WHERE  id_user = :user EXCEPT SELECT id_playlist FROM playlist WHERE titre_playlist = 'favoris' OR titre_playlist = 'historique'");
+            $statement = $dbh->prepare("SELECT id_playlist FROM playlist WHERE  id_user = :user EXCEPT SELECT id_playlist FROM playlist WHERE titre_playlist = 'Favoris' OR titre_playlist = 'Historique'");
             $statement->bindParam(':user', $this->id_user);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);

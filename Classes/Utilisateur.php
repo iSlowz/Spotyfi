@@ -59,7 +59,7 @@ class Utilisateur
                 $manquant['naissance']=True;
                 $valide = False;
             }
-            if (empty($_POST['mail'])) {
+            if (empty($_POST['mail']) or !filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
                 $manquant['mail']=True;
                 $valide = False;
             }
@@ -79,9 +79,9 @@ class Utilisateur
             }
             else{
                 try {
-                    $dbh = Database::connexionBD();
+                    $conn = Database::connexionBD();
 
-                    $statement = $dbh->prepare("SELECT mail_user FROM users WHERE mail_user=:mail");
+                    $statement = $conn->prepare("SELECT id_user FROM users WHERE mail_user=:mail");
                     $statement->bindParam(':mail', $_POST['mail']);
                     $statement->execute();
                     $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -96,7 +96,7 @@ class Utilisateur
                     $timestamp = strtotime($_POST["naissance"]); // Formatage du timestamp en SQL DATE
                     $naissance = date('Y-m-d', $timestamp);
 
-                    $statement = $dbh->prepare("INSERT INTO users(prenom_user, nom_user, date_naissance_user, mail_user, mot_de_passe) 
+                    $statement = $conn->prepare("INSERT INTO users(prenom_user, nom_user, date_naissance_user, mail_user, mot_de_passe) 
                                                 VALUES (:prenom, :nom, :naissance, :mail, :mot_de_passe)");
 
                     //$password = password_hash($_POST['password'], PASSWORD_BCRYPT); plus tard
@@ -110,9 +110,42 @@ class Utilisateur
                     error_log('Connection error: '.$exception->getMessage());
                     return false;
                 }
-                header('Location: Accueil.php');
+                //on retrouve son id
+                $statement = $conn->prepare('SELECT id_user FROM users WHERE mail_user=:mail');
+                $statement->bindParam(':mail', $_POST['mail']);
+                $statement->execute();
+                $id=$statement->fetch(PDO::FETCH_ASSOC)["id_user"];
+
+                //on ajoute Favoris et Historique
+                try {
+                    $titre='Historique';
+                    $statement = $conn->prepare("INSERT INTO playlist(titre_playlist, date_creation_playlist, id_user) 
+                                                VALUES (:titre,NOW(), :id)");
+                    $statement->bindParam(":titre", $titre);
+                    $statement->bindParam(":id", $id);
+
+                    $statement->execute();
+                } catch (PDOException $exception) {
+                    error_log('Connection error: '.$exception->getMessage());
+                    return false;
+                }
+                try {
+                    $titre='Favoris';
+                    $statement = $conn->prepare("INSERT INTO playlist(titre_playlist, date_creation_playlist, id_user) 
+                                                VALUES (:titre,NOW(), :id)");
+                    $statement->bindParam(":titre", $titre);
+                    $statement->bindParam(":id", $id);
+                    $statement->execute();
+                } catch (PDOException $exception) {
+                    error_log('Connection error: '.$exception->getMessage());
+                    return false;
+                }
+                header('Location: private/Accueil.php');
             }
         }
         return False;
     }
+
 }
+
+?>
