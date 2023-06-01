@@ -10,7 +10,7 @@ class Utilisateur
 
         if (isset($_SESSION['user'])) {
             if ($file == 'index.php') {
-                header('Location: private/Accueil.php');
+                header('Location: Accueil.php');
             }
             return $_SESSION['user'];
         }
@@ -30,7 +30,7 @@ class Utilisateur
 
             if ($_POST['password'] == $result['mot_de_passe'] && !empty($result)) {
                 $_SESSION['user'] = $result['id_user'];
-                header('Location: private/Accueil.php');
+                header('Location: Accueil.php');
             } else {
                 return "E-Mail ou Mot de passe invalide !";
             }

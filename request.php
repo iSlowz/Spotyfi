@@ -1,5 +1,6 @@
 <?php
-require_once('')
+require_once('Classes/User.php');
+require_once('Classes/Playlist.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
@@ -12,11 +13,23 @@ if ($id == '')
 $result = null;
 
 switch ($requestRessource) {
-    case 'musique':
+    case 'historique':
         switch ($requestMethod){
             case "GET":
-
+                $result=Playlist::getHistorique($id);
         }
 }
+
+if (!empty($result)) {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-control: no-store, no-cache, must-revalidate');
+    header('Pragma: no-cache');
+    header('HTTP/1.1 200 OK');
+    echo json_encode($result);
+    exit();
+}
+
+// Bad request case.
+header('HTTP/1.1 400 Bad Request');
 
 ?>

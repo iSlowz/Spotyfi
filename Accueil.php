@@ -1,7 +1,6 @@
 <?php
-$fileName = explode('/', $_SERVER['PHP_SELF']);
-$fileName = array_pop($fileName);
-//echo $fileName;
+require_once ('Classes/Utilisateur.php');
+$id_user = Utilisateur::Connexion()
 ?>
 
 <!-- /-------------------- HTML --------------------/ -->
@@ -28,7 +27,10 @@ $fileName = array_pop($fileName);
 </head>
 
 <body>
+<?php
+echo "<div id='id_user' style='display: none'>".$id_user."</div>";
 
+?>
   <div class="disposition">
     
     <div class="Navbar-Accueil">
@@ -67,15 +69,7 @@ $fileName = array_pop($fileName);
     <div class="Page-Central">
       <div class="rectangle-page">
         <div class="flex-page">
-          <div class="titre-page">
-            <label>Derniers morceaux écoutés</label>
-          </div>
-          <div class="barre-page">
-            <hr>
-          </div>
-          <div class="dernier-morceaux-page">
-            
-          </div>
+
         </div>
       </div>
     </div>
@@ -85,7 +79,10 @@ $fileName = array_pop($fileName);
     </div>
 
   </div>
-  
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="js/Ajax.js"></script>
+<script src="js/affichage.js"></script>
 </body>
+
 
 </html>
