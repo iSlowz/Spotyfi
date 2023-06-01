@@ -69,8 +69,8 @@ var_dump($result);
                       }
                       ?>
                     
-                    <label for="userInput" class="form-label">Age :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="age">
+                    <label for="userInput" class="form-label">Date de naissance :</label>
+                    <input type="date" class="form-control" id="userInput" aria-describedby="userInput" name="age">
                       <?php
                       if (isset($result["age"])){
                           echo "<p id='erreur'>Veuillez rentrer votre âge</p>";
@@ -90,7 +90,8 @@ var_dump($result);
                       ?>
 
                     <label for="userInput" class="form-label">Mot de passe :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="password">
+                    <input type="password" class="form-control" id="userInput" aria-describedby="userInput" name="password">
+
                       <?php
                       if (isset($result["password"])){
                           echo "<p id='erreur'>Veuillez rentrer votre mot de passe</p>";
@@ -98,7 +99,7 @@ var_dump($result);
                       ?>
                     
                     <label for="userInput" class="form-label">Vérification mot de passe :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="verif_password">
+                    <input type="password" class="form-control" id="userInput" aria-describedby="userInput" name="verif_password">
                       <?php
                       if (isset($result["verif"])){
                           echo "<p id='erreur'>Veuillez rentrer le même mot de passe</p>";

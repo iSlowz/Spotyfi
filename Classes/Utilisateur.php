@@ -41,15 +41,17 @@ class Utilisateur
 
     static function sign_up()
     {
-        $manquant=Array();
-        $valide = True;
+
         if (!empty($_POST)) {
-            if (empty($_POST['nom'])) {
-                $manquant['nom']=True;
-                $valide = False;
-            }
+            $manquant=Array();
+            $valide = True;
+
             if (empty($_POST['prenom'])) {
                 $manquant['prenom']=True;
+                $valide = False;
+            }
+            if (empty($_POST['nom'])) {
+                $manquant['nom']=True;
                 $valide = False;
             }
 
@@ -91,9 +93,25 @@ class Utilisateur
                 if (!empty($result)) {
                     return 'Adresse déjà utilisée !';
                 }
+                try {
+                    $statement = $dbh->prepare("INSERT INTO users(prenom_user, nom_user, age_user, mail_user, mot_de_passe) 
+                                                VALUES (:prenom, :nom, :age, :mail, :mot_de_passe)");
+
+                    //$password = password_hash($_POST['password'], PASSWORD_BCRYPT); plus tard
+                    $statement->bindParam(":prenom", $_POST['prenom']);
+                    $statement->bindParam(":nom", $_POST['nom']);
+                    $statement->bindParam(":age", $_POST['age']);
+                    $statement->bindParam(":mail", $_POST["mail"]);
+                    $statement->bindParam(":mot_de_passe", $_POST['password']);
+                    $statement->execute();
+                } catch (PDOException $exception) {
+                    error_log('Connection error: '.$exception->getMessage());
+                    return false;
+                }
+                header('Location: Accueil.php');
             }
         }
-        //manque des trucs
+
         return False;
     }
 }
