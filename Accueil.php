@@ -27,8 +27,7 @@ $fileName = array_pop($fileName);
     -->
 
     <title>Spotyfi</title>
-
-    <!--
+  
     <style>
 
       html, body {
@@ -100,65 +99,35 @@ $fileName = array_pop($fileName);
       }
 
     </style>
-    -->
-
-    <style>
-
-      html, body{
-
-        height : 100%;
-
-      }
-
-      #bar-haut{
-        background-color: rgb(2, 97, 103);
-        border-bottom: solid white;
-        color: white;
-
-        align-items: center;
-
-        font-size: 3.5em;
-
-      }
-
-      .
-
-    </style>
 
 </head>
 
 <body>
 
-  <div class="d-flex flex-column">
-    <div class="d-flex flex-row" id="bar-haut">
-      
-        <div class="Navbar-Accueil">
-          <label>Accueil</label>
-        </div>
-      
-        <div class="Navbar-Recherche">
-          <label>Recherche</label>
-        </div>
-      
+  <div class="disposition">
+    
+    <div class="Navbar-Accueil">
+      <label id="Accueil">Accueil</label>
     </div>
-    <div class="d-flex flex-row">
-      
-        <div class="Bar-Playlist">
-          <label id="Playlist">Playlists</label>
-        </div>
-      
-        <div class="Page-Central">
-          <label id="Page">Page</label>
-        </div>
-      
-    </div>
-    <div class="d-flex flex-row">
-      <label>Flex item 1</label>
-        <div class="Bar-Footer">
-          <label id="Footer">footer</label>
-        </div>
-    </div>
-  </div>
 
+    <div class="Navbar-Recherche">
+      <label id="Accueil">Recherche</label>
+    </div>
+
+    <div class="Bar-Playlist">
+      <label id="playlist">Playlists</label>
+    </div>
+
+    <div class="Page-Central">
+      <label id="page">Page</label>
+    </div>
+
+    <div class="Bar-Footer">
+      <label id="playlist">footer</label>
+    </div>
+
+  </div>
+  
 </body>
+
 </html>
