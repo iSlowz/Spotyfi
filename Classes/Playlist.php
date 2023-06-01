@@ -14,9 +14,9 @@ class Playlist
     }
     static function getHistorique($id_user){
         try {
-            $dbh = Database::connexionBD();
+            $conn = Database::connexionBD();
 
-            $statement = $dbh->prepare("SELECT id_musique, titre_musique, nom_artiste FROM musique_playlist mp 
+            $statement = $conn->prepare("SELECT id_musique, titre_musique, nom_artiste FROM musique_playlist mp 
                                                                 JOIN playlist p using (id_playlist)  
                                                                 JOIN musique m using (id_musique)
                                                                 JOIN artiste using (id_artiste)
@@ -30,11 +30,13 @@ class Playlist
         }
     }
 
+
+
     static function getFavoris($id_user){
         try {
-            $dbh = Database::connexionBD();
+            $conn = Database::connexionBD();
 
-            $statement = $dbh->prepare("SELECT * FROM musique_playlist m JOIN playlist p using (id_playlist) WHERE id_user=:id_user AND titre_playlist='Favoris'");
+            $statement = $conn->prepare("SELECT * FROM musique_playlist m JOIN playlist p using (id_playlist) WHERE id_user=:id_user AND titre_playlist='Favoris'");
             $statement->bindParam(':id_user', $id_user);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -44,14 +46,26 @@ class Playlist
         }
     }
 
-    static function getMusiques(){
+    static function getMusiques($id_playlist){
         try {
-            $dbh = Database::connexionBD();
-
-            $statement = $dbh->prepare("SELECT * FROM musique_playlist WHERE id_playlist=:id_playlist");
+            $conn = Database::connexionBD();
+            $result=Array();
+            $statement = $conn->prepare("SELECT id_musique, date_ajout_musique_playlist, titre_musique,
+                                 lien_musique, duree_musique, ar.id_artiste, pseudo_artiste, id_album, title_album
+                                                FROM musique_playlist JOIN musique m using (id_musique)
+                                                JOIN artiste ar using (id_artiste)
+                                                JOIN album  al using (id_album)
+                                                WHERE id_playlist=:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $statement = $conn->prepare("SELECT titre_playlist, date_creation_playlist FROM playlist WHERE id_playlist=:id_playlist");
+            $statement->bindParam(':id_playlist', $id_playlist);
+            $statement->execute();
+            $result += $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
@@ -59,9 +73,9 @@ class Playlist
     }
     public function addMusique($id_musique){
         try {
-            $dbh = Database::connexionBD();
+            $conn = Database::connexionBD();
 
-            $statement = $dbh->prepare("INSERT INTO public.musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) VALUES(:id_musique, :id_playlist, NOW())");
+            $statement = $conn->prepare("INSERT INTO public.musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) VALUES(:id_musique, :id_playlist, NOW())");
             $statement->bindParam(':id_musique', $id_musique);
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
@@ -73,9 +87,9 @@ class Playlist
 
     public function deleteMusique($id_musique){
         try {
-            $dbh = Database::connexionBD();
+            $conn = Database::connexionBD();
 
-            $statement = $dbh->prepare("DELETE FROM public.musique_playlist WHERE id_musique = :id_musique");
+            $statement = $conn->prepare("DELETE FROM public.musique_playlist WHERE id_musique = :id_musique");
             $statement->bindParam(':id_musique', $id_musique);
             $statement->execute();
         } catch (PDOException $exception) {

@@ -1,9 +1,11 @@
 let id_user=document.getElementById("id_user").innerText
 ajaxRequest("GET", "request.php/historique/"+id_user, loadHistorique)
+ajaxRequest("GET","request.php/playlist_list/"+id_user, loadPlaylists)   //id_user sera ce qu'on va retrouver
+                                                        //dans id dans request.php (car après le /)
 
 function loadHistorique(musiques){
     console.log(musiques)
-    $(".flex-page").html()
+    $(".flex-page").html('')
     let text='<div class="titre-page">' +
         '            <label>Derniers morceaux écoutés</label>' +
         '          </div>' +
@@ -21,3 +23,44 @@ function loadHistorique(musiques){
     })
     $(".flex-page").append(text+'</div>')
 }
+
+function loadPlaylists(playlists){
+    console.log(playlists)
+    playlists.forEach(function (playlist){
+        console.log(playlist)
+        $(".flex-playlist").append('<button class="btn playlist-bouton" value="'+playlist["id_playlist"]+'" type="submit">'+playlist["titre_playlist"]+'</button>')
+    })
+
+    $(".playlist-bouton").click(function (event) {
+        let id = $(event.target).closest('.playlist-bouton').attr('value')
+        console.log(id)
+        ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
+        }
+        )
+
+}
+
+function showPlaylist(playlist){
+    console.log(playlist)
+    $(".flex-page").html('<h1>'+playlist["titre_playlist"]+'</h1>' +
+        '<p>Créée le '+playlist["date_creation_playlist"]+'</p>' +
+        '<table>' +
+        '<tr><th>Titre</th><th>Artiste</th><th>Album</th><th>Date d\'ajout</th><th>Durée</th></tr>')
+
+    let text=""
+    playlist["musiques"].forEach(function (musique){
+        text+='<tr>' +
+            '<td><button class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
+        '<td><button class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
+        '<button class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
+        '<td>'+musique["date_ajout_musique_playlist"]+' </td> <td> '+musique["duree_musique"]+'</td>' +
+            '</tr>'
+
+    })
+    $(".flex-page").append(text+'</table>')
+    //faut ajouter tous les .click pour les xxx-bouton
+}
+
+$("#Accueil").click(function (event){
+    ajaxRequest("GET", "request.php/historique/"+id_user, loadHistorique)
+})

@@ -17,7 +17,24 @@ switch ($requestRessource) {
         switch ($requestMethod){
             case "GET":
                 $result=Playlist::getHistorique($id);
+                break;
         }
+        break;
+
+    case 'playlist_list':
+        switch ($requestMethod){
+            case "GET":
+                $result=User::getPlaylists($id);
+                break;
+        }
+        break;
+    case 'playlist':
+        switch ($requestMethod){
+            case "GET":
+                $result=Playlist::getMusiques($id);
+                break;
+        }
+        break;
 }
 
 if (!empty($result)) {

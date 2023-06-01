@@ -29,14 +29,14 @@ class User
         );
     }
 
-    public function getPlaylists(){
+    static function getPlaylists($id_user){
         try {
             $dbh = Database::connexionBD();
 
-            $statement = $dbh->prepare("SELECT id_playlist FROM playlist WHERE  id_user = :user EXCEPT SELECT id_playlist FROM playlist WHERE titre_playlist = 'Favoris' OR titre_playlist = 'Historique'");
-            $statement->bindParam(':user', $this->id_user);
+            $statement = $dbh->prepare("SELECT id_playlist,titre_playlist FROM playlist WHERE  id_user = :user EXCEPT SELECT id_playlist,titre_playlist FROM playlist WHERE titre_playlist = 'Favoris' OR titre_playlist = 'Historique'");
+            $statement->bindParam(':user', $id_user);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

@@ -138,7 +138,7 @@ html, body {
 
 }
 
-#playlist-bouton{
+.playlist-bouton{
 
     border: rgb(25, 157, 166);
     background-color : rgb(25, 157, 166);
