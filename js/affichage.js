@@ -74,8 +74,8 @@ $("#Accueil").click(function (event){
 function showMusique(musique){
     console.log(musique)
     $(".flex-page").html('<h1>'+musique["titre_musique"]+'</h1>' +
-        '<p>'+musique["duree_musique"]+'</p>' +
-        '' +
+        '<p>'+musique["duree_musique"]+'</p>')
+
 
 
 }
