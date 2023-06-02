@@ -3,7 +3,7 @@
 class Album
 {   
     public $id_album;
-    public $title_alnum;
+    public $titre_alnum;
     public $photo_album;
     public $date_creation_album;
     public $id_artiste;
@@ -11,7 +11,7 @@ class Album
 
     public function __construct($dbRow){
         $this->id_album = $dbRow["id_album"];
-        $this->title_alnum = $dbRow["title_alnum"];
+        $this->titre_alnum = $dbRow["titre_alnum"];
         $this->photo_album = $dbRow["photo_album"];
         $this->date_creation_album = $dbRow["date_creation_album"];
         $this->id_artiste = $dbRow["id_artiste"];
@@ -21,7 +21,7 @@ class Album
     static function getAlbum($id_album){
         try {
             $conn = Database::connexionBD();
-            $statement = $conn->prepare("SELECT id_album, title_album, photo_album, date_creation_album, id_artiste, id_style
+            $statement = $conn->prepare("SELECT id_album, titre_album, photo_album, date_creation_album, id_artiste, id_style
                                     FROM album 
                                     WHERE id_album=:id_album");
             $statement->bindParam(':id_album', $id_album);
