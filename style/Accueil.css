@@ -62,39 +62,39 @@ html, body {
 
     align-items : center;
 
-  }
+}
 
-  #bar-recherche{
+#bar-recherche{
 
     border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
     background-color: rgb(25, 157, 166);
 
     border: solid white;
-    color : white;
+    color : white;  
 
     margin-left: 5%;
 
-    width : 200%;
+    width : 100%;
 
-  }
+}
 
-  #bouton-recherche{
+#bouton-recherche{
 
     border : solid white;
     background-color: rgb(25, 157, 166);
     color : white;
 
-  }  
+}  
 
-  .bouton-user{
+.bouton-user{
 
     margin-left: auto;
     margin-right: 2%;
 
-  }
+}
 
-  #id-bouton-user{
+#id-bouton-user{
 
     color : white;
     border: rgb(25, 157, 166);
@@ -104,7 +104,7 @@ html, body {
 
     font-size: 120%;
 
-  }
+}
 
 
 /* Partie de la barre de Playlist */
@@ -296,5 +296,57 @@ html, body {
 .card-text{
 
     font-style: italic;
+
+}
+
+
+/* Partie tableau pour les playlist */
+
+
+.page-playlist-flex{
+
+    display: flex;
+    flex-direction : row;
+
+}
+
+#titre-page{
+
+    margin-left: 5%;
+    margin-right: 10%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    
+}
+
+#titre-date{
+
+    margin-left: auto;
+    margin-top: 2.5%;
+    margin-bottom: 1%;
+    margin-right: 5%;
+
+}
+
+#trait{
+
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+#titre-table{
+
+    display: flex;
+    flex-direction : row;
+
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+#texte-titre-table{
+
+    color: white;
 
 }

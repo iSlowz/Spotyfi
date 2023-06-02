@@ -47,14 +47,32 @@ function loadPlaylists(playlists){
 
 function showPlaylist(playlist){    //affiche les musiques d'une playlist
     console.log(playlist)
-    $(".flex-page").html('<h1>'+playlist["titre_playlist"]+'</h1>' +
-        '<p>Créée le '+playlist["date_creation_playlist"]+'</p>' +
-        '<table>' +
-        '<tr><th>Titre</th><th>Artiste</th><th>Album</th><th>Date d\'ajout</th><th>Durée</th></tr>')
+    $(".flex-page").html(
+        
+        '<div class="page-playlist-flex">'+
+          '<h2 id="titre-page">' + playlist["titre_playlist"] + '</h2>'+
+          '<h4 id="titre-date"> '+playlist["date_creation_playlist"]+'</h4>'+
+        '</div>'+
+        '<hr id="trait">' +
+        '<div class="page-table" id="titre-table">' +
+          '<table class="table" id="texte-titre-table">' + 
+            '<thead>' +
+              '<tr>' +
+                '<th scope="col">Titre</th>' +
+                '<th scope="col">Artiste</th>' +
+                '<th scope="col">Album</th>' +
+                '<th scope="col">Date ajout</th>' +
+                '<th scope="col">Durée</th>' +
+                '<th scope="col">Sup</th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>')
 
     let text=""
     playlist["musiques"].forEach(function (musique){
-        text+='<tr>' +
+
+        text+=
+        '<tr>' +
             '<td><button type="button" class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
         '<td><button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
         '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
@@ -62,6 +80,42 @@ function showPlaylist(playlist){    //affiche les musiques d'une playlist
             '</tr>'
 
     })
+
+
+// <div class="page-table">
+//   <table class="table">
+//     <thead>
+//       <tr>
+//         <th scope="col">Titre</th>
+//         <th scope="col">Artiste</th>
+//         <th scope="col">Album</th>
+//         <th scope="col">Date d'ajout</th>
+//         <th scope="col">Durée</th>
+//         <th scope="col">Sup</th>
+//       </tr>
+//     </thead>
+//     <tbody>
+//       <tr>
+//         <th scope="row">music1</th>
+//         <td>M</td>
+//         <td>undfined</td>
+//         <td>2023-06-02</td>
+//         <td>2:02</td>
+//         <td>Bouton supprimer</td>
+//       </tr>
+//       <tr>
+//       <th scope="row">music2</th>
+//         <td>M</td>
+//         <td>undfined</td>
+//         <td>2023-06-02</td>
+//         <td>3:05</td>
+//         <td>Bouton supprimer</td>
+//       </tr>
+//     </tbody>
+//   </table>
+// </div>
+
+
     $(".flex-page").append(text+'</table>')
     //faut ajouter tous les .click pour les xxx-bouton
 
