@@ -2,6 +2,7 @@
 require_once('Classes/User.php');
 require_once('Classes/Playlist.php');
 require_once('Classes/Musique.php');
+require_once('Classes/Album.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
@@ -43,6 +44,11 @@ switch ($requestRessource) {
                 break;
         }
         break;
+    case 'album':
+        switch ($requestMethod){
+            case "GET":
+                $result=Album::getAlbum($id);
+        }
 }
 
 if (!empty($result)) {

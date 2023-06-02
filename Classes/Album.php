@@ -1,7 +1,7 @@
 <?php
 
 class Album
-{
+{   /*
     public $id_album;
     public $title_alnum;
     public $photo_album;
@@ -16,6 +16,10 @@ class Album
         $this->date_creation_album = $dbRow["date_creation_album"];
         $this->id_artiste = $dbRow["id_artiste"];
         $this->id_style = $dbRow["id_style"];
+    }
+   */
+    static function getAlbum($id_album){
+
     }
     
 
