@@ -36,7 +36,11 @@ class Musique
                                     WHERE id_musique=:id_musique");
             $statement->bindParam(':id_musique', $id_musique);
             $statement->execute();
-            return $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            list($heures, $minutes, $secondes) = explode(":", $result["duree_musique"]);
+            $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
+            $result["duree_musique"] = $dureeFormatee;
+            return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

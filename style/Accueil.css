@@ -217,6 +217,8 @@ html, body {
 
 
 .Bar-Footer{
+    
+    display: grid;
 
     grid-column: 2 / 6;
     grid-row: 5 / 6;
