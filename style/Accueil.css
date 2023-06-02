@@ -15,8 +15,8 @@ html, body {
 .disposition {
 
     display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
     grid-template-rows: 100px 517px 0px 0px 100px;
-    grid-template-columns: repeat(5, 2fr);
 
 }
 
@@ -26,8 +26,10 @@ html, body {
 
 .Navbar-Accueil {
 
-    grid-column: 1;
-    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
 
     background-color: rgb(2, 97, 103);
     color: white;
@@ -49,8 +51,10 @@ html, body {
 
     flex-direction : row;
 
-    grid-column: 2 / 6;
-    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
 
     background-color: rgb(2, 97, 103);
     color: white;
@@ -71,7 +75,7 @@ html, body {
 
     margin-left: 5%;
 
-    width : 500px;
+    width : 200%;
 
   }
 
