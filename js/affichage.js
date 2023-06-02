@@ -1,3 +1,4 @@
+
 let id_user=document.getElementById("id_user").innerText
 ajaxRequest("GET", "request.php/historique/"+id_user, loadHistorique)
 ajaxRequest("GET","request.php/playlist_list/"+id_user, loadPlaylists)   //id_user sera ce qu'on va retrouver
@@ -6,19 +7,24 @@ ajaxRequest("GET","request.php/playlist_list/"+id_user, loadPlaylists)   //id_us
 function loadHistorique(musiques){
     console.log(musiques)
     $(".flex-page").html('')
-    let text='<div class="titre-page">' +
-        '            <label>Derniers morceaux écoutés</label>' +
-        '          </div>' +
-        '          <div class="barre-page">' +
-        '            <hr>' +
-        '          </div>' +
-        '          <div id="dernier-morceaux-page">'
+    let text=
+    
+    '<div class="titre-page">' +
+      '<label>Derniers morceaux écoutés</label>' +
+    '</div>' +
+    '<div class="barre-page">' +
+      '<hr>' +
+    '</div>' +
+    '<div class="card" style="width: 10rem;">' +
+      '<div class="card-body">' +
+
     musiques.forEach(function (musique){
         console.log(musique)
 
-        text+= '<p>'+musique["titre_musique"]+'</p>' + //Faudra faire un rectangle clean avec titre et
-            '<p>' +musique["nom_artiste"]+'</p>' + // en plus petit en dessous auteur (et à gauche photo de la musique)
-            '<hr>'
+        text+= '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' + 
+            '<p class="card-text">' +musique["nom_artiste"]+'</p>' + 
+            '</div>' + 
+            '</div>'
 
     })
     $(".flex-page").append(text+'</div>')

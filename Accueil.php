@@ -12,6 +12,9 @@ $id_user = Utilisateur::Connexion()
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/Accueil.css">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -19,74 +22,7 @@ $id_user = Utilisateur::Connexion()
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style/Accueil.css">
-
     <title>Spotyfi</title>
-
-    <style>
-
-      .Navbar-Recherche {
-
-        display: flex;
-
-        flex-direction : row;
-
-        grid-column: 2 / 6;
-        grid-row: 1;
-
-        background-color: rgb(2, 97, 103);
-        color: white;
-        border-bottom : solid white;
-
-        align-items : center;
-
-      }
-
-      #bar-recherche{
-
-        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
-
-        background-color: rgb(25, 157, 166);
-
-        border: solid white;
-        color : white;
-
-        margin-left: 5%;
-
-        width : 500px;
-    
-      }
-
-      #bouton-recherche{
-
-        border : solid white;
-        background-color: rgb(25, 157, 166);
-        color : white;
-
-      }  
-
-      .bouton-user{
-
-        margin-left: auto;
-        margin-right: 2%;
-
-      }
-
-      #id-bouton-user{
-
-        color : white;
-        border: rgb(25, 157, 166);
-        background-color : rgb(25, 157, 166);
-
-        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
-
-        font-size: 120%;
-
-      }
-      
-
-    </style>
 
 </head>
 
@@ -142,7 +78,6 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
     <div class="Page-Central">
       <div class="rectangle-page">
         <div class="flex-page">
-
         </div>
       </div>
     </div>
@@ -156,6 +91,4 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
 <script src="js/Ajax.js"></script>
 <script src="js/affichage.js"></script>
 </body>
-
-
 </html>

@@ -43,7 +43,64 @@ html, body {
 
 /* Partie de la barre de Recherche */
 
+.Navbar-Recherche {
 
+    display: flex;
+
+    flex-direction : row;
+
+    grid-column: 2 / 6;
+    grid-row: 1;
+
+    background-color: rgb(2, 97, 103);
+    color: white;
+    border-bottom : solid white;
+
+    align-items : center;
+
+  }
+
+  #bar-recherche{
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    background-color: rgb(25, 157, 166);
+
+    border: solid white;
+    color : white;
+
+    margin-left: 5%;
+
+    width : 500px;
+
+  }
+
+  #bouton-recherche{
+
+    border : solid white;
+    background-color: rgb(25, 157, 166);
+    color : white;
+
+  }  
+
+  .bouton-user{
+
+    margin-left: auto;
+    margin-right: 2%;
+
+  }
+
+  #id-bouton-user{
+
+    color : white;
+    border: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    font-size: 120%;
+
+  }
 
 
 /* Partie de la barre de Playlist */
