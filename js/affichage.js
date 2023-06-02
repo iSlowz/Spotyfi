@@ -98,6 +98,20 @@ function showMusique(musique){
         '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button>' +
         '<button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button>' +
         '<p>'+musique["nom_style"]+'</p>')
+
+    $(".album-bouton").click(function (event){
+        let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album
+        console.log(id)
+        ajaxRequest("GET", "request.php/album/"+id, showAlbum)
+    })
+
+    $(".artiste-bouton").click(function (event){
+        let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
+        console.log(id);
+        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste)
+    })
+
+
 }
 
 function showAlbum(album) {    //affiche les musiques d'un album
@@ -117,6 +131,12 @@ function showAlbum(album) {    //affiche les musiques d'un album
 
     })
     $(".flex-page").append(text + '</table>')
+
+    $(".musique-bouton").click(function (event){
+        let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
+        console.log(id)
+        ajaxRequest("GET", "request.php/musique/"+id, showMusique)
+    })
 }
 
 
@@ -127,7 +147,8 @@ $("#id-bouton-user").click(function (event){
 function loadProfil(profil){
     console.log(profil)
     $(".flex-page").html('<h1>'+profil["prenom_user"]+' '+profil["nom_user"]+'</h1>' +
-        '<p>'+profil["date_naissance_user"]+'</p>'+
+        '<p>'+profil["date_naissance_user"]+'</p>' +
+        '<p>'+profil["age"]+'</p>'+
         '<p>'+profil["mail_user"]+'</p>'+
         '<button type="button" id="password">Modifier votre mot de passe</button>'
     )
@@ -137,10 +158,11 @@ function loadProfil(profil){
 function showArtiste(artiste){
     console.log(artiste)
     console.log(artiste["pseudo_artiste"])
-    $(".flex-page").html('<h1>' + artiste['pseudo_artiste'] + '</h1>' + 
-    '<p>' + artiste['nom_artiste'] + '</p>' +
-    '<p>' + artiste['prenom_artiste'] + '</p>' +
-    '<p>' + artiste['type_artiste'] + '</p>'
+    $(".flex-page").html('<h1>' + artiste["pseudo_artiste"] + '</h1>' +
+    '<p>' + artiste["nom_artiste"] + '</p>' +
+    '<p>' + artiste["prenom_artiste"] + '</p>' +
+    '<p>' + artiste["type_artiste"] + '</p>' +
+        '<p>'+artiste["nom_style"]+'</p>'
     
     //Rajouter les albums
     
