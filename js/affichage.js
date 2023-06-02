@@ -52,7 +52,7 @@ function showPlaylist(playlist){    //affiche les musiques d'une playlist
         text+='<tr>' +
             '<td><button type="button" class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
         '<td><button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
-        '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
+        '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button></td>' +
         '<td>'+musique["date_ajout_musique_playlist"]+' </td> <td> '+musique["duree_musique"]+'</td>' +
             '</tr>'
 
@@ -90,14 +90,14 @@ function showMusique(musique){
     $(".flex-page").html('<h1>'+musique["titre_musique"]+'</h1>' +
         '<p>'+musique["duree_musique"]+'</p>' +
         '<p>Parue le '+musique["date_parution_musique"]+'</p>' +
-        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button>' +
+        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button>' +
         '<button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button>' +
         '<p>'+musique["nom_style"]+'</p>')
 }
 
 function showAlbum(album) {    //affiche les musiques d'un album
     console.log(album)
-    $(".flex-page").html('<h1>' + album["title_album"] + '</h1>' +
+    $(".flex-page").html('<h1>' + album["titre_album"] + '</h1>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
         '<tr><th>Titre</th><th>Artiste</th><th>Durée</th></tr>')
