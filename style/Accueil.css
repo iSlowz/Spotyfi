@@ -258,6 +258,7 @@ html, body {
     border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
     text-align: center;
+    margin: 4%;
 }
 
 .titre-page{
@@ -267,3 +268,33 @@ html, body {
 }
 
 
+/* Partie des cards derniers morceaux sur la page d'accueil */
+
+
+.flex-card{
+
+    display: flex;
+    flex-direction : row;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+
+    margin-bottom: 2%;
+
+}
+
+#id-card{
+
+    color : white;
+    border-color: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+    
+    margin-bottom: 5%;
+
+}
+
+.card-text{
+
+    font-style: italic;
+
+}

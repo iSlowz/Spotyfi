@@ -1,4 +1,3 @@
-
 let id_user=document.getElementById("id_user").innerText
 ajaxRequest("GET", "request.php/historique/"+id_user, loadHistorique)
 ajaxRequest("GET","request.php/playlist_list/"+id_user, loadPlaylists)   //id_user sera ce qu'on va retrouver
@@ -7,24 +6,24 @@ ajaxRequest("GET","request.php/playlist_list/"+id_user, loadPlaylists)   //id_us
 function loadHistorique(musiques){
     console.log(musiques)
     $(".flex-page").html('')
-    let text=
-    
-    '<div class="titre-page">' +
-      '<label>Derniers morceaux écoutés</label>' +
-    '</div>' +
-    '<div class="barre-page">' +
-      '<hr>' +
-    '</div>' +
-    '<div class="card" style="width: 10rem;">' +
-      '<div class="card-body">' +
-
+    let text='<div class="titre-page">' +
+        '            <label>Derniers morceaux écoutés</label>' +
+        '          </div>' +
+        '          <div class="barre-page">' +
+        '            <hr>' +
+        '          </div>' +
+        '          <div class="flex-card" id="dernier-morceaux-page">'
     musiques.forEach(function (musique){
         console.log(musique)
 
-        text+= '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' + 
-            '<p class="card-text">' +musique["nom_artiste"]+'</p>' + 
-            '</div>' + 
-            '</div>'
+        text+= 
+
+        '<div class="card" id="id-card" style="width: 17%;">'+
+          '<div class="card-body">'+
+             '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' + 
+             '<p class="card-text">' + musique["nom_artiste"] + '</p>'+
+           '</div>'+
+        '</div>'
 
     })
     $(".flex-page").append(text+'</div>')
@@ -34,7 +33,7 @@ function loadPlaylists(playlists){
     console.log(playlists)
     playlists.forEach(function (playlist){
         console.log(playlist)
-        $(".flex-playlist").append('<button class="btn playlist-bouton" value="'+playlist["id_playlist"]+'" type="submit">'+playlist["titre_playlist"]+'</button>')
+        $(".flex-playlist").append('<button class="playlist-bouton" value="'+playlist["id_playlist"]+'" type="submit">'+playlist["titre_playlist"]+'</button>')
     })
 
     $(".playlist-bouton").click(function (event) {
@@ -58,7 +57,7 @@ function showPlaylist(playlist){    //affiche les musiques d'une playlist
         text+='<tr>' +
             '<td><button type="button" class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
         '<td><button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
-        '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button></td>' +
+        '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
         '<td>'+musique["date_ajout_musique_playlist"]+' </td> <td> '+musique["duree_musique"]+'</td>' +
             '</tr>'
 
@@ -96,7 +95,7 @@ function showMusique(musique){
     $(".flex-page").html('<h1>'+musique["titre_musique"]+'</h1>' +
         '<p>'+musique["duree_musique"]+'</p>' +
         '<p>Parue le '+musique["date_parution_musique"]+'</p>' +
-        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button>' +
+        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button>' +
         '<button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button>' +
         '<p>'+musique["nom_style"]+'</p>')
 
@@ -117,15 +116,16 @@ function showMusique(musique){
 
 function showAlbum(album) {    //affiche les musiques d'un album
     console.log(album)
-    $(".flex-page").html('<h1>' + album["titre_album"] + '<h4> par : ' + album['pseudo_artiste'] + '</h4></h1>' +
+    $(".flex-page").html('<h1>' + album["title_album"] + '</h1>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
-        '<tr><th>Titre</th><th>Durée</th></tr>')
+        '<tr><th>Titre</th><th>Artiste</th><th>Durée</th></tr>')
 
     let text = ""
     album["musiques"].forEach(function (musique) {
         text += '<tr>' +
             '<td><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></td>' +
+            '<td><button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></td>' +
             '<td>' + musique["duree_musique"] + '</td>' +
             '</tr>'
 
