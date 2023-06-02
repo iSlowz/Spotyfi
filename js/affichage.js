@@ -50,17 +50,32 @@ function showPlaylist(playlist){
     let text=""
     playlist["musiques"].forEach(function (musique){
         text+='<tr>' +
-            '<td><button class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
-        '<td><button class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
-        '<button class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
+            '<td><button type="button" class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
+        '<td><button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
+        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
         '<td>'+musique["date_ajout_musique_playlist"]+' </td> <td> '+musique["duree_musique"]+'</td>' +
             '</tr>'
 
     })
     $(".flex-page").append(text+'</table>')
     //faut ajouter tous les .click pour les xxx-bouton
+
+    $(".musique-bouton").click(function (event){
+        let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
+        console.log(id)
+        ajaxRequest("GET", "request.php/musique/"+id, showMusique)
+    })
 }
 
 $("#Accueil").click(function (event){
     ajaxRequest("GET", "request.php/historique/"+id_user, loadHistorique)
 })
+
+function showMusique(musique){
+    console.log(musique)
+    $(".flex-page").html('<h1>'+musique["titre_musique"]+'</h1>' +
+        '<p>'+musique["duree_musique"]+'</p>' +
+        '' +
+
+
+}
