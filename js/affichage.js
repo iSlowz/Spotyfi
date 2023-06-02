@@ -57,7 +57,7 @@ function showPlaylist(playlist){    //affiche les musiques d'une playlist
         text+='<tr>' +
             '<td><button type="button" class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
         '<td><button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
-        '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
+        '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button></td>' +
         '<td>'+musique["date_ajout_musique_playlist"]+' </td> <td> '+musique["duree_musique"]+'</td>' +
             '</tr>'
 
@@ -95,7 +95,7 @@ function showMusique(musique){
     $(".flex-page").html('<h1>'+musique["titre_musique"]+'</h1>' +
         '<p>'+musique["duree_musique"]+'</p>' +
         '<p>Parue le '+musique["date_parution_musique"]+'</p>' +
-        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button>' +
+        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button>' +
         '<button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button>' +
         '<p>'+musique["nom_style"]+'</p>')
 
@@ -116,7 +116,7 @@ function showMusique(musique){
 
 function showAlbum(album) {    //affiche les musiques d'un album
     console.log(album)
-    $(".flex-page").html('<h1>' + album["title_album"] + '</h1>' +
+    $(".flex-page").html('<h1>' + album["titre_album"] + '</h1>' +
         '<h4> par : ' + album["pseudo_artiste"] + '</h4>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
@@ -147,11 +147,16 @@ $("#id-bouton-user").click(function (event){
 function loadProfil(profil){
     console.log(profil)
     $(".flex-page").html('<h1>'+profil["prenom_user"]+' '+profil["nom_user"]+'</h1>' +
-        '<p>'+profil["date_naissance_user"]+'</p>' +
+        '<div id="date_naissance"><p>'+profil["date_naissance_user"]+'</p></div>' +
         '<p>'+profil["age"]+'</p>'+
-        '<p>'+profil["mail_user"]+'</p>'+
-        '<button type="button" id="password">Modifier votre mot de passe</button>'
+        '<div id="mail"><p id="mail">'+profil["mail_user"]+'</p></div>'+
+        '<div id="modif_profil"><button type="button" id="password">Modifier votre profil</button></div>'
     )
+    $('#modif_profil').click(function (event){
+        $('#date_naissance').append()
+    })
+
+
 }
 
 

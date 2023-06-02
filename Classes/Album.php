@@ -27,6 +27,12 @@ class Album
             $statement->execute();
             $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+            for ($i=0;$i<count($result["musiques"]);$i++) {
+                list($heures, $minutes, $secondes) = explode(":", $result["musiques"][$i]["duree_musique"]);
+                $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
+                $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
+            }
+
             $statement = $conn->prepare("SELECT id_album, titre_album, photo_album, date_creation_album, al.id_artiste, al.id_style, ar.pseudo_artiste
                                     FROM album al
                                     JOIN artiste ar using (id_artiste)
@@ -50,7 +56,8 @@ class Album
             HERE id_album=:id_artiste;");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
-            $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
 
             $statement = $conn->prepare("SELECT titre_playlist, date_creation_playlist FROM playlist WHERE id_playlist=:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);

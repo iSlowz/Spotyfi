@@ -60,6 +60,11 @@ class Playlist
             $statement->execute();
             $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+            for ($i=0;$i<count($result["musiques"]);$i++) {
+                list($heures, $minutes, $secondes) = explode(":", $result["musiques"][$i]["duree_musique"]);
+                $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
+                $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
+            }
             $statement = $conn->prepare("SELECT titre_playlist, date_creation_playlist FROM playlist WHERE id_playlist=:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
