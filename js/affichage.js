@@ -92,10 +92,10 @@ function showMusique(musique){
         '<p>Parue le '+musique["date_parution_musique"]+'</p>' +
         '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button>' +
         '<button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button>' +
-        '<p>'+["nom_style"]+'</p>')
+        '<p>'+musique["nom_style"]+'</p>')
 }
 
-function showAlbum(album) {    //affiche les musiques d'une playlist
+function showAlbum(album) {    //affiche les musiques d'un album
     console.log(playlist)
     $(".flex-page").html('<h1>' + album["title_album"] + '</h1>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
@@ -103,12 +103,11 @@ function showAlbum(album) {    //affiche les musiques d'une playlist
         '<tr><th>Titre</th><th>Artiste</th><th>Durée</th></tr>')
 
     let text = ""
-    playlist["musiques"].forEach(function (musique) {
+    album["musiques"].forEach(function (musique) {
         text += '<tr>' +
             '<td><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></td>' +
             '<td><button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></td>' +
-            '<td><button type="button" class="album-bouton" value="' + musique["id_album"] + '">' + musique["title_album"] + '</button></td>' +
-            '<td>' + musique["date_ajout_musique_playlist"] + ' </td> <td> ' + musique["duree_musique"] + '</td>' +
+            '<td>' + musique["duree_musique"] + '</td>' +
             '</tr>'
 
     })
