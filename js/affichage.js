@@ -100,13 +100,12 @@ function showAlbum(album) {    //affiche les musiques d'un album
     $(".flex-page").html('<h1>' + album["titre_album"] + '<h4> par : ' + album['pseudo_artiste'] + '</h4></h1>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
-        '<tr><th>Titre</th><th>Artiste</th><th>Durée</th></tr>')
+        '<tr><th>Titre</th><th>Durée</th></tr>')
 
     let text = ""
     album["musiques"].forEach(function (musique) {
         text += '<tr>' +
             '<td><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></td>' +
-            '<td><button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></td>' +
             '<td>' + musique["duree_musique"] + '</td>' +
             '</tr>'
 
