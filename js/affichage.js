@@ -33,7 +33,7 @@ function loadPlaylists(playlists){
     console.log(playlists)
     playlists.forEach(function (playlist){
         console.log(playlist)
-        $(".flex-playlist").append('<button class="btn playlist-bouton" value="'+playlist["id_playlist"]+'" type="submit">'+playlist["titre_playlist"]+'</button>')
+        $(".flex-playlist").append('<button class="playlist-bouton" value="'+playlist["id_playlist"]+'" type="submit">'+playlist["titre_playlist"]+'</button>')
     })
 
     $(".playlist-bouton").click(function (event) {
