@@ -69,7 +69,7 @@ print_r($a);
                 echo "<p id='erreur'>".$result."</p>";
             }
             ?>
-            <a href="Sign_up.php"><button type="button" class="btn">Créer compte</button></a>
+          <a href="Sign_up.php"><button type="button" class="btn">Créer compte</button></a>
           <button type="submit" class="btn">Se connecter</button>
 
           
