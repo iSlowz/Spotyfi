@@ -71,6 +71,13 @@ function showPlaylist(playlist){    //affiche les musiques d'une playlist
         ajaxRequest("GET", "request.php/album/"+id, showAlbum)
     })
 
+    $(".artiste-bouton").click(function (event){
+        let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
+        console.log(id);
+        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste)
+
+    })
+
 }
 
 $("#Accueil").click(function (event){
@@ -107,3 +114,17 @@ function showAlbum(album) {    //affiche les musiques d'un album
     $(".flex-page").append(text + '</table>')
 }
 //faut ajouter tous les .click pour les xxx-bouton
+
+
+function showArtiste(artiste){
+    console.log(artiste)
+    console.log(artiste["pseudo_artiste"])
+    $(".flex-page").html('<h1>' + artiste['pseudo_artiste'] + '</h1>' + 
+    '<p>' + artiste['nom_artiste'] + '</p>' +
+    '<p>' + artiste['prenom_artiste'] + '</p>' +
+    '<p>' + artiste['type_artiste'] + '</p>'
+    
+    //Rajouter les albums
+    
+    )
+}

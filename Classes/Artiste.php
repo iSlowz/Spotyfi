@@ -11,8 +11,19 @@ class Artiste
         $this->nom_artiste = $dbRow["nom_artiste"];
         $this->type_artiste = $dbRow["type_artiste"];
     }
-
     
+    static function getArtiste($id_artiste){
+        try {
+            $conn = Database::connexionBD();
+            $statement = $conn->prepare("SELECT * FROM artiste WHERE id_artiste:id_artiste");
+            $statement->bindParam(':id_artiste', $id_artiste);
+            $statement->execute();
+            return $statement->fetch();
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+    }   
 
 }
 
