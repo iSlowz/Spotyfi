@@ -24,7 +24,14 @@ class Artiste
                     WHERE id_artiste=:id_artiste");
             $statement->bindParam(':id_artiste', $id_artiste);
             $statement->execute();
-            return $statement->fetch(PDO::FETCH_ASSOC);
+            $result= $statement->fetch(PDO::FETCH_ASSOC);
+
+            $statement = $conn->prepare("SELECT id_musique,  titre_musique, lien_musique, duree_musique FROM musique WHERE id_artiste=:id_artiste");
+            $statement->bindParam(':id_artiste', $id_artiste);
+            $statement->execute();
+            $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
