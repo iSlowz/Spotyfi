@@ -96,7 +96,7 @@ function showMusique(musique){
 }
 
 function showAlbum(album) {    //affiche les musiques d'un album
-    console.log(playlist)
+    console.log(album)
     $(".flex-page").html('<h1>' + album["title_album"] + '</h1>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
@@ -113,7 +113,20 @@ function showAlbum(album) {    //affiche les musiques d'un album
     })
     $(".flex-page").append(text + '</table>')
 }
-//faut ajouter tous les .click pour les xxx-bouton
+
+
+$("#id-bouton-user").click(function (event){
+    ajaxRequest("GET", "request.php/profil/"+id_user, loadProfil)
+})
+
+function loadProfil(profil){
+    console.log(profil)
+    $(".flex-page").html('<h1>'+profil["prenom_user"]+' '+profil["nom_user"]+'</h1>' +
+        '<p>'+profil["date_naissance_user"]+'</p>'+
+        '<p>'+profil["mail_user"]+'</p>'+
+        '<button type="button" id="password">Modifier votre mot de passe</button>'
+    )
+}
 
 
 function showArtiste(artiste){

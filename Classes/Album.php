@@ -21,7 +21,7 @@ class Album
     static function getAlbum($id_album){
         try {
             $conn = Database::connexionBD();
-            $statement = $conn->prepare("SELECT id_album, titre_album, photo_album, date_creation_album, id_artiste, id_style
+            $statement = $conn->prepare("SELECT id_album, title_album, photo_album, date_creation_album, id_artiste, id_style
                                     FROM album 
                                     WHERE id_album=:id_album");
             $statement->bindParam(':id_album', $id_album);
