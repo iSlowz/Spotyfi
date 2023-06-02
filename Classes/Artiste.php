@@ -29,7 +29,7 @@ class Artiste
 
         try{
             $conn = Database::connexionDB();
-            $statement = $conn->prepare("SELECT pseudo_artiste, id_artiste FROM artiste WHERE pseudo_artiste ILIKE '%:artiste%'");
+            $statement = $conn->prepare("SELECT pseudo_artiste, id_artiste FROM artiste WHERE pseudo_artiste ILIKE '%artiste%'");
             $statement->bindParam(':artiste', $artiste);
             $statement->execute();
             return $statement->fetch();
