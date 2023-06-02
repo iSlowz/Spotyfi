@@ -97,7 +97,7 @@ function showMusique(musique){
 
 function showAlbum(album) {    //affiche les musiques d'un album
     console.log(album)
-    $(".flex-page").html('<h1>' + album["titre_album"] + '</h1>' +
+    $(".flex-page").html('<h1>' + album["titre_album"] + '<h4> par : ' + album['pseudo_artiste'] + '</h4></h1>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
         '<tr><th>Titre</th><th>Artiste</th><th>Durée</th></tr>')

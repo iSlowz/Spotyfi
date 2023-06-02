@@ -20,13 +20,22 @@ class Album
 
     static function getAlbum($id_album){
         try {
+            $result=Array();
             $conn = Database::connexionBD();
-            $statement = $conn->prepare("SELECT id_album, titre_album, photo_album, date_creation_album, id_artiste, id_style
-                                    FROM album 
+            $statement = $conn->prepare("SELECT id_album, titre_album, photo_album, date_creation_album, al.id_artiste, al.id_style, ar.pseudo_artiste
+                                    FROM album al
+                                    JOIN artiste ar using (id_artiste)
                                     WHERE id_album=:id_album");
             $statement->bindParam(':id_album', $id_album);
             $statement->execute();
-            return $statement->fetch(PDO::FETCH_ASSOC);
+            $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $statement = $conn->prepare("SELECT titre_album, date_creation_album FROM album WHERE id_album=:id_album");
+            $statement->bindParam(':id_album', $id_album);
+            $statement->execute();
+            $result += $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

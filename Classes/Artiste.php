@@ -4,7 +4,11 @@ class Artiste
 {
     public $id_artiste;
     public $nom_artiste;
+    public $prenom_artiste;
     public $type_artiste;
+    public $pseudo_artiste;
+    public $id_style;
+
 
     public function __construct($dbRow){
         $this->id_artiste = $dbRow["id_artiste"];
