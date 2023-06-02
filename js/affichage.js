@@ -40,7 +40,7 @@ function loadPlaylists(playlists){
 
 }
 
-function showPlaylist(playlist){
+function showPlaylist(playlist){    //affiche les musiques d'une playlist
     console.log(playlist)
     $(".flex-page").html('<h1>'+playlist["titre_playlist"]+'</h1>' +
         '<p>Créée le '+playlist["date_creation_playlist"]+'</p>' +
@@ -52,7 +52,7 @@ function showPlaylist(playlist){
         text+='<tr>' +
             '<td><button type="button" class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
         '<td><button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
-        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
+        '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button></td>' +
         '<td>'+musique["date_ajout_musique_playlist"]+' </td> <td> '+musique["duree_musique"]+'</td>' +
             '</tr>'
 
@@ -65,6 +65,12 @@ function showPlaylist(playlist){
         console.log(id)
         ajaxRequest("GET", "request.php/musique/"+id, showMusique)
     })
+    $(".album-bouton").click(function (event){
+        let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album
+        console.log(id)
+        ajaxRequest("GET", "request.php/album/"+id, showAlbum)
+    })
+
 }
 
 $("#Accueil").click(function (event){
@@ -73,9 +79,32 @@ $("#Accueil").click(function (event){
 
 function showMusique(musique){
     console.log(musique)
+    console.log(musique["titre_musique"])
     $(".flex-page").html('<h1>'+musique["titre_musique"]+'</h1>' +
-        '<p>'+musique["duree_musique"]+'</p>')
-
-
-
+        '<p>'+musique["duree_musique"]+'</p>' +
+        '<p>Parue le '+musique["date_parution_musique"]+'</p>' +
+        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button>' +
+        '<button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button>' +
+        '<p>'+["nom_style"]+'</p>')
 }
+
+function showAlbum(album) {    //affiche les musiques d'une playlist
+    console.log(playlist)
+    $(".flex-page").html('<h1>' + album["title_album"] + '</h1>' +
+        '<p>Créé le ' + album["date_creation_album"] + '</p>' +
+        '<table>' +
+        '<tr><th>Titre</th><th>Artiste</th><th>Durée</th></tr>')
+
+    let text = ""
+    playlist["musiques"].forEach(function (musique) {
+        text += '<tr>' +
+            '<td><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></td>' +
+            '<td><button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></td>' +
+            '<td><button type="button" class="album-bouton" value="' + musique["id_album"] + '">' + musique["title_album"] + '</button></td>' +
+            '<td>' + musique["date_ajout_musique_playlist"] + ' </td> <td> ' + musique["duree_musique"] + '</td>' +
+            '</tr>'
+
+    })
+    $(".flex-page").append(text + '</table>')
+}
+//faut ajouter tous les .click pour les xxx-bouton

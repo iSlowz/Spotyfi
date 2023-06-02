@@ -27,8 +27,8 @@
 <?php
 require_once ('Classes/Utilisateur.php');
 $result=Utilisateur::sign_up();
-var_dump($result);
-print_r($result);
+//var_dump($result);
+//print_r($result);
 ?>
 
   <div class="form">
