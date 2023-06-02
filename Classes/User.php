@@ -42,6 +42,19 @@ class User
             return false;
         }
     }
+
+    static function getProfil($id_user){
+        try {
+            $dbh = Database::connexionBD();
+            $statement = $dbh->prepare("SELECT id_user,prenom_user, nom_user, date_naissance_user, mail_user FROM users WHERE id_user = :id_user");
+            $statement->bindParam(':id_user', $id_user);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+    }
 }
 
 ?>
