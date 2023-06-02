@@ -18,7 +18,7 @@ function loadHistorique(musiques){
 
         text+= 
 
-        '<div class="card" id="id-card" style="width: 20%;">'+
+        '<div class="card" id="id-card" style="width: 17%;">'+
           '<div class="card-body">'+
              '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' + 
              '<p class="card-text">' + musique["nom_artiste"] + '</p>'+

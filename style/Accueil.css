@@ -271,6 +271,7 @@ html, body {
 
     display: flex;
     flex-direction : row;
+    flex-wrap: wrap;
 
     justify-content: space-around;
 
@@ -283,7 +284,8 @@ html, body {
     color : white;
     border-color: rgb(25, 157, 166);
     background-color : rgb(25, 157, 166);
-
+    
+    margin-bottom: 5%;
 
 }
 
