@@ -82,7 +82,9 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
     </div>
 
     <div class="Bar-Footer">
-      <label id="Footer">footer</label>
+      <audio id="player" controls autoplay>
+        <source src="musique/epic-power.mp3" type="audio/ogg">
+      </audio>
     </div>
 
   </div>

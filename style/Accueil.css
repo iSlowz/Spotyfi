@@ -217,6 +217,8 @@ html, body {
 
 
 .Bar-Footer{
+    
+    display: grid;
 
     grid-column: 2 / 6;
     grid-row: 5 / 6;
@@ -297,4 +299,14 @@ html, body {
 
     font-style: italic;
 
+}
+
+
+audio::-webkit-media-controls-panel {
+    background-color: rgb(2, 97, 103);
+}
+  
+audio::-webkit-media-controls-mute-button {
+    background-color: #B1D4E0;
+    border-radius: 50%;
 }
