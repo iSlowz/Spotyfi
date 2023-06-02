@@ -3,6 +3,7 @@ require_once('Classes/User.php');
 require_once('Classes/Playlist.php');
 require_once('Classes/Musique.php');
 require_once('Classes/Album.php');
+require_once('Classes/Artiste.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);

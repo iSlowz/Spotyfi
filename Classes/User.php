@@ -31,9 +31,9 @@ class User
 
     static function getPlaylists($id_user){
         try {
-            $dbh = Database::connexionBD();
+            $conn = Database::connexionBD();
 
-            $statement = $dbh->prepare("SELECT id_playlist,titre_playlist FROM playlist WHERE id_user = :user EXCEPT SELECT id_playlist,titre_playlist FROM playlist WHERE titre_playlist = 'Favoris' OR titre_playlist = 'Historique'");
+            $statement = $conn->prepare("SELECT id_playlist,titre_playlist FROM playlist WHERE id_user = :user EXCEPT SELECT id_playlist,titre_playlist FROM playlist WHERE titre_playlist = 'Favoris' OR titre_playlist = 'Historique'");
             $statement->bindParam(':user', $id_user);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -45,11 +45,17 @@ class User
 
     static function getProfil($id_user){
         try {
-            $dbh = Database::connexionBD();
-            $statement = $dbh->prepare("SELECT id_user,prenom_user, nom_user, date_naissance_user, mail_user FROM users WHERE id_user = :id_user");
+            $conn = Database::connexionBD();
+            $statement = $conn->prepare("SELECT id_user,prenom_user, nom_user, date_naissance_user, mail_user FROM users WHERE id_user = :id_user");
             $statement->bindParam(':id_user', $id_user);
             $statement->execute();
-            return $statement->fetch(PDO::FETCH_ASSOC);
+            $result= $statement->fetch(PDO::FETCH_ASSOC);
+            $naissance = new DateTime($result["date_naissance_user"]);
+            $actuelle = new DateTime(date('Y-m-d'));
+            $difference = date_diff($naissance, $actuelle);
+            $age = $difference->format('%Y');
+            $result["age"]=$age;
+            return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

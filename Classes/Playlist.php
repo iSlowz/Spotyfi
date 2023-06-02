@@ -46,7 +46,7 @@ class Playlist
         }
     }
 
-    static function getMusiques($id_playlist){
+    static function getMusiques($id_playlist){  //prend les musiques d'une playlist
         try {
             $conn = Database::connexionBD();
             $result=Array();

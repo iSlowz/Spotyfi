@@ -19,10 +19,12 @@ class Artiste
     static function getArtiste($id_artiste){
         try {
             $conn = Database::connexionBD();
-            $statement = $conn->prepare("SELECT * FROM artiste WHERE id_artiste=:id_artiste");
+            $statement = $conn->prepare("SELECT id_artiste, pseudo_artiste, nom_artiste, prenom_artiste, type_artiste, s.id_style, nom_style
+                    FROM artiste JOIN style s on artiste.id_style = s.id_style
+                    WHERE id_artiste=:id_artiste");
             $statement->bindParam(':id_artiste', $id_artiste);
             $statement->execute();
-            return $statement->fetch();
+            return $statement->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

@@ -113,3 +113,5 @@ CREATE TABLE public.musique_playlist(
 	,CONSTRAINT musique_playlist_musique_FK FOREIGN KEY (id_musique) REFERENCES public.musique(id_musique)
 	,CONSTRAINT musique_playlist_playlist0_FK FOREIGN KEY (id_playlist) REFERENCES public.playlist(id_playlist)
 )WITHOUT OIDS;
+
+
