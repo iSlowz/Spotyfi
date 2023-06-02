@@ -24,6 +24,69 @@ $id_user = Utilisateur::Connexion()
 
     <title>Spotyfi</title>
 
+    <style>
+
+      .Navbar-Recherche {
+
+        display: flex;
+
+        flex-direction : row;
+
+        grid-column: 2 / 6;
+        grid-row: 1;
+
+        background-color: rgb(2, 97, 103);
+        color: white;
+        border-bottom : solid white;
+
+        align-items : center;
+
+      }
+
+      #bar-recherche{
+
+        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+        background-color: rgb(25, 157, 166);
+
+        border: solid white;
+        color : white;
+
+        margin-left: 5%;
+        padding-right: 10%;
+
+      }
+
+      #bouton-recherche{
+
+        border : solid white;
+        background-color: rgb(25, 157, 166);
+        color : white;
+        
+      }
+
+      .bouton-user{
+
+        margin-left: auto;
+
+
+      }
+
+      #id-bouton-user{
+
+        color : white;
+        border: rgb(25, 157, 166);
+        background-color : rgb(25, 157, 166);
+
+        border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+        font-size: 120%;
+
+      }
+      
+
+    </style>
+
 </head>
 
 <body>
@@ -38,17 +101,22 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
     </div>
 
     <div class="Navbar-Recherche">
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search" id="bar-recherche">
+      <div class="flex-recherche">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search" id="bar-recherche">
 
-        <!-- Bouton de recherche trouvé sur bootstrap -->
+          <!-- Bouton de recherche trouvé sur bootstrap -->
 
-        <button class="btn btn-outline-success" type="submit" id="bouton-recherche">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-          </svg>
-        </button>
-      </form>
+          <button class="btn btn-outline-success" type="submit" id="bouton-recherche">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div class="bouton-user">
+        <button class="btn" id="id-bouton-user" type="submit">User</button>
+      </div>
     </div>
 
     <div class="Bar-Playlist">

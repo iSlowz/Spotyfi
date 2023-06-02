@@ -44,39 +44,6 @@ html, body {
 /* Partie de la barre de Recherche */
 
 
-.Navbar-Recherche {
-
-    grid-column: 2 / 6;
-    grid-row: 1;
-
-    background-color: rgb(2, 97, 103);
-    color: white;
-    border-bottom : solid white;
-    
-    padding-left: 5%;
-    padding-top: 2.5%;
-    padding-right: 50%;
-
-}
-
-#bar-recherche{
-
-    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
-    
-    background-color: rgb(25, 157, 166);
-
-    border: solid white;
-    color : white;
-
-}
-
-#bouton-recherche{
-
-    border : solid white;
-    background-color: rgb(25, 157, 166);
-    color : white;
-
-}
 
 
 /* Partie de la barre de Playlist */
