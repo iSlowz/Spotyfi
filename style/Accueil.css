@@ -353,6 +353,10 @@ html, body {
 
 }
 
+#nom_user, #prenom_user{
+    display: inline;
+}
+
 audio::-webkit-media-controls-panel {
     background-color: rgb(2, 97, 103);
 }

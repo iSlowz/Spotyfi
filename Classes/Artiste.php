@@ -26,10 +26,15 @@ class Artiste
             $statement->execute();
             $result= $statement->fetch(PDO::FETCH_ASSOC);
 
-            $statement = $conn->prepare("SELECT id_musique,  titre_musique, lien_musique, duree_musique FROM musique WHERE id_artiste=:id_artiste");
+            $statement = $conn->prepare("SELECT id_musique,  titre_musique, lien_musique, duree_musique, a.id_album, titre_album FROM musique JOIN album a on musique.id_album = a.id_album WHERE musique.id_artiste=:id_artiste");
             $statement->bindParam(':id_artiste', $id_artiste);
             $statement->execute();
             $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
+            for ($i=0;$i<count($result["musiques"]);$i++) {
+                list($heures, $minutes, $secondes) = explode(":", $result["musiques"][$i]["duree_musique"]);
+                $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
+                $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
+            }
 
             return $result;
         } catch (PDOException $exception) {

@@ -34,7 +34,7 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
   <div class="disposition">
     
     <div class="Navbar-Accueil">
-      <label id="Accueil">Accueil</label>
+      <label id="Accueil">Spotyfi++</label>
     </div>
 
     <div class="Navbar-Recherche">

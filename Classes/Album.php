@@ -22,7 +22,7 @@ class Album
         try {
             $result=Array();
             $conn = Database::connexionBD();
-            $statement = $conn->prepare("SELECT id_musique,  titre_musique, lien_musique, duree_musique FROM musique WHERE id_album=:id_album");
+            $statement = $conn->prepare("SELECT id_musique,  titre_musique, lien_musique, duree_musique FROM musique JOIN album using (id_album) WHERE id_album=:id_album");
             $statement->bindParam(':id_album', $id_album);
             $statement->execute();
             $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -52,8 +52,7 @@ class Album
         try {
             $conn = Database::connexionBD();
             $result=Array();
-            $statement = $conn->prepare("SELECT id_musique, titre_musique, lien_musique, duree_musique, m.id_artiste, pseudo_artiste FROM album a JOIN musique m using (id_album) JOIN artiste ar ON a.id_artiste=ar.id_artiste W
-            HERE id_album=:id_artiste;");
+            $statement = $conn->prepare("SELECT id_musique, titre_musique, lien_musique, duree_musique, m.id_artiste, pseudo_artiste FROM album a JOIN musique m using (id_album) JOIN artiste ar ON a.id_artiste=ar.id_artiste WHERE id_album=:id_artiste;");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
 

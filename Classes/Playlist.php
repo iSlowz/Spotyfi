@@ -16,7 +16,7 @@ class Playlist
         try {
             $conn = Database::connexionBD();
 
-            $statement = $conn->prepare("SELECT id_musique, titre_musique, nom_artiste FROM musique_playlist mp 
+            $statement = $conn->prepare("SELECT id_musique, titre_musique, pseudo_artiste FROM musique_playlist mp 
                                                                 JOIN playlist p using (id_playlist)  
                                                                 JOIN musique m using (id_musique)
                                                                 JOIN artiste using (id_artiste)

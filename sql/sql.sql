@@ -114,4 +114,4 @@ CREATE TABLE public.musique_playlist(
 	,CONSTRAINT musique_playlist_playlist0_FK FOREIGN KEY (id_playlist) REFERENCES public.playlist(id_playlist)
 )WITHOUT OIDS;
 
-
+UPDATE users SET nom_user=:nom, prenom_user=:prenom, date_naissance_user=:date WHERE id_user=:id

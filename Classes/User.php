@@ -61,6 +61,25 @@ class User
             return false;
         }
     }
+
+    static function modify($id, $nom, $prenom, $date){
+        try
+        {
+            $dbh = Database::connexionBD();
+            $statement = $dbh->prepare('UPDATE users SET nom_user=:nom, prenom_user=:prenom, date_naissance_user=:date WHERE id_user=:id');
+            $statement->bindParam(':id', $id);
+            $statement->bindParam(':nom', $nom);
+            $statement->bindParam(':prenom', $prenom);
+            $statement->bindParam(':date', $date);
+            $statement->execute();
+        }
+        catch (PDOException $exception)
+        {
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+        return true;
+    }
 }
 
 ?>

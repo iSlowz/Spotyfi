@@ -57,6 +57,9 @@ switch ($requestRessource) {
             case "GET":
                 $result=User::getProfil($id);
                 break;
+            case "PUT":
+                parse_str(file_get_contents('php://input'), $_PUT);
+                $result=User::modify($id, $_PUT["nom"], $_PUT["prenom"], $_PUT["date"]);
         }
         break;
     case 'artiste':
