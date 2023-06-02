@@ -69,7 +69,7 @@ CREATE TABLE public.artiste(
 ------------------------------------------------------------
 CREATE TABLE public.album(
 	id_album              SERIAL NOT NULL ,
-	title_album           VARCHAR (20) NOT NULL ,
+	titre_album           VARCHAR (20) NOT NULL ,
 	photo_album           VARCHAR (100) NOT NULL ,
 	date_creation_album   DATE  NOT NULL ,
 	id_artiste            INT  NOT NULL ,
