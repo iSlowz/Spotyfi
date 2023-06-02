@@ -55,6 +55,22 @@ class Album
         }
     }
 
+    static function getAlbumBySearch($album){
+
+        try{
+
+            $conn = Database::connexionDB();
+            $statement = $conn->prepare("SELECT titre_album FROM album WHERE titre_album ILIKE '%album%'");
+            $statement->bindParam(':album', $album);
+            $statement->execute();
+            return $statement->fetch();
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+
+    }
+
 }
 
 ?>
