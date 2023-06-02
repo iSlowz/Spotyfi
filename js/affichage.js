@@ -73,9 +73,11 @@ $("#Accueil").click(function (event){
 
 function showMusique(musique){
     console.log(musique)
+    console.log(musique["titre_musique"])
     $(".flex-page").html('<h1>'+musique["titre_musique"]+'</h1>' +
-        '<p>'+musique["duree_musique"]+'</p>')
-
-
-
+        '<p>'+musique["duree_musique"]+'</p>' +
+        '<p>Parue le '+musique["date_parution_musique"]+'</p>' +
+        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["title_album"] + '</button>' +
+        '<button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button>' +
+        '<p>'+["nom_style"]+'</p>')
 }

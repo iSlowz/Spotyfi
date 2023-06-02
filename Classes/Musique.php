@@ -36,7 +36,7 @@ class Musique
                                     WHERE id_musique=:id_musique");
             $statement->bindParam(':id_musique', $id_musique);
             $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $statement->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
