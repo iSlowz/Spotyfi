@@ -42,6 +42,22 @@ class Musique
             return false;
         }
     }
+
+    static function getMusiquesBySearch($musique){
+
+        try{
+
+            $conn = Database::connexionDB();
+            $statement = $conn->prepare("SELECT titre_musique FROM musique WHERE titre_musique ILIKE '%musique%'");
+            $statement->bindParam(':musique', $musique);
+            $statement->execute();
+            return $statement->fetch();
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+
+    }
     
 }
 
