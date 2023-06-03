@@ -5,7 +5,7 @@
 
 html, body {
         
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
   
 }
@@ -18,9 +18,10 @@ html, body {
 
 .disposition {
 
+    height: 100%;
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
-    grid-template-rows: 100px 517px 0px 0px 100px;
+    grid-template-rows: 14vh 72vh 14vh;
 
 }
 
@@ -126,7 +127,7 @@ html, body {
     display: grid;
 
     grid-column: 1;
-    grid-row: 2 / 6;
+    grid-row: 2 / 4;
 
     background-color: rgb(2, 97, 103);
     color: white;
@@ -231,7 +232,7 @@ html, body {
 .Page-Central{
 
     grid-column: 2 / 6;
-    grid-row: 2 / 5;
+    grid-row: 2;
 
     background-color: rgb(25, 157, 166);
 
@@ -239,6 +240,7 @@ html, body {
 
     overflow: auto; /* Ajoute une barre de défilement si le contenu dépasse la hauteur */
 }
+
 .Page-Central::-webkit-scrollbar {
     width: 8px; /* Largeur de la barre de défilement */
     background-color: #02858d; /* Couleur de fond de la barre de défilement */
@@ -383,7 +385,7 @@ html, body {
     display: grid;
 
     grid-column: 2 / 6;
-    grid-row: 5 / 6;
+    grid-row: 3;
 
     background-color: rgb(2, 97, 103);
 
