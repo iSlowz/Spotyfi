@@ -176,7 +176,7 @@ function showMusique(musique){
 function showAlbum(album) {    //affiche les musiques d'un album
     console.log(album)
     $(".flex-page").html('<h1>' + album["titre_album"] + '</h1>' +
-        '<h4> par : ' + album["pseudo_artiste"] + '</h4>' +
+        '<h4> par : <button type="button" class="artiste-bouton" value="'+album["id_artiste"]+'">' + album["pseudo_artiste"] + '</button>'  + '</h4>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
         '<tr><th>Titre</th><th>Durée</th></tr>')
@@ -195,6 +195,12 @@ function showAlbum(album) {    //affiche les musiques d'un album
         let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
         console.log(id)
         ajaxRequest("GET", "request.php/musique/"+id, showMusique)
+    })
+
+    $(".artiste-bouton").click(function (event){
+        let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
+        console.log(id);
+        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste)
     })
 }
 
