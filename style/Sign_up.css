@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    width: 100%;
 }
 
 .navbar{
@@ -23,10 +24,13 @@ html, body {
 
     background-color: rgb(25, 157, 166);
     height: 100%;
+    width: 100%;
     
 }
 
 .rectangle-Sign_up{
+
+    min-width: 400px;
   
     border: rgb(2, 97, 103);
     background-color: rgb(2, 97, 103);
@@ -39,8 +43,8 @@ html, body {
     border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
     margin-top: 2em;
-    margin-left: 13em;
-    margin-right: 13em;
+    margin-left: 25%;
+    margin-right: 25%;
     margin-bottom: 2em;
 
     padding: 0.2em 1em;
@@ -52,13 +56,20 @@ html, body {
     border-bottom : solid white;
 
     padding-bottom: 0.5em;
-    padding-right: 1.5em;
-    padding-left: 1.5em;
+    padding-right: 10%;
+    padding-left: 10%;
     padding-top: 0.5em;
+
+    margin-left: 25%;
+    margin-right: 25%;
 
 }
 
 .texte-gauche{
+
+    min-width: 100%;
+
+    background-color: red;
 
     text-align: left;
 
@@ -67,17 +78,24 @@ html, body {
     padding-bottom: 1em;
     padding-top: 1em;
 
-    padding-left: 2em;
+    margin-right: 3em;
 
 }
 
 .texte-droit{
 
+    min-width: 100%;
+
+    background-color: yellow;
+
     text-align: left;
 
     font-size: 0.7em;
 
-    padding-left: 4em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+
+    margin-right: 1em;
 
 }
 

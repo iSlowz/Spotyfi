@@ -27,8 +27,6 @@
 <?php
 require_once ('Classes/Utilisateur.php');
 $result=Utilisateur::sign_up();
-//var_dump($result);
-//print_r($result);
 ?>
 
   <div class="form">
@@ -45,11 +43,10 @@ $result=Utilisateur::sign_up();
         <form action="#" method="post" class="g-3" id="LoginForm">
           <div class="mb-3">
 
+          <label class="trait">Sign up</label>
+
             <table width="100%" cellspacing="0" cellpadding="5">
-              <tr>
-                <td colspan="2"><label class="trait">Sign up</label></td>
-              </tr>
-              
+                            
               <tr>
                 <td>
                   <div class="texte-gauche">
