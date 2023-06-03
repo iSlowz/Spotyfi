@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    width: 100%;
     background-color: rgb(25, 157, 166);
 
 }
@@ -24,6 +25,9 @@ html, body {
 
 
 .rectangle-login{
+
+    width: 30%;
+    min-width: 300px;
   
     border: rgb(2, 97, 103);
     background-color: rgb(2, 97, 103);
@@ -36,8 +40,8 @@ html, body {
     border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
     margin-top: 2em;
-    margin-left: 17em;
-    margin-right: 17em;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 2em;
 
     padding: 0.2em 3em;
@@ -46,11 +50,13 @@ html, body {
 
 .trait{
 
+    width: 70%;
+
     border-bottom : solid white;
 
     padding-bottom: 0.5em;
-    padding-right: 1.5em;
-    padding-left: 1.5em;
+    padding-right: auto;
+    padding-left: auto;
     padding-top: 0.5em;
 
 }
