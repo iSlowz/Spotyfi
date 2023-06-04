@@ -79,7 +79,7 @@ $result=Utilisateur::sign_up();
                 <td>
                   <div class="texte-droit">
                     <label for="userInput" class="form-label">Email :</label>
-                    <input type="text" class="form-control" id="userInput" aria-describedby="userInput" name="mail">
+                    <input type="email" class="form-control" id="userInput" aria-describedby="userInput" name="mail">
                       <?php
                       if (isset($result["mail"])){
                           echo "<p id='erreur'>Veuillez rentrer votre Email</p>";

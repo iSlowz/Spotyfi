@@ -9,11 +9,18 @@ class Utilisateur
         $file = array_pop($path);
 
         if (isset($_SESSION['user'])) {
-            if ($file == 'index.php') {
+            if ($file == 'Login.php') {
                 header('Location: Accueil.php');
             }
             return $_SESSION['user'];
         }
+
+
+        if (!isset($_SESSION['id_utilisateur']) && $file != 'Login.php') {    //deco
+            header('Location: Login.php');
+        }
+
+
 
         if (!empty($_POST['mail']) && !empty($_POST['password'])) {
             try {
@@ -145,6 +152,13 @@ class Utilisateur
         }
         return False;
     }
+
+    static function deconnexion()
+    {
+        unset($_SESSION['user']);
+        header('Location: Login.php');
+    }
+
 
 }
 
