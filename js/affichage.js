@@ -152,8 +152,8 @@ function showMusique(musique){
 
 function showAlbum(album) {    //affiche les musiques d'un album
     console.log(album)
-    $(".flex-page").html('<h1>' + album["titre_album"] + '</h1>' +
-        '<h4> par : ' + album["pseudo_artiste"] + '</h4>' +
+    $(".flex-page").html('<h1>Titre album :' + album["titre_album"] + '</h1>' +
+        '<h4> Artiste : ' + album["pseudo_artiste"] + '</h4>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
         '<tr><th>Titre</th><th>Durée</th></tr>')
@@ -220,27 +220,48 @@ function loadProfil(profil){
 
 
 function showArtiste(artiste){
+    
     console.log(artiste)
     console.log(artiste["pseudo_artiste"])
-    $(".flex-page").html('<h1>' + artiste["pseudo_artiste"] + '</h1>' +
-    '<p>' + artiste["nom_artiste"] + '</p>' +
-    '<p>' + artiste["prenom_artiste"] + '</p>' +
-    '<p>' + artiste["type_artiste"] + '</p>' +
-        '<p>'+artiste["nom_style"]+'</p>'
-    )
-    let text=""
-    text+='<table>' +
-    '<tr><th>Titre</th><th>Album</th><th>Durée</th></tr>'
-
+    let html = 
+    
+    '<h1>Artiste : ' + artiste["pseudo_artiste"] + '</h1>' +
+    '<br>' +
+    '<div class="text-artiste">'+
+        '<p> Nom : ' + artiste["nom_artiste"] + '</p>' +
+        '<p> Prénom : ' + artiste["prenom_artiste"] + '</p>' +
+        '<p> Type de chant : ' + artiste["type_artiste"] + '</p>' +
+        '<p> Style : '+artiste["nom_style"]+'</p>' +
+    '</div>'+
+    '<hr id="trait">';
+    '<div class="page-table" id="titre-table">' +
+      '<table class="table" id="texte-titre-table">' +
+        '<thead>' +
+          '<tr>' +
+            '<th scope="col">Titre</th>' +
+            '<th scope="col">Album</th>' +
+            '<th scope="col">Durée</th>' +
+          '</tr>' +
+        '</thead>' +
+        '<tbody>';
 
     artiste["musiques"].forEach(function (musique){
-        text+='<tr>' +
-            '<td><button type="button" class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
-            '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button></td>' +
-            '<td> '+musique["duree_musique"]+'</td>' +
+        html+=
+
+            '<tr>' +
+              '<td><button type="button" class="musique-bouton" value="'+musique["id_musique"]+'">' + musique["titre_musique"] + '</button></td>' +
+              '<td><button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button></td>' +
+              '<td> '+musique["duree_musique"]+'</td>' +
             '</tr>'
 
     })
+
+    html += '</tbody>' +
+      '</table>' +
+    '</div>';
+
+    $(".flex-page").html(html);
+    
     $(".flex-page").append(text+'</table>')
     $(".musique-bouton").click(function (event){
         let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
