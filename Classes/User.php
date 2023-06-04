@@ -33,10 +33,23 @@ class User
         try {
             $conn = Database::connexionBD();
 
+            $statement = $conn->prepare("SELECT id_playlist, titre_playlist FROM playlist WHERE id_user=:id_user AND titre_playlist='Favoris'");
+            $statement->bindParam(':id_user', $id_user);
+            $statement->execute();
+            $result["favoris"] = $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+
+        try {
+            $conn = Database::connexionBD();
+
             $statement = $conn->prepare("SELECT id_playlist,titre_playlist FROM playlist WHERE id_user = :user EXCEPT SELECT id_playlist,titre_playlist FROM playlist WHERE titre_playlist = 'Favoris' OR titre_playlist = 'Historique'");
             $statement->bindParam(':user', $id_user);
             $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result["playlists"] = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
@@ -67,24 +80,24 @@ class User
         try
         {
             $dbh = Database::connexionBD();
-            $statement = $dbh->prepare("SELECT id_user FROM users WHERE mail_user = :mail");
-            $statement->bindParam(':id', $id);
-            $statement->bindParam(':nom', $nom);
-            $statement->bindParam(':prenom', $prenom);
-            $statement->bindParam(':date', $date);
+            $statement = $dbh->prepare("SELECT mail_user FROM users
+                                                WHERE mail_user=:mail AND id_user!=:id");
             $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':id', $id);
             $statement->execute();
-            $result=$statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception)
         {
             error_log('Request error: '.$exception->getMessage());
             return false;
         }
-        $a='Mail déjà utilisé';
-        return $a;
-
-
+        /*
+        if (empty($result)) {
+            $a = 'Mail déjà utilisé';
+            return $a;
+        }
+        */
         try
         {
             $dbh = Database::connexionBD();

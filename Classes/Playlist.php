@@ -30,22 +30,6 @@ class Playlist
         }
     }
 
-
-
-    static function getFavoris($id_user){
-        try {
-            $conn = Database::connexionBD();
-
-            $statement = $conn->prepare("SELECT * FROM musique_playlist m JOIN playlist p using (id_playlist) WHERE id_user=:id_user AND titre_playlist='Favoris'");
-            $statement->bindParam(':id_user', $id_user);
-            $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $exception) {
-            error_log('Connection error: '.$exception->getMessage());
-            return false;
-        }
-    }
-
     static function getMusiques($id_playlist){  //prend les musiques d'une playlist
         try {
             $conn = Database::connexionBD();

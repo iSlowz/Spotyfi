@@ -420,7 +420,7 @@ html, body {
     margin-right: 5%;
 }
   
-#trait {
+.trait {
     
     border: none; 
     border-top: 3px solid;

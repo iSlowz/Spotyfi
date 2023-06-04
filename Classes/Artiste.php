@@ -35,7 +35,18 @@ class Artiste
                 $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
                 $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
             }
-
+            try{
+                $conn = Database::connexionBD();
+                $statement = $conn->prepare("SELECT id_album, titre_album, photo_album, date_creation_album
+                                            FROM album
+                                            WHERE id_artiste=:artiste");
+                $statement->bindParam(':artiste', $id_artiste);
+                $statement->execute();
+                $result["albums"]= $statement->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $exception) {
+                error_log('Connection error: '.$exception->getMessage());
+                return false;
+            }
             return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
