@@ -74,16 +74,16 @@ switch ($requestRessource) {
             case "GET":
                 if (!empty($_GET["recherche"])) {
                     $recherche=$_GET["recherche"];
-                    $result["musique"] = Musique::getMusiquesBySearch($recherche);
-                    //$result["album"] = Album::getAlbumBySearch($recherche);
-                    //$result["artiste"]=Artiste::getArtisteBySearch($recherche);
+                    $result["musiques"] = Musique::getMusiquesBySearch($recherche);
+                    //$result["albums"] = Album::getAlbumBySearch($recherche);
+                    //$result["artistes"]=Artiste::getArtisteBySearch($recherche);
                     break;
                     }
         }
         break;
 }
 
-if (!empty($result)) {
+if (!empty($result) or $requestRessource=='recherche') {
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-control: no-store, no-cache, must-revalidate');
     header('Pragma: no-cache');

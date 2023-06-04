@@ -52,15 +52,22 @@ class Musique
         try{
 
             $conn = Database::connexionBD();
-            $statement = $conn->prepare("SELECT id_musique, date_ajout_musique_playlist, titre_musique,
-                                 lien_musique, duree_musique, ar.id_artiste, pseudo_artiste, id_album, titre_album
-                                                FROM musique_playlist JOIN musique m using (id_musique)
+            $statement = $conn->prepare("SELECT id_musique, titre_musique,
+                                 lien_musique, duree_musique, ar.id_artiste, pseudo_artiste
+                                                FROM musique
                                                 JOIN artiste ar using (id_artiste)
-                                                JOIN album  al using (id_album)
-                                                WHERE titre_musique ILIKE '%' || :musique || '%'");
+                                                WHERE titre_musique ILIKE '%' || :musique || '%'
+                                                ORDER BY id_musique");
             $statement->bindParam(':musique', $musique);
             $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            for ($i=0;$i<count($result);$i++) {
+                list($heures, $minutes, $secondes) = explode(":", $result[$i]["duree_musique"]);
+                $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
+                $result[$i]["duree_musique"] = $dureeFormatee;
+            }
+            return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
