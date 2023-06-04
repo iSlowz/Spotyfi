@@ -11,7 +11,7 @@ $('.flex-recherche').submit(function (event){
 
 function showRecherches(recherches){
     console.log(recherches);
-    /*
+    
     let html =
 
         '<div class="page-playlist-flex">' +
@@ -51,8 +51,9 @@ function showRecherches(recherches){
 
     $(".flex-page").html(html);
 
-     */
+     
 }
+
 function loadHistorique(musiques) {
     console.log(musiques)
     $(".flex-page").html('')
@@ -251,7 +252,7 @@ function showAlbum(album) {    //affiche les musiques d'un album
         ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
     })
 }
-*
+
 $("#id-bouton-user").click(function (event) {
     ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
 })
