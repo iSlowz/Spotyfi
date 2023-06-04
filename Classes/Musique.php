@@ -57,7 +57,7 @@ class Musique
                                                 FROM musique
                                                 JOIN artiste ar using (id_artiste)
                                                 WHERE titre_musique ILIKE '%' || :musique || '%'
-                                                ORDER BY id_musique");
+                                                ORDER BY titre_musique");
             $statement->bindParam(':musique', $musique);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);

@@ -358,12 +358,12 @@ html, body {
 }
 
 .flex-card-musique::-webkit-scrollbar-thumb {
-    background-color: #273c75; /* Couleur de la poignée de la barre de défilement */
+    background-color: #00464c; /* Couleur de la poignée de la barre de défilement */
     border-radius: 4px; /* Bordure arrondie de la poignée de la barre de défilement */
 }
 
 .flex-card-musique::-webkit-scrollbar-thumb:hover {
-    background-color: #192a56; /* Couleur de la poignée de la barre de défilement au survol */
+    background-color: #013034; /* Couleur de la poignée de la barre de défilement au survol */
 }
 
 .flex-card-musique::-webkit-scrollbar-track {
@@ -455,48 +455,7 @@ html, body {
     display: inline;
 }
 
-.musique-bouton{
-
-    border: none;
-    color: white;
-    background-color: rgb(25, 157, 166);
-
-    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
-
-    margin-top: 1%;
-    margin-bottom: 1%;
-
-
-}
-
-.artiste-bouton{
-
-    border: none;
-    color: white;
-    background-color: rgb(25, 157, 166);
-
-    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
-
-    margin-top: 1%;
-    margin-bottom: 1%;    
-
-}
-
-.album-bouton{
-
-    border: none;
-    color: white;
-    background-color: rgb(25, 157, 166);
-
-    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
-
-    margin-top: 1%;
-    margin-bottom: 1%;
-
-
-}
-
-.musique-bouton-album{
+.musique-bouton-album, .album-bouton, .artiste-bouton, .musique-bouton{
 
     border: none;
     color: white;

@@ -75,8 +75,8 @@ switch ($requestRessource) {
                 if (!empty($_GET["recherche"])) {
                     $recherche=$_GET["recherche"];
                     $result["musiques"] = Musique::getMusiquesBySearch($recherche);
-                    //$result["albums"] = Album::getAlbumBySearch($recherche);
-                    //$result["artistes"]=Artiste::getArtisteBySearch($recherche);
+                    $result["albums"] = Album::getAlbumBySearch($recherche);
+                    $result["artistes"]=Artiste::getArtisteBySearch($recherche);
                     break;
                     }
         }

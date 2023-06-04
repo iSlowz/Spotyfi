@@ -46,11 +46,14 @@ class Artiste
     static function getArtisteBySearch($artiste){
 
         try{
-            $conn = Database::connexionDB();
-            $statement = $conn->prepare("SELECT pseudo_artiste, id_artiste FROM artiste WHERE pseudo_artiste ILIKE '%artiste%'");
+            $conn = Database::connexionBD();
+            $statement = $conn->prepare("SELECT pseudo_artiste, id_artiste, nom_style
+                                            FROM artiste JOIN style using(id_style) 
+                                            WHERE pseudo_artiste ILIKE '%' || :artiste || '%'
+                                                ORDER BY pseudo_artiste");
             $statement->bindParam(':artiste', $artiste);
             $statement->execute();
-            return $statement->fetch();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

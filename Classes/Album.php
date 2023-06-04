@@ -74,11 +74,16 @@ class Album
 
         try{
 
-            $conn = Database::connexionDB();
-            $statement = $conn->prepare("SELECT titre_album FROM album WHERE titre_album ILIKE '%album%'");
+            $conn = Database::connexionBD();
+            $statement = $conn->prepare("SELECT id_album, titre_album,
+                                 photo_album, ar.id_artiste, pseudo_artiste
+                                                FROM album
+                                                JOIN artiste ar using (id_artiste)
+                                                WHERE titre_album ILIKE '%' || :album || '%'
+                                                ORDER BY titre_album");
             $statement->bindParam(':album', $album);
             $statement->execute();
-            return $statement->fetch();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

@@ -47,6 +47,38 @@ function showRecherches(recherches) {
     });
 
     $(".flex-page").html(html + '</div>');
+
+    html='<hr><h1 class="text-gauche">Albums : </h1>' +
+        '<div class="flex-card-musique">'
+    recherches["albums"].forEach(function (album) {
+        html +=
+            '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+            '<div class="card-body">' +
+            '<div class="id_musique" style="display: none">' + album["id_album"] + '</div>' +
+            '<h5 class="card-title">' + album["titre_album"] + '</h5>' +
+            '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+album["id_artiste"] +'">' + album["pseudo_artiste"] + '</button></p>' +
+            '</div>' +
+            '</div>'
+    });
+
+    $(".flex-page").append(html + '</div>');
+
+    html='<hr><h1 class="text-gauche">Artistes : </h1>' +
+        '<div class="flex-card-musique">'
+    recherches["artistes"].forEach(function (artiste) {
+        console.log(artiste)
+        html +=
+            '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+            '<div class="card-body">' +
+            '<div class="id_musique" style="display: none">' + artiste["id_artiste"] + '</div>' +
+            '<h5 class="card-title">' + artiste["pseudo_artiste"] + '</h5>' +
+            '<p class="card-text">' + artiste["nom_style"] + '</button></p>' +
+            '</div>' +
+            '</div>'
+    });
+    $(".flex-page").append(html + '</div>');
+
+
     $(".card-body").click(function (event) {
         let id = $(event.target).closest(".card").find(".id_musique").text();
         console.log(id)
