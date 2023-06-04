@@ -11,28 +11,11 @@ $('.flex-recherche').submit(function (event){
 
 function showRecherches(recherches){
     console.log(recherches);
+    $(".flex-page").html('<p>Trier par : </p>' +
+        '<button type="button" value="musique">Musique</button>' +
+        '<button type="button" value="artiste">Artiste</button>' +
+        '<button type="button" value="album">Album</button>');
     /*
-    let html =
-
-        '<div class="page-playlist-flex">' +
-        '<h1>' + playlist["titre_playlist"] + '</h1>' +
-        '<h4 class="titre-date">' + playlist["date_creation_playlist"] + '</h4>' +
-        '</div>' +
-        '<hr id="trait">' +
-        '<div class="page-table" id="titre-table">' +
-        '<table class="table" id="texte-titre-table">' +
-        '<thead>' +
-        '<tr>' +
-        '<th scope="col">Titre</th>' +
-        '<th scope="col">Artiste</th>' +
-        '<th scope="col">Album</th>' +
-        '<th scope="col">Date dajout</th>' +
-        '<th scope="col">Durée</th>' +
-        '<th scope="col">Sup</th>' +
-        '</tr>' +
-        '</thead>' +
-        '<tbody>';
-
     playlist["musiques"].forEach(function (musique) {
         html +=
             '<tr>' +
@@ -52,6 +35,8 @@ function showRecherches(recherches){
     $(".flex-page").html(html);
 
      */
+
+
 }
 function loadHistorique(musiques) {
     console.log(musiques)
