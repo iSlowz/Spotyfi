@@ -59,7 +59,7 @@ switch ($requestRessource) {
                 break;
             case "PUT":
                 parse_str(file_get_contents('php://input'), $_PUT);
-                $result=User::modify($id, $_PUT["nom"], $_PUT["prenom"], $_PUT["date"]);
+                $result=User::modify($id, $_PUT["nom"], $_PUT["prenom"], $_PUT["date"], $_PUT["mail"]);
         }
         break;
     case 'artiste':
@@ -67,6 +67,18 @@ switch ($requestRessource) {
             case "GET":
                 $result=Artiste::getArtiste($id);
                 break;
+        }
+        break;
+    case 'recherche':
+        switch ($requestMethod){
+            case "GET":
+                if (!empty($_GET["recherche"])) {
+                    $recherche=$_GET["recherche"];
+                    $result["musique"] = Musique::getMusiquesBySearch($recherche);
+                    //$result["album"] = Album::getAlbumBySearch($recherche);
+                    //$result["artiste"]=Artiste::getArtisteBySearch($recherche);
+                    break;
+                    }
         }
         break;
 }

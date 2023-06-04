@@ -307,6 +307,11 @@ html, body {
 
 }
 
+.text-gauche{
+    text-align: left;
+    padding-left: 5%;
+}
+
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie des cards derniers morceaux sur la page d'accueil */
@@ -467,3 +472,9 @@ audio::-webkit-media-controls-mute-button {
     background-color: #B1D4E0;
     border-radius: 50%;
 }
+
+.erreur_mail{
+    color: red;
+}
+
+

@@ -51,11 +51,16 @@ class Musique
 
         try{
 
-            $conn = Database::connexionDB();
-            $statement = $conn->prepare("SELECT titre_musique FROM musique WHERE titre_musique ILIKE '%musique%'");
+            $conn = Database::connexionBD();
+            $statement = $conn->prepare("SELECT id_musique, date_ajout_musique_playlist, titre_musique,
+                                 lien_musique, duree_musique, ar.id_artiste, pseudo_artiste, id_album, titre_album
+                                                FROM musique_playlist JOIN musique m using (id_musique)
+                                                JOIN artiste ar using (id_artiste)
+                                                JOIN album  al using (id_album)
+                                                WHERE titre_musique ILIKE '%' || :musique || '%'");
             $statement->bindParam(':musique', $musique);
             $statement->execute();
-            return $statement->fetch();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
