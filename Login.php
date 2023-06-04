@@ -54,7 +54,7 @@ print_r($a);
           <div class="mb-3">
             <div class="texte-email">
               <label for="userInput" class="form-label">Email :</label>
-              <input type="text" class="form-control" id="mail" aria-describedby="userInput" name="mail">
+              <input type="email" class="form-control" id="mail" aria-describedby="userInput" name="mail">
             </div>
           </div>
 

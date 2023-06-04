@@ -16,10 +16,10 @@ class Playlist
         try {
             $conn = Database::connexionBD();
 
-            $statement = $conn->prepare("SELECT id_musique, titre_musique, pseudo_artiste FROM musique_playlist mp 
+            $statement = $conn->prepare("SELECT id_musique, titre_musique, pseudo_artiste, ar.id_artiste FROM musique_playlist mp 
                                                                 JOIN playlist p using (id_playlist)  
                                                                 JOIN musique m using (id_musique)
-                                                                JOIN artiste using (id_artiste)
+                                                                JOIN artiste ar using (id_artiste)
                                                                 WHERE id_user=:id_user AND titre_playlist='Historique'");
             $statement->bindParam(':id_user', $id_user);
             $statement->execute();

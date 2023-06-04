@@ -62,7 +62,29 @@ class User
         }
     }
 
-    static function modify($id, $nom, $prenom, $date){
+    static function modify($id, $nom, $prenom, $date, $mail){
+
+        try
+        {
+            $dbh = Database::connexionBD();
+            $statement = $dbh->prepare("SELECT id_user FROM users WHERE mail_user = :mail");
+            $statement->bindParam(':id', $id);
+            $statement->bindParam(':nom', $nom);
+            $statement->bindParam(':prenom', $prenom);
+            $statement->bindParam(':date', $date);
+            $statement->bindParam(':mail', $mail);
+            $statement->execute();
+            $result=$statement->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception)
+        {
+            error_log('Request error: '.$exception->getMessage());
+            return false;
+        }
+        $a='Mail déjà utilisé';
+        return $a;
+
+
         try
         {
             $dbh = Database::connexionBD();
