@@ -35,8 +35,6 @@ function showRecherches(recherches){
     $(".flex-page").html(html);
 
      */
-
-
 }
 function loadHistorique(musiques) {
     console.log(musiques)
@@ -90,6 +88,12 @@ function loadPlaylists(playlists) {
     )
 
 }
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Permet d'afficher ce que contient une playlist */
+/*--------------------------------------------------------------------------------------------------------------*/
+
 
 function showPlaylist(playlist) {    //affiche les musiques d'une playlist
     console.log(playlist);
@@ -161,6 +165,12 @@ $("#Accueil").click(function (event){
     ajaxRequest("GET", "request.php/historique/"+id_user, loadHistorique)
 })
 
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Permet d'afficher les détails sur les musiques */
+/*--------------------------------------------------------------------------------------------------------------*/
+
+
 function showMusique(musique){
     console.log(musique)
     console.log(musique["titre_musique"])
@@ -191,27 +201,37 @@ function showMusique(musique){
 
 }
 
-function showAlbum(album) {    //affiche les musiques d'un album
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Permet d'afficher les détails sur les albums */
+/*--------------------------------------------------------------------------------------------------------------*/
+
+
+function showAlbum(album) {
     console.log(album)
-    let html = '<h1>' + album["titre_album"] + '</h1>' +
-        '<h4> par : <button type="button" class="artiste-bouton" value="' + album["id_artiste"] + '">' + album["pseudo_artiste"] + '</button>' + '</h4>' +
+    let html =
+
+        "<h1> Nom de l'album : " + album["titre_album"] + '</h1>' +
+        '<h4> Artiste : <button type="button" class="artiste-bouton" value="' + album["id_artiste"] + '">' + album["pseudo_artiste"] + '</button>' + '</h4>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<hr id="trait">' +
         '<div class="page-table" id="titre-table">' +
-        '<table class="table" id="texte-titre-table">' +
-        '<thead>' +
-        '<tr>' +
-        '<th scope="col">Titre</th>' +
-        '<th scope="col">Durée</th>' +
-        '<th scope="col">Sup</th>' +
-        '</tr>' +
-        '</thead>' +
-        '<tbody>'
+          '<table class="table" id="texte-titre-table">' +
+            '<thead>' +
+              '<tr>' +
+                '<th scope="col">Titre</th>' +
+                '<th scope="col">Durée</th>' +
+                '<th scope="col">Sup</th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>'
 
 
     album["musiques"].forEach(function (musique) {
-        html += '<tr>' +
-            '<th scope="row"><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></th>' +
+        html +=
+
+        '<tr>' +
+            '<td><button type="button" class="musique-bouton-album" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></td>' +
             '<td>' + musique["duree_musique"] + '</td>' +
             '<td> suppr </td>'
         '</tr>';
@@ -297,23 +317,29 @@ function loadProfil(profil) {
 function showArtiste(artiste) {
     console.log(artiste)
     console.log(artiste["pseudo_artiste"])
-    let html = '<div class="text-gauche"><h1>' + artiste["pseudo_artiste"] + '</h1>' +
-        '<p>' + artiste["nom_artiste"] + '</p>' +
-        '<p>' + artiste["prenom_artiste"] + '</p>' +
-        '<p>' + artiste["type_artiste"] + '</p>' +
-        '<p>' + artiste["nom_style"] + '</p></div>' +
-        '<hr id="trait">' +
+    let html =
+
+    '<div class="titre-text-artiste">' +
+      '<h1> Artiste : ' + artiste["pseudo_artiste"] + '</h1>' +
+      '<br>' +
+      '<div class="text-artiste">' +
+        '<p> Nom artiste : ' + artiste["nom_artiste"] + '</p>' +
+        '<p> Prenom artiste : ' + artiste["prenom_artiste"] + '</p>' +
+        '<p> Type de chant : ' + artiste["type_artiste"] + '</p>' +
+        '<p> Style : ' + artiste["nom_style"] + '</p></div>' +
+      '</div>' +
+      '<hr id="trait">' +
         '<div class="page-table" id="titre-table">' +
-        '<table class="table" id="texte-titre-table">' +
-        '<thead>' +
-        '<tr>' +
-        '<th scope="col">Titre</th>' +
-        '<th scope="col">Album</th>' +
-        '<th scope="col">Durée</th>' +
-        ' <th scope="col">Suppr</th>' +
-        '</tr>' +
-        '</thead>' +
-        '<tbody>'
+          '<table class="table" id="texte-titre-table">' +
+            '<thead>' +
+              '<tr>' +
+                '<th scope="col">Titre</th>' +
+                '<th scope="col">Album</th>' +
+                '<th scope="col">Durée</th>' +
+                '<th scope="col">Suppr</th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>'
 
 
     artiste["musiques"].forEach(function (musique) {
