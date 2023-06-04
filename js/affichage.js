@@ -2,7 +2,7 @@ let id_user = document.getElementById("id_user").innerText
 ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
 ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)   //id_user sera ce qu'on va retrouver
 //dans id dans request.php (car après le /)
-$('#bouton-recherche').click(function (event){
+$('.flex-recherche').submit(function (event){
     event.preventDefault()
     console.log($('#bar-recherche').val())
     ajaxRequest("GET", "request.php/recherche/", showRecherches,'recherche='+$('#bar-recherche').val())
@@ -71,7 +71,7 @@ function loadHistorique(musiques) {
             '<div class="card-body">' +
             '<div class="id_musique" style="display: none">' + musique["id_musique"] + '</div>' +
             '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
-            '<p class="card-text"><button type="button" class="artiste-bouton" value="'+musique["id_artiste"] +'">' + musique["pseudo_artiste"] + '</button></p>' +
+            '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+musique["id_artiste"] +'">' + musique["pseudo_artiste"] + '</button></p>' +
             '</div>' +
             '</div>'
 
