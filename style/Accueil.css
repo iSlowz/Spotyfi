@@ -312,6 +312,11 @@ html, body {
     padding-left: 5%;
 }
 
+.text-musique{
+
+    font-size: 120%;
+
+}
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie des cards derniers morceaux sur la page d'accueil */

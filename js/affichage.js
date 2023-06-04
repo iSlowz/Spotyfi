@@ -179,12 +179,17 @@ $("#Accueil").click(function (event){
 function showMusique(musique){
     console.log(musique)
     console.log(musique["titre_musique"])
-    $(".flex-page").html('<h1>'+musique["titre_musique"]+'</h1>' +
-        '<p>'+musique["duree_musique"]+'</p>' +
-        '<p>Parue le '+musique["date_parution_musique"]+'</p>' +
-        '<button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button>' +
-        '<button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button>' +
-        '<p>'+musique["nom_style"]+'</p>')
+    $(".flex-page").html(
+        
+        '<h1> Titre : ' + musique["titre_musique"]+'</h1>' +
+        '<br>'+
+        '<div class="text-musique">' +
+            '<p> Durée : '+musique["duree_musique"]+'</p>' +
+            '<p>Date de parution : '+musique["date_parution_musique"]+'</p>' +
+            '<p> Son album : <button type="button" class="album-bouton" value="'+musique["id_album"]+'">' + musique["titre_album"] + '</button></p>' +
+            '<p> Son artiste : <button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></p>' +
+            '<p> Style : '+musique["nom_style"]+'</p>'+
+        '</div>')
 
     $(".album-bouton").click(function (event){
         let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album
