@@ -194,7 +194,7 @@ function showMusique(musique){
     console.log(musique["titre_musique"])
     $(".flex-page").html(
         
-        '<h1> Titre : ' + musique["titre_musique"]+'</h1>' +
+        '<h1 id="titre-page-de-recherche"> Titre : ' + musique["titre_musique"]+'</h1>' +
         '<br>'+
         '<div class="text-musique">' +
             '<p> Durée : '+musique["duree_musique"]+'</p>' +
@@ -229,7 +229,7 @@ function showAlbum(album) {
     console.log(album)
     let html = 
         
-        "<h1> Nom de l'album : " + album["titre_album"] + '</h1>' +
+        "<h1 id='titre-page-de-recherche'> Nom de l'album : " + album["titre_album"] + '</h1>' +
         '<h4> Artiste : <button type="button" class="artiste-bouton" value="' + album["id_artiste"] + '">' + album["pseudo_artiste"] + '</button>' + '</h4>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<hr id="trait">' +
@@ -259,6 +259,7 @@ function showAlbum(album) {
     html += '</tbody>' +
         '</table>' +
         '</div>';
+        
     $(".flex-page").html(html)
 
     $(".musique-bouton").click(function (event) {
@@ -272,6 +273,7 @@ function showAlbum(album) {
         console.log(id);
         ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
     })
+
 }
 
 $("#id-bouton-user").click(function (event) {
@@ -337,7 +339,7 @@ function showArtiste(artiste) {
     let html = 
     
     '<div class="titre-text-artiste">' +
-      '<h1> Artiste : ' + artiste["pseudo_artiste"] + '</h1>' +
+      '<h1 id="titre-page-de-recherche"> Artiste : ' + artiste["pseudo_artiste"] + '</h1>' +
       '<br>' +
       '<div class="text-artiste">' +
         '<p> Nom artiste : ' + artiste["nom_artiste"] + '</p>' +
@@ -367,9 +369,11 @@ function showArtiste(artiste) {
             '</tr>'
 
     })
+
     html += '</tbody>' +
         '</table>' +
         '</div>';
+
     $(".flex-page").html(html)
     $(".musique-bouton").click(function (event) {
         let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique

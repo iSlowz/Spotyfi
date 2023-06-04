@@ -305,6 +305,7 @@ html, body {
 .titre-page{
 
     font-size : 200%;
+    margin-top: 2%;
 
 }
 
@@ -321,6 +322,12 @@ html, body {
 .text-artiste{
 
     font-size: 120%;
+
+}
+
+#titre-page-de-recherche{
+
+    margin-top: 2%;
 
 }
 
