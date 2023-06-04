@@ -34,8 +34,9 @@ function showRecherches(recherches){
 
     $(".flex-page").html(html);
 
-     */
+     
 }
+
 function loadHistorique(musiques) {
     console.log(musiques)
     $(".flex-page").html('')
@@ -176,7 +177,7 @@ function showMusique(musique){
     console.log(musique["titre_musique"])
     $(".flex-page").html(
         
-        '<h1> Titre : ' + musique["titre_musique"]+'</h1>' +
+        '<h1 id="titre-page-de-recherche"> Titre : ' + musique["titre_musique"]+'</h1>' +
         '<br>'+
         '<div class="text-musique">' +
             '<p> Durée : '+musique["duree_musique"]+'</p>' +
@@ -207,11 +208,11 @@ function showMusique(musique){
 /*--------------------------------------------------------------------------------------------------------------*/
 
 
-function showAlbum(album) {
+function showAlbum(album) { 
     console.log(album)
-    let html =
-
-        "<h1> Nom de l'album : " + album["titre_album"] + '</h1>' +
+    let html = 
+        
+        "<h1 id='titre-page-de-recherche'> Nom de l'album : " + album["titre_album"] + '</h1>' +
         '<h4> Artiste : <button type="button" class="artiste-bouton" value="' + album["id_artiste"] + '">' + album["pseudo_artiste"] + '</button>' + '</h4>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<hr id="trait">' +
@@ -228,8 +229,8 @@ function showAlbum(album) {
 
 
     album["musiques"].forEach(function (musique) {
-        html +=
-
+        html += 
+        
         '<tr>' +
             '<td><button type="button" class="musique-bouton-album" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></td>' +
             '<td>' + musique["duree_musique"] + '</td>' +
@@ -241,6 +242,7 @@ function showAlbum(album) {
     html += '</tbody>' +
         '</table>' +
         '</div>';
+
     $(".flex-page").html(html)
 
     $(".musique-bouton").click(function (event) {
@@ -254,8 +256,8 @@ function showAlbum(album) {
         console.log(id);
         ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
     })
-}
 
+}
 
 $("#id-bouton-user").click(function (event) {
     ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
@@ -317,8 +319,8 @@ function loadProfil(profil) {
 function showArtiste(artiste) {
     console.log(artiste)
     console.log(artiste["pseudo_artiste"])
-    let html =
-
+    let html = 
+    
     '<div class="titre-text-artiste">' +
       '<h1> Artiste : ' + artiste["pseudo_artiste"] + '</h1>' +
       '<br>' +
@@ -341,7 +343,6 @@ function showArtiste(artiste) {
             '</thead>' +
             '<tbody>'
 
-
     artiste["musiques"].forEach(function (musique) {
         html += '<tr>' +
             '<th scope="row"><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></th>' +
@@ -351,9 +352,11 @@ function showArtiste(artiste) {
             '</tr>'
 
     })
+
     html += '</tbody>' +
         '</table>' +
         '</div>';
+
     $(".flex-page").html(html)
     $(".musique-bouton").click(function (event) {
         let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
