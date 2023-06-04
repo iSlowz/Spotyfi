@@ -1,3 +1,8 @@
+
+/* background-color: rgb(25, 157, 166); C'est le vert clair */
+/* background-color: rgb(2, 97, 103);  C'est le vert foncé */
+
+
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Définition de la page */
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -342,35 +347,31 @@ html, body {
 /*--------------------------------------------------------------------------------------------------------------*/
 
 
-.page-playlist-flex{
-
-    display: flex;
-    flex-direction : row;
-
+.page-playlist-flex {
+    display: flex; 
 }
-
-#titre-page{
-
-    margin-left: 5%;
-    margin-right: 10%;
-    margin-top: 2%;
-    margin-bottom: 1%;
+  
+#titre-page-des-playlist {
+    margin-left: 5%; 
+    margin-top: 1%;
+}
+  
+.date-container { 
+    margin-top: 2.2%;
+    margin-left: auto; 
+    margin-right: 5%;
+}
+  
+#trait {
     
-}
+    border: none; 
+    border-top: 3px solid;
+    
+    margin: 10px 0;
 
-#titre-date{
-
-    margin-left: auto;
-    margin-top: 2.5%;
-    margin-bottom: 1%;
     margin-right: 5%;
-
-}
-
-#trait{
-
     margin-left: 5%;
-    margin-right: 5%;
+
 
 }
 
@@ -394,6 +395,40 @@ html, body {
     display: inline;
 }
 
+.musique-bouton{
+
+    border: none;
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+
+    margin-top: 1%;
+
+
+}
+
+.artiste-bouton{
+
+    border: none;
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+
+
+}
+
+.album-bouton{
+
+    border: none;
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+
+
+}
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie pour le footer */

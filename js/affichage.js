@@ -54,36 +54,40 @@ function showPlaylist(playlist){    //affiche les musiques d'une playlist
     console.log(playlist);
 
     let html = 
-    
+
     '<div class="page-playlist-flex">' +
-    '<h1>' + playlist["titre_playlist"] + '</h1>' +
-    '<h4 class="titre-date">' + playlist["date_creation_playlist"] + '</h4>' +
-    '</div>' +
-    '<hr id="trait">' +
+      '<div id="titre-page-des-playlist">'+
+        '<h1>' + playlist["titre_playlist"] + '</h1>' +
+      '</div>'+
+      '<div class="date-container">'+
+        '<h4 class="titre-date">' + playlist["date_creation_playlist"] + '</h4>' +
+      '</div>' +
+    '</div>'+
+      '<hr id="trait">' +
     '<div class="page-table" id="titre-table">' +
-    '<table class="table" id="texte-titre-table">' +
-    '<thead>' +
-    '<tr>' +
-    '<th scope="col">Titre</th>' +
-    '<th scope="col">Artiste</th>' +
-    '<th scope="col">Album</th>' +
-    '<th scope="col">Date dajout</th>' +
-    '<th scope="col">Durée</th>' +
-    '<th scope="col">Sup</th>' +
-    '</tr>' +
-    '</thead>' +
-    '<tbody>';
+      '<table class="table" id="texte-titre-table">' +
+        '<thead>' +
+          '<tr>' +
+            '<th scope="col">Titre</th>' +
+            '<th scope="col">Artiste</th>' +
+            '<th scope="col">Album</th>' +
+            '<th scope="col">Date dajout</th>' +
+            '<th scope="col">Durée</th>' +
+            '<th scope="col"></th>' +
+          '</tr>' +
+        '</thead>' +
+        '<tbody>';
 
     playlist["musiques"].forEach(function (musique) {
     html +=
-        '<tr>' +
-        '<th scope="row">' + musique["titre_musique"] + '</th>' +
-        '<td>' + musique["pseudo_artiste"] + '</td>' +
-        '<td>' + musique["titre_album"] + '</td>' +
-        '<td>' + musique["date_ajout_musique_playlist"] + '</td>' +
-        '<td>' + musique["duree_musique"] + '</td>' +
-        '<td>Bouton supprimer</td>' +
-        '</tr>';
+        '<tr id="tableau-playlist">'+
+          '<th scope="row"><button type="button" class="musique-bouton" value="' + musique["id_musique"]+'">' + musique["titre_musique"] + '</button></th>' +
+          '<td><button type="button" class="artiste-bouton" value="'+musique["id_artiste"]+'">' + musique["pseudo_artiste"] + '</button></td>' +
+          '<td><button type="button" class="album-bouton" value="' + musique["id_album"] + '">' + musique["titre_album"] + '</button></td>' +
+          '<td>' + musique["date_ajout_musique_playlist"] + '</td>' +
+          '<td>' + musique["duree_musique"] + '</td>' +
+          '<td>Bouton supprimer</td>'+
+        '</tr>'
     });
 
     html += '</tbody>' +
@@ -144,7 +148,7 @@ function showMusique(musique){
 function showAlbum(album) {    //affiche les musiques d'un album
     console.log(album)
     $(".flex-page").html('<h1>' + album["titre_album"] + '</h1>' +
-        '<h4> par : <button type="button" class="artiste-bouton" value="'+album["id_artiste"]+'">' + album["pseudo_artiste"] + '</button>'  + '</h4>' +
+        '<h4> par : ' + album["pseudo_artiste"] + '</h4>' +
         '<p>Créé le ' + album["date_creation_album"] + '</p>' +
         '<table>' +
         '<tr><th>Titre</th><th>Durée</th></tr>')
@@ -163,12 +167,6 @@ function showAlbum(album) {    //affiche les musiques d'un album
         let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
         console.log(id)
         ajaxRequest("GET", "request.php/musique/"+id, showMusique)
-    })
-
-    $(".artiste-bouton").click(function (event){
-        let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
-        console.log(id);
-        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste)
     })
 }
 

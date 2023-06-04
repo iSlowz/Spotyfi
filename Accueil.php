@@ -92,34 +92,4 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
 <script src="js/Ajax.js"></script>
 <script src="js/affichage.js"></script>
 </body>
-
-<!-- '<div class="page-playlist-flex">'+
-        '<h1>Exemple 1</h1>'+
-        '<h4 class="titre-date">02/06/2023</h4>'+
-      '</div>'+
-      '<hr id="trait">'+
-      '<div class="page-table" id="titre-table">'+
-       '<table class="table" id="texte-titre-table">'+
-          '<thead>'+
-            '<tr>'+
-              '<th scope="col">Titre</th>'+
-              '<th scope="col">Artiste</th>'+
-              '<th scope="col">Album</th>'+
-              '<th scope="col">Date dajout</th>'+
-              '<th scope="col">Durée</th>'+
-              '<th scope="col">Sup</th>'+
-            '</tr>'+
-          '</thead>'+
-          '<tbody>'+
-            '<tr>'+
-              '<th scope="row">music1</th>'+
-              '<td>M</td>'+
-              '<td>undfined</td>'+
-             '<td>2023-06-02</td>'+
-             '<td>2:02</td>'+
-             '<td>Bouton supprimer</td>'+
-            '</tr>'+
-          '</tbody>'+
-        '</table>'+
-      '</div>'
-</html> -->
+</html>
