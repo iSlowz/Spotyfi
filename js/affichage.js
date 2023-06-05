@@ -562,8 +562,6 @@ function showArtiste(artiste) {
 
         html+='</div></div>';
 
-
-
         html+=
             '<hr class="trait">'+
             '<div class="page-table" id="titre-table">' +
@@ -573,7 +571,6 @@ function showArtiste(artiste) {
             '<th scope="col">Titre</th>' +
             '<th scope="col">Album</th>' +
             '<th scope="col">Durée</th>' +
-            '<th scope="col">Suppr</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody>'
@@ -583,7 +580,6 @@ function showArtiste(artiste) {
                 '<th scope="row"><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></th>' +
                 '<td><button type="button" class="album-bouton" value="' + musique["id_album"] + '">' + musique["titre_album"] + '</button></td>' +
                 '<td> ' + musique["duree_musique"] + '</td>' +
-                '<td> suppr </td>' +
                 '</tr>'
 
         })
