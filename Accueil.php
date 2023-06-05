@@ -125,7 +125,7 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
         </div>
         <div class="flex-footer-volume">
           <div>
-            <input class="volume-bar" type="range" min="0" max="10">
+            <input id="volume-bar" type="range" min="0" max="10">
           </div>
           <div>
             <button id="btn-vol-moins" onClick="volume_moins()">Vol -</button>
