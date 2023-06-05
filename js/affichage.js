@@ -673,6 +673,16 @@ function setCurrentTime(k){
     x.play();
     x.currentTime = k;
 }
+function plus5s(){
+    let x = document.getElementById('player');
+    x.play();
+    x.currentTime += 5;
+}
+function moins5s(){
+    let x = document.getElementById('player');
+    x.play();
+    x.currentTime -= 5;
+}
 function updateMusiqueBar(max){
     let musiqueBar = document.getElementById('range-test');
     musiqueBar.value = getCurrentTime();
