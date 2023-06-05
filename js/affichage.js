@@ -619,6 +619,15 @@ function pause(){
     clearInterval(myInterval);
     document.getElementById('player').pause();
 }
+function setVolume(){
+    let volume_bar = document.getElementById('volume-bar');
+    volume_bar.value = document.getElementById('player').volume*10;
+
+    volume_bar.addEventListener("change", () => {
+        const vol = volume_bar.value ;
+        document.getElementById('player').volume = vol*0.1;
+    }); 
+}
 function volume_plus(){
     document.getElementById('player').volume += 0.1;
 }
@@ -665,4 +674,5 @@ function updateMusiqueBar(max){
     console.log(musiqueBar.value);
 }
 
-    
+setInterval(setVolume, 500);
+
