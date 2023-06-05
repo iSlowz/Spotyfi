@@ -33,13 +33,12 @@ function showRecherches(recherches) {
           '<button class="bouton-recherche-spécifique" type="button" id="album-search" value="album">Album</button>' +
         '</div>' +
 
-        '<div id="liste-musique"><hr class="trait"><h1 class="text-gauche">Musiques : </h1>' +
+        '<div id="liste-musique"><hr class="trait-long"><h1 class="text-gauche">Musiques : </h1>' +
           '<div class="flex-card-musique">'
 
     recherches["musiques"].forEach(function (musique) {
         html +=
-          
-        '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+        '<div class="card bouton-musique-select" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
           '<div class="card-body musique">' +
             '<div class="id_musique" style="display: none">' + musique["id_musique"] + '</div>' +
               '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
@@ -51,7 +50,7 @@ function showRecherches(recherches) {
 
     $(".flex-page").html(html + '</div></div>');
 
-    html='<div id="liste-album"><hr><h1 class="text-gauche">Albums : </h1>' +
+    html='<div id="liste-album"><hr class="trait-long"><h1 class="text-gauche">Albums : </h1>' +
         '<div class="flex-card-musique">'
     recherches["albums"].forEach(function (album){
         html +=
@@ -66,7 +65,7 @@ function showRecherches(recherches) {
 
     $(".flex-page").append(html + '</div></div>');
 
-    html='<div id="liste-artiste"><hr><h1 class="text-gauche">Artistes : </h1>' +
+    html='<div id="liste-artiste"><hr class="trait-long"><h1 class="text-gauche">Artistes : </h1>' +
         '<div class="flex-card-musique">'
     recherches["artistes"].forEach(function (artiste) {
         console.log(artiste)
@@ -547,22 +546,10 @@ function showArtiste(artiste) {
 
 }
 
-let playing = false;
-function playPause(){
-    if(!playing){
-        lancer();
-        document.getElementById('btn-lancer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/></svg>';
-        playing = true;
-    }
-    else{
-        pause();
-        document.getElementById('btn-lancer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg>';
-        playing = false;
-    }
-}
+    
 function lancer(){
     let max = getDuration();
-    document.getElementById('musique-progerss-bar').max = max;
+    document.getElementById('musique-progerss-bar').max = getDuration();
 
     myInterval = setInterval(updateProgressBar, 1000, max);
 

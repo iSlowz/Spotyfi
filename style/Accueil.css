@@ -346,9 +346,13 @@ html, body {
 }
 
 .card {
-    flex: 0 0 auto; /* Empêche les cartes de se rétrécir */
-    width: 17%; /* Largeur fixe pour chaque carte */
-    margin-right: 1%; /* Marge entre les cartes */
+    
+    flex: 0 0 auto;
+    
+    width: 17%;
+    margin-right: 1%;
+    margin-left: 1%;
+    
     cursor: pointer;
 }
 
@@ -657,7 +661,7 @@ audio::-webkit-media-controls-mute-button {
     text-align: start;
 
     margin-top: 2%;
-    margin-left: 5%;
+    margin-left: 2%;
     margin-bottom: 2%;
     
 }
@@ -669,7 +673,7 @@ audio::-webkit-media-controls-mute-button {
 
     text-align: start;
 
-    margin-left: 5%;
+    margin-left: 2%;
 
 }
 
@@ -688,5 +692,23 @@ audio::-webkit-media-controls-mute-button {
 
     padding-left: 1%;
     padding-right: 1%;
+
+}
+
+.trait-long{
+
+    border: none; 
+    border-top: 3px solid;
+    
+    margin: 10px 0;
+
+    margin-right: 2%;
+    margin-left: 2%;
+
+}
+
+.bouton-musique-select{
+
+    margin-left: 2%;
 
 }
