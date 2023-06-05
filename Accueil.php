@@ -97,18 +97,15 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
           <button id="btn-pause" onClick="pause()">Pause</button> 
           <button id="btn-vol-plus" onClick="volume_plus()">Vol +</button> 
           <button id="btn-vol-moins" onClick="volume_moins()">Vol -</button>
-          <div id="musique-progerss-bar">
-            
-          </div>
-          <div id='player_button'>
-            <button id="like" onClick="pause()">like</button> 
-            <button id="ajouter" onClick="pause()">ajouter</button> 
-          </div>
+          <progress id="musique-progerss-bar" max="0" value="0"></progress>
+
+          
+        </div>
+        <div id='player_button'>
+          <button id="like" onClick="pause()">like</button> 
+          <button id="ajouter" onClick="pause()">ajouter</button> 
         </div>
       </div>
-
-      
-
       
     </div>
   </div>

@@ -482,8 +482,10 @@ function loadPlaylists(playlists) {
     function lancer(){
         console.log(getDuration());
         console.log(getCurrentTime());
+        document.getElementById('musique-progerss-bar').max += getDuration();
 
-        myInterval = setInterval(drawMusiqueProgressBar, 1000)
+        myInterval = setInterval(updateProgressBar, 1000);
+
         document.getElementById('player').play(); 
     
     }
@@ -507,12 +509,9 @@ function loadPlaylists(playlists) {
         x.play();
         return parseInt(x.currentTime);
     }
-    function drawMusiqueProgressBar(){
-        
-        document.getElementById('musique-progerss-bar').innerHTML ='<progress id="progerss-bar" max="'+ getDuration() +'" value="'+ getCurrentTime() +'"></progress>';
-    }
     function updateProgressBar(){
-        
+
+        document.getElementById('musique-progerss-bar').value += 1;
     }
     
 
