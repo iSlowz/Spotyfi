@@ -115,7 +115,7 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
               </div>
             </div>
             <div class="flex-footer-bar-boucle">
-              <input class="slide-style" type="range" id="range-test" value="0" max="100" step="0">
+              <input class="slide-style" type="range" id="range-test" value="0" max="0" step="0">
               <button class="bouton-boucle" id="btn-boucle" onClick="boucle()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-repeat" viewBox="0 0 16 16">
                   <path d="M11 4v1.466a.25.25 0 0 0 .41.192l2.36-1.966a.25.25 0 0 0 0-.384l-2.36-1.966a.25.25 0 0 0-.41.192V3H5a5 5 0 0 0-4.48 7.223.5.5 0 0 0 .896-.446A4 4 0 0 1 5 4h6Zm4.48 1.777a.5.5 0 0 0-.896.446A4 4 0 0 1 11 12H5.001v-1.466a.25.25 0 0 0-.41-.192l-2.36 1.966a.25.25 0 0 0 0 .384l2.36 1.966a.25.25 0 0 0 .41-.192V13h6a5 5 0 0 0 4.48-7.223Z"/>
