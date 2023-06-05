@@ -483,6 +483,7 @@ function loadPlaylists(playlists) {
     function lancer(){
         console.log(getDuration());
         console.log(getCurrentTime());
+
         myInterval = setInterval(drawMusiqueProgressBar, 1000)
         document.getElementById('player').play(); 
     
@@ -510,6 +511,9 @@ function loadPlaylists(playlists) {
     function drawMusiqueProgressBar(){
         
         document.getElementById('musique-progerss-bar').innerHTML ='<progress id="progerss-bar" max="'+ getDuration() +'" value="'+ getCurrentTime() +'"></progress>';
+    }
+    function updateProgressBar(){
+        
     }
     
 

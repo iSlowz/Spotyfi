@@ -100,7 +100,10 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
           <div id="musique-progerss-bar">
             
           </div>
-          <div id='demo'></div>
+          <div id='player_button'>
+            <button id="like" onClick="pause()">like</button> 
+            <button id="ajouter" onClick="pause()">ajouter</button> 
+          </div>
         </div>
       </div>
 
