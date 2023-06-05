@@ -33,6 +33,9 @@ switch ($requestRessource) {
                     $result["musique"]=json_decode($_GET["musique"]);
                 }
                 break;
+            case "POST":
+                //$result=Array($id,$_POST["titre"]);
+                $result=User::addPlaylist($id,$_POST["titre"]);
         }
         break;
     case 'playlist':

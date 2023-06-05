@@ -21,6 +21,37 @@ $('#bar-recherche').on('input',function (event){
         ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
     }
 })
+$('#id-bouton-creer').click(function() {
+    console.log("creer");
+    $('.flex-page').html('<div class="card" id="id-card" style="width: 70%;">' +
+        '<div class="card-body">' +
+        '<h5 class="card-title">Créer une Playlist</h5>' +
+        '<form action="#" method="post" id="form-playlist">' +
+        '<label for="userInput" class="titre-nouvelle-playlist">Titre de la Playlist : </label>' +
+        '<input type="text" class="form-control" id="titre" aria-describedby="userInput" name="titre">' +
+        '<button class="bouton-valid-annule" id="valider" type="submit">Valider</button>' +
+        '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button>' +
+        '</form></div>' +
+        '</div>');
+
+    $('#annuler').click(function (event) {
+        event.preventDefault()
+        ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+    })
+    $('#form-playlist').submit(function (event){
+        event.preventDefault()
+        console.log($('#titre').val())
+        ajaxRequest("POST", "request.php/playlist_list/" + id_user, ()=>{
+            ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+            ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+        },'titre='+$("#titre").val())
+    })
+});
+$('#btn-creer-playlist').click(function() {
+    var nomPlaylist = $('#nom-playlist').val();
+    // Traitez le nom de la playlist ici
+    $('#modal-creer-playlist').modal('hide');
+});
 
 function showRecherches(recherches) {
     console.log(recherches);
@@ -161,7 +192,8 @@ function loadHistorique(musiques) {
 
 function loadPlaylists(playlists) {
     console.log(playlists)
-    $(".flex-playlist").append('<button class="playlist-bouton" value="' + playlists["favoris"]["id_playlist"] + '" type="submit">' + playlists["favoris"]["titre_playlist"] + ' <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n' +
+    $(".flex-playlist").html('<label id="Playlist">Playlists</label>'+
+    '<button class="playlist-bouton" value="' + playlists["favoris"]["id_playlist"] + '" type="submit">' + playlists["favoris"]["titre_playlist"] + ' <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n' +
         '            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n' +
         '          </svg></button>')
     playlists["playlists"].forEach(function (playlist) {

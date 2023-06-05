@@ -62,10 +62,9 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
     </div>
     <div class="Bar-Playlist">
       <div class="flex-playlist">
-        <label id="Playlist">Playlists</label>
       </div>
       <div class="bouton-créer">
-        <button class="btn" id="id-bouton-créer" type="submit">Créer +</button>
+        <button class="btn" id="id-bouton-creer" type="submit">Créer +</button>
       </div>
     </div>
     <div class="Page-Central">
