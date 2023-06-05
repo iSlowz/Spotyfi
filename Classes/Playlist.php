@@ -49,7 +49,7 @@ class Playlist
                 $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
                 $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
             }
-            $statement = $conn->prepare("SELECT titre_playlist, date_creation_playlist FROM playlist WHERE id_playlist=:id_playlist");
+            $statement = $conn->prepare("SELECT id_playlist, titre_playlist, date_creation_playlist FROM playlist WHERE id_playlist=:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
             $result += $statement->fetch(PDO::FETCH_ASSOC);
@@ -74,12 +74,13 @@ class Playlist
         }
     }
 
-    public function deleteMusique($id_musique){
+    static function deleteMusique($id_musique, $id_playlist){
         try {
             $conn = Database::connexionBD();
 
-            $statement = $conn->prepare("DELETE FROM public.musique_playlist WHERE id_musique = :id_musique");
+            $statement = $conn->prepare("DELETE FROM musique_playlist WHERE id_musique = :id_musique AND id_playlist=:id_playlist");
             $statement->bindParam(':id_musique', $id_musique);
+            $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
