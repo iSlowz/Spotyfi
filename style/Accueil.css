@@ -598,6 +598,33 @@ html, body {
 
 }
 
+.slide-style{
+
+    width: 100%;
+
+}
+
+.bouton-menu-footer{
+
+    border: none;
+    background-color: rgb(2, 97, 103);
+
+    color: white;
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+    padding-right: 2%;
+    padding-left: 2%;
+
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
 audio::-webkit-media-controls-panel {
     background-color: rgb(2, 97, 103);
 }
@@ -619,7 +646,6 @@ audio::-webkit-media-controls-mute-button {
     text-align: left !important;
     padding-left: 2%;
 }
-
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie de la page user */
