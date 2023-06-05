@@ -371,7 +371,7 @@ function showMusique(musique) {
         $("#add-playlist").click(function (event){
             let id = $(event.target).closest('#add-playlist').attr('value')   // id de la musique
             console.log(id)
-            ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylistsMain)
+            ajaxRequest("GET", "request.php/playlist_list/" + id_user + "?musique="+JSON.stringify(musique), loadPlaylistsMain)
         })
 
         $(".album-bouton").click(function (event) {
@@ -390,20 +390,25 @@ function showMusique(musique) {
 }
 
 function loadPlaylistsMain(playlists){
-    $(".flex-page").html('')
+    console.log(playlists)
+    $(".flex-page").html('<p>A quelle playlist souhaitez vous ajoutez '+playlists["musique"]["titre_musique"] +
+        ' de '+playlists["musique"]["pseudo_artiste"]+' ? </p>')
     playlists["playlists"].forEach(function (playlist) {
         console.log(playlist)
         $(".flex-page").append('<button class="add-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>')
     })
-    /*
+
     $(".add-playlist").click(function (event) {
-            let id = $(event.target).closest('.playlist-bouton').attr('value')
+            let id = $(event.target).closest('.add-playlist').attr('value')
             console.log(id)
-            ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
+            console.log(playlists["musique"]["id_musique"])
+            ajaxRequest("POST", "request.php/playlist/" + id, ()=>{
+                ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
+            },"id_musique="+playlists["musique"]["id_musique"])
         }
     )
 
-     */
+
 }
 
 /*--------------------------------------------------------------------------------------------------------------*/

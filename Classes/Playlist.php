@@ -85,7 +85,7 @@ class Playlist
             return false;
         }
     }
-    public function addMusique($id_musique){
+    static function addMusique($id_playlist ,$id_musique){
         try {
             $conn = Database::connexionBD();
 
@@ -93,6 +93,7 @@ class Playlist
             $statement->bindParam(':id_musique', $id_musique);
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
+            return true;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
