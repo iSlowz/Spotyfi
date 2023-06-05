@@ -667,5 +667,5 @@ function updateMusiqueBar(max){
     console.log(musiqueBar.value);
 }
 
-setInterval(setVolume, 500);
+setInterval(setVolume, 100);
 
