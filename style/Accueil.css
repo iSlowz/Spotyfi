@@ -331,6 +331,17 @@ html, body {
 
 }
 
+.petit-trait{
+
+    border: none; 
+    border-top: 3px solid;
+    
+    margin: 10px 0;
+
+    margin-right: 35%;
+    margin-left: 35%;
+
+}
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie des cards derniers morceaux sur la page d'accueil */
@@ -655,6 +666,7 @@ audio::-webkit-media-controls-mute-button {
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie quand une recherche est faite */
 /*--------------------------------------------------------------------------------------------------------------*/
+
 
 #titre-recherche-spécifique{
 
