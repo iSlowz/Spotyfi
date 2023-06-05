@@ -371,6 +371,7 @@ function showMusique(musique) {
         $("#add-playlist").click(function (event){
             let id = $(event.target).closest('#add-playlist').attr('value')   // id de la musique
             console.log(id)
+            ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylistsMain)
         })
 
         $(".album-bouton").click(function (event) {
@@ -388,6 +389,22 @@ function showMusique(musique) {
 
 }
 
+function loadPlaylistsMain(playlists){
+    $(".flex-page").html('')
+    playlists["playlists"].forEach(function (playlist) {
+        console.log(playlist)
+        $(".flex-page").append('<button class="add-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>')
+    })
+    /*
+    $(".add-playlist").click(function (event) {
+            let id = $(event.target).closest('.playlist-bouton').attr('value')
+            console.log(id)
+            ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
+        }
+    )
+
+     */
+}
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les albums */
