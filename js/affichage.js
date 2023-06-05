@@ -616,10 +616,4 @@ function updateMusiqueBar(max){
     }
 }
 
-
-    let bouton = document.getElementsByClassName('bouton-recherche-spécifique');
-    document.bouton.style.backgroundColor = black;
-
-}
-*/  
     
