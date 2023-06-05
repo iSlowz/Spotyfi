@@ -91,8 +91,11 @@ switch ($requestRessource) {
     case 'like':
         switch ($requestMethod){
             case 'POST':
-                $result = Array($id, $_POST["user"]);
+                //$result = Array($id, $_POST["user"]);
                 $result = Musique::likeMusic($_POST["user"], $id);
+            case 'DELETE':
+                //$result=Array($_GET["user"], $id);
+                $result = Musique::unlikeMusic($_POST["user"], $id);
         }
 }
 

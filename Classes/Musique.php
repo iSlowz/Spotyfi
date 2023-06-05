@@ -91,8 +91,36 @@ class Musique
         try {
             $conn = Database::connexionBD();
 
-            $statement = $conn->prepare("INSERT INTO public.musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) 
+            $statement = $conn->prepare("INSERT INTO musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) 
                                                 VALUES(:id_musique, :id_playlist, NOW())");
+            $statement->bindParam(':id_musique', $id_musique);
+            $statement->bindParam(':id_playlist', $id_playlist);
+            $statement->execute();
+            return Array($id_musique, $id_playlist);
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+    }
+
+    static function unlikeMusic($id_user, $id_musique){
+        try {
+            $conn = Database::connexionBD();
+
+            $statement = $conn->prepare("SELECT playlist.id_playlist FROM playlist 
+                                                    WHERE id_user=:id_user AND titre_playlist='Favoris'");
+            $statement->bindParam(':id_user', $id_user);
+            $statement->execute();
+            $id_playlist=$statement->fetch()[0];
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+        try {
+            $conn = Database::connexionBD();
+
+            $statement = $conn->prepare("DELETE FROM musique_playlist 
+                                                   WHERE id_playlist=:id_playlist AND id_musique=:id_musique");
             $statement->bindParam(':id_musique', $id_musique);
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();

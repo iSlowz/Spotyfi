@@ -208,58 +208,62 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                       '<th scope="col">Album</th>' +
                       '<th scope="col">Date dajout</th>' +
                       '<th scope="col">Durée</th>' +
-                      '<th scope="col">Aimer</th>' +
-                      '<th scope="col">Supprimer</th>' +
+                      '<th scope="col">Aimer</th>'
+        if (playlist["titre_playlist"]!=="Favoris") {
+            html +=
+                '<th>Supprimer</th>'
+        }
+        html+=
                     '</tr>' +
                   '</thead>' +
                   '<tbody>';
 
         playlist["musiques"].forEach(function (musique) {
             html +=
-
                 '<tr id="tableau-playlist">' +
                   '<td>' +
                     '<button type="button" class="play-musique" value="' + musique["id_musique"] + '">' +
                       '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
                         '<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'+
                         '<path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>'+
-                      '</svg>' + 
-                    '</button>' + 
+                      '</svg>' +
+                    '</button>' +
                   '</td>' +
                   '<th scope="row">'+
-                    '<button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button>' + 
+                    '<button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button>' +
                   '</th>' +
-                  '<td>' + 
-                    '<button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + 
-                      musique["pseudo_artiste"] + 
-                    '</button>' + 
+                  '<td>' +
+                    '<button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' +
+                      musique["pseudo_artiste"] +
+                    '</button>' +
                   '</td>' +
-                  '<td>' + 
-                    '<button type="button" class="album-bouton" value="' + musique["id_album"] + '">' 
-                      + musique["titre_album"] + 
-                    '</button>' + 
+                  '<td>' +
+                    '<button type="button" class="album-bouton" value="' + musique["id_album"] + '">'
+                      + musique["titre_album"] +
+                    '</button>' +
                   '</td>' +
-                  '<td>' 
-                    + musique["date_ajout_musique_playlist"] + 
+                  '<td>'
+                    + musique["date_ajout_musique_playlist"] +
                   '</td>' +
-                  '<td>' 
-                    + musique["duree_musique"] + 
-                  '</td>' +
-                  '<td>'+
-                    '<button type="button" class="like-musique" value="' + musique["id_musique"] + '">' + 
-                      '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">'+
-                        '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>'+
-                      '</svg>' + 
-                    '</button>' + 
-                  '</td>' +
-                  '<td>' + 
-                    '<button type="button" class="delete-musique" value="' + musique["id_musique"] + '">' + 
-                      '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">' +
-                        '<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>' +
-                      '</svg>' + 
-                    '</button>' + 
-                  '</td>' +
-                '</tr>'
+                  '<td>'
+                    + musique["duree_musique"] +
+                  '</td>'
+            if (musique["like"]===false) {
+                html+='<td><button type="button" class="like-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">' +
+                    '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>' +
+                    '</svg></button></td>'
+            }
+            else{
+                html+='<td><button type="button" class="unlike-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">'+
+                    '<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>'+
+                    '</svg></button></td>'
+            }
+
+            if (playlist["titre_playlist"]!=="Favoris") {
+                html+='<td><button type="button" class="delete-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">' +
+                    '  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>' +
+                    '</svg></button></td>'
+            }
         });
 
         html += '</tbody>' +
@@ -298,8 +302,8 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
             },"user="+id_user)
         })
-        $(".like-musique").click(function (event) {
-            let id = $(event.target).closest('.like-musique').attr('value')
+        $(".unlike-musique").click(function (event) {
+            let id = $(event.target).closest('.unlike-musique').attr('value')
             console.log(id);
             ajaxRequest("POST", "request.php/like/" + id,()=>{
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
@@ -310,9 +314,9 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
 
 }
 
-$("#Accueil").click(function (event) {
-    ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-})
+    $("#Accueil").click(function (event) {
+        ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+    })
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -582,12 +586,6 @@ function showArtiste(artiste) {
         })
 
 }
-
-
-/*--------------------------------------------------------------------------------------------------------------*/
-/* Permet d'afficher le footer */
-/*--------------------------------------------------------------------------------------------------------------*/
-
 
 let playing = false;
 function playPause(){
