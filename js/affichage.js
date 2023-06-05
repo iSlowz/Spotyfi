@@ -222,7 +222,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             html +=
                 '<tr id="tableau-playlist">' +
                   '<td>' +
-                    '<button type="button" class="play-musique" value="' + musique["id_musique"] + '">' +
+                    '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\' )">' +
                       '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
                         '<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'+
                         '<path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>'+
@@ -636,16 +636,22 @@ function showArtiste(artiste) {
 }
 
 let playing = false;
+function playPauseFrom(lien){
+    document.getElementById('player').innerHTML = '<source src="' + lien + '" >';
+    playPause();
+    playing = true;
+
+}
+
 function playPause(){
     if(!playing){
-        lancer();
         playing = true;
+        lancer();
     }
     else{
-        pause();
         playing = false;
+        pause();
     }
-
 }
 function lancer(){
     document.getElementById('btn-lancer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/></svg>';
@@ -655,7 +661,7 @@ function lancer(){
 
     console.log(max);
 
-    myInterval = setInterval(updateMusiqueBar, 1000, max);
+    myInterval = setInterval(updateMusiqueBar, 1001, max);
 
 
     document.getElementById('player').play();
@@ -666,23 +672,20 @@ function pause(){
     clearInterval(myInterval);
     document.getElementById('player').pause();
 }
-function setVolume(){
-    
-    volume_bar.addEventListener("change", () => {
-        const vol = volume_bar.value ;
-        document.getElementById('player').volume = vol*0.1;
-    }); 
-    if(volume_bar.value <= 10 && volume_bar.value >= 7){
-        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-up" viewBox="0 0 16 16"> <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/> <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/> <path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"/> </svg>';
+function updateMusiqueBar(max){
+    let musiqueBar = document.getElementById('range-test');
+    musiqueBar.value = getCurrentTime();
+    if(musiqueBar.value == max && document.getElementById('player').loop == false){
+        musiqueBar.value = 0;
+        pause();
     }
-    else{
-        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-down" viewBox="0 0 16 16"> <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zM6.312 6.39 8 5.04v5.92L6.312 9.61A.5.5 0 0 0 6 9.5H4v-3h2a.5.5 0 0 0 .312-.11zM12.025 8a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/> </svg>';
-    }
-    if(volume_bar.value == 0){
-        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-mute" viewBox="0 0 16 16"> <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/> </svg>';
-    }
-    
+    musiqueBar.addEventListener("change", () => {
+        const val = musiqueBar.value ;
+        setCurrentTime(val);
+    });
+    console.log(musiqueBar.value);
 }
+
 function boucle(){
     if(document.getElementById('player').loop == true){
         console.log('false');
@@ -720,17 +723,24 @@ function moins5s(){
     x.play();
     x.currentTime -= 5;
 }
-function updateMusiqueBar(max){
-    let musiqueBar = document.getElementById('range-test');
-    musiqueBar.value = getCurrentTime();
-    if(musiqueBar.value == max && document.getElementById('player').loop == false){
-        pause();
+
+
+function setVolume(){
+    
+    volume_bar.addEventListener("change", () => {
+        const vol = volume_bar.value ;
+        document.getElementById('player').volume = vol*0.1;
+    }); 
+    if(volume_bar.value <= 10 && volume_bar.value >= 7){
+        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-up" viewBox="0 0 16 16"> <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/> <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/> <path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"/> </svg>';
     }
-    musiqueBar.addEventListener("change", () => {
-        const val = musiqueBar.value ;
-        setCurrentTime(val);
-    });
-    console.log(musiqueBar.value);
+    else{
+        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-down" viewBox="0 0 16 16"> <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zM6.312 6.39 8 5.04v5.92L6.312 9.61A.5.5 0 0 0 6 9.5H4v-3h2a.5.5 0 0 0 .312-.11zM12.025 8a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/> </svg>';
+    }
+    if(volume_bar.value == 0){
+        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-mute" viewBox="0 0 16 16"> <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/> </svg>';
+    }
+    
 }
 let volume_bar = document.getElementById('volume-bar');
 volume_bar.value = document.getElementById('player').volume*10;

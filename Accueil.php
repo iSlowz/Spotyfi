@@ -78,11 +78,10 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
     <div class="Bar-Footer">
       <div class="d-flex flex-footer">
         <div class="p-2 flex-fill musique-info">
-          <button id="btn"">Musique info</button>
+          <button id="btn">Musique info</button>
         </div>
         <div class="p-2 flex-fill musique-player">         
           <audio id="player">
-            <source src="musique/epic-power.mp3">
           </audio>
           <div class="flex-footer-bouton">
             <div class="flex-footer-bouton-menu">
@@ -97,7 +96,7 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
                     <path d="M.5 3.5A.5.5 0 0 0 0 4v8a.5.5 0 0 0 1 0V8.753l6.267 3.636c.54.313 1.233-.066 1.233-.697v-2.94l6.267 3.636c.54.314 1.233-.065 1.233-.696V4.308c0-.63-.693-1.01-1.233-.696L8.5 7.248v-2.94c0-.63-.692-1.01-1.233-.696L1 7.248V4a.5.5 0 0 0-.5-.5z"/>
                   </svg>
                 </button>
-                <button class="bouton-menu-footer" id="btn-lancer" onClick="playPause()">
+                <button class="bouton-menu-footer" id="btn-lancer" onClick='playPause()'>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                     <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
