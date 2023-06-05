@@ -91,12 +91,16 @@ switch ($requestRessource) {
     case 'like':
         switch ($requestMethod){
             case 'POST':
-                //$result = Array($id, $_POST["user"]);
+
                 $result = Musique::likeMusic($_POST["user"], $id);
+                break;
+
             case 'DELETE':
                 //$result=Array($_GET["user"], $id);
-                $result = Musique::unlikeMusic($_POST["user"], $id);
+                $result = Musique::unlikeMusic($_GET["user"], $id);
+                break;
         }
+        break;
 }
 
 if (!empty($result) or $requestRessource=='recherche') {

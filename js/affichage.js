@@ -305,9 +305,9 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         $(".unlike-musique").click(function (event) {
             let id = $(event.target).closest('.unlike-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/like/" + id,()=>{
+            ajaxRequest("DELETE", "request.php/like/" + id + "?user="+id_user,()=>{
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
-            },"user="+id_user)
+            },)
         })
 
 
@@ -418,13 +418,13 @@ function loadProfil(profil) {
         $(".flex-page").html(
             
             '<div class="flex-info-user">' +
-              '<h1>Nom : </h1>' +
+              '<h1>Nom : </h1>' + ' '+
               '<div id="nom_user">' + 
                 '<h1>' + profil["nom_user"] + '</h1>'  +
               '</div>' +
             '</div>' + 
             '<div class="flex-info-user">' +
-              '<h1>Prenom : </h1>' +
+              '<h1>Prenom : </h1>' + ' '+
               '<div id="prenom_user">' + 
                 '<h1>' +profil["prenom_user"] + '</h1>' +
               '</div>'+
@@ -464,13 +464,13 @@ function loadProfil(profil) {
                 '<hr class="trait">' +
                 '<div class="form-modif-profil" ' +
                   '<form id="changement_profil" action="#" method="post">' +
-                    '<label for="userInput" class="form-label-user">Nom :</label>\n' +
+                    '<label for="userInput" class="form-label-user">Nom : </label>\n' +
                     '<input type="text" class="form-control" id="nouveau_nom" aria-describedby="userInput" name="nouveau_nom" value="' + $("#nom_user").text() + '">' +
-                    '<label for="userInput" class="form-label-user">Prenom :</label>' +
+                    '<label for="userInput" class="form-label-user">Prenom : </label>' +
                     '<input type="text" class="form-control" id="nouveau_prenom" aria-describedby="userInput" name="nouveau_prenom" value="' + $("#prenom_user").text() + '">' +
-                    '<label for="userInput" class="form-label-user">Date de naissance :</label>' +
+                    '<label for="userInput" class="form-label-user">Date de naissance : </label>' +
                     '<input type="text" class="form-control" id="nouvelle_date" aria-describedby="userInput" name="nouvelle_date" value="' + $("#date_naissance").text() + '">' +
-                    '<label for="userInput" class="form-label-user">Mail :</label>' +
+                    '<label for="userInput" class="form-label-user">Mail : </label>' +
                     '<input type="text" class="form-control" id="nouveau_mail" aria-describedby="userInput" name="nouveau_mail" value="' + $("#mail").text() + '">' +
                     '<button class="bouton-valid-annule" id="valider" type="button">Valider</button>' +
                     '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button>' +

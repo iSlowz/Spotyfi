@@ -550,7 +550,7 @@ html, body {
     background-color: rgb(2, 97, 103);
 
     color: white;
-    border-top : solid white;
+    border-top : solid white;   
 
 }
 
@@ -559,12 +559,42 @@ html, body {
     display: flex;
     flex-direction: row;
 
+    justify-content: space-between;
+
 }
 
 .flex-footer-bouton{
 
     display: flex;
     flex-direction: column;
+
+}
+
+.bouton-footer{
+
+    margin-top: 5%;
+
+}
+
+.flex-footer-bar-boucle{
+
+    display: flex;
+    flex-direction: row;
+    
+    text-align: center;
+    justify-content: center;
+
+}
+
+.flex-footer-volume{
+
+    display: flex;
+    flex-direction: column;
+
+    margin-right: 2%;
+
+    text-align: center;
+    justify-content: center;
 
 }
 
