@@ -44,7 +44,11 @@ switch ($requestRessource) {
                 $result=Musique::getMusique($id);
                 break;
             case "DELETE":
-                $result=Playlist::deleteMusique($id,$_GET["id_playlist"]);
+
+                $id_playlist=explode('.',$id);
+                $id_musique=array_shift($id_playlist);
+                $id_playlist=array_shift($id_playlist);
+                $result=Playlist::deleteMusique($id_musique,$id_playlist);
         }
 
         break;
@@ -84,6 +88,11 @@ switch ($requestRessource) {
                     }
         }
         break;
+    case 'like':
+        switch ($requestMethod){
+            case 'POST':
+                $result = Array($id, $_POST["user"]);
+        }
 }
 
 if (!empty($result) or $requestRessource=='recherche') {

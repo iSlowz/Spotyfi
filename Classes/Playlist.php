@@ -82,6 +82,7 @@ class Playlist
             $statement->bindParam(':id_musique', $id_musique);
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
+            return true;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
