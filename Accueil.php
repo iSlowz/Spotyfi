@@ -107,7 +107,6 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
           <button id="ajouter" onClick="pause()">ajouter</button> 
         </div>
       </div>
-      
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

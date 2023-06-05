@@ -501,8 +501,6 @@ audio::-webkit-media-controls-mute-button {
     color: red;
 }
 
-
-
 .souligne:hover{
     text-decoration: underline;
 }
@@ -510,4 +508,65 @@ audio::-webkit-media-controls-mute-button {
 .text-gauche{
     text-align: left !important;
     padding-left: 2%;
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Partie de la page user */
+/*--------------------------------------------------------------------------------------------------------------*/
+
+.flex-bouton-modif-deco{
+
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: center;
+
+}
+
+.bouton-user-modif{
+
+    border: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+    color: white;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    padding-right: 2%;
+    padding-left: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
+.bouton-user-deco{
+
+    
+    padding-left: 2%;
+    padding-right: 2%;
+
+    margin-left: 2%;
+
+}
+
+.bouton-user-deco-style{
+
+    border: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+    color: white;
+    
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    padding-right: 2%;
+    padding-left: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+
 }
