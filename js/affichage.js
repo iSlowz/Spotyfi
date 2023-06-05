@@ -24,24 +24,29 @@ $('#bar-recherche').on('input',function (event){
 
 function showRecherches(recherches) {
     console.log(recherches);
-    let html='<p>Trier par : </p>' +
-        '<button type="button" id="musique-search" value="musique">Musique</button>' +
-        '<button type="button" id="artiste-search" value="artiste">Artiste</button>' +
-        '<button type="button" id="album-search" value="album">Album</button>' +
+    let html=
+    
+        '<h1 id="titre-recherche-spécifique">Recherche : </h1>' +
+        '<div class="flex-bouton-recherche-spécifique">' +
+          '<button class="bouton-recherche-spécifique" type="button" id="musique-search" value="musique">Musique</button>' +
+          '<button class="bouton-recherche-spécifique" type="button" id="artiste-search" value="artiste">Artiste</button>' +
+          '<button class="bouton-recherche-spécifique" type="button" id="album-search" value="album">Album</button>' +
+        '</div>' +
 
-        '<div id="liste-musique"><hr><h1 class="text-gauche">Musiques : </h1>' +
-                    '<div class="flex-card-musique">'
+        '<div id="liste-musique"><hr class="trait"><h1 class="text-gauche">Musiques : </h1>' +
+          '<div class="flex-card-musique">'
 
     recherches["musiques"].forEach(function (musique) {
         html +=
-            '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
-            '<div class="card-body musique">' +
+          
+        '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+          '<div class="card-body musique">' +
             '<div class="id_musique" style="display: none">' + musique["id_musique"] + '</div>' +
-            '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
-            '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+musique["id_artiste"] +'">' + musique["pseudo_artiste"] + '</button></p>' +
-            '<p>'+musique["duree_musique"]+'</p>' +
+              '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
+              '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+musique["id_artiste"] +'">' + musique["pseudo_artiste"] + '</button></p>' +
+              '<p>'+musique["duree_musique"]+'</p>' +
             '</div>' +
-            '</div>'
+          '</div>'
     });
 
     $(".flex-page").html(html + '</div></div>');

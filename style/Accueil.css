@@ -646,3 +646,47 @@ audio::-webkit-media-controls-mute-button {
     padding-right: 1%;
 
 }
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Partie quand une recherche est faite */
+/*--------------------------------------------------------------------------------------------------------------*/
+
+#titre-recherche-spécifique{
+
+    text-align: start;
+
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    
+}
+
+.flex-bouton-recherche-spécifique{
+
+    display: flex;
+    flex-direction: row;
+
+    text-align: start;
+
+    margin-left: 5%;
+
+}
+
+.bouton-recherche-spécifique{
+
+    border: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+    color: white;
+
+    font-size: 125%;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    margin-bottom: 2%;
+    margin-right: 1%;
+
+    padding-left: 1%;
+    padding-right: 1%;
+
+}
