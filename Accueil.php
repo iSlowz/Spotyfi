@@ -127,10 +127,6 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
           <div>
             <input id="volume-bar" type="range" min="0" max="10">
           </div>
-          <div>
-            <button id="btn-vol-moins" onClick="volume_moins()">Vol -</button>
-            <button id="btn-vol-plus" onClick="volume_plus()">Vol +</button> 
-          </div>  
         </div>
       </div>
     </div>  
