@@ -490,6 +490,50 @@ html, body {
 
 }
 
+.play-musique{
+
+    border: none;
+
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+}
+
+.like-musique{
+
+    border: none;
+
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+}
+
+.delete-musique{
+
+    border: none;
+
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+}
+
+.like-musique{
+
+    border: none;
+
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+}
+
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie pour le footer */
