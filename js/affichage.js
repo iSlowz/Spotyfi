@@ -628,12 +628,6 @@ function setVolume(){
         document.getElementById('player').volume = vol*0.1;
     }); 
 }
-function volume_plus(){
-    document.getElementById('player').volume += 0.1;
-}
-function volume_moins(){
-    document.getElementById('player').volume -= 0.1;
-}
 function boucle(){
     if(document.getElementById('player').loop == true){
         console.log('false');
