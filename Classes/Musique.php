@@ -90,7 +90,6 @@ class Musique
         }
         try {
             $conn = Database::connexionBD();
-
             $statement = $conn->prepare("INSERT INTO musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) 
                                                 VALUES(:id_musique, :id_playlist, NOW())");
             $statement->bindParam(':id_musique', $id_musique);
