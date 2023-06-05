@@ -639,8 +639,7 @@ function pause(){
     document.getElementById('player').pause();
 }
 function setVolume(){
-    let volume_bar = document.getElementById('volume-bar');
-    volume_bar.value = document.getElementById('player').volume*10;
+    
 
     volume_bar.addEventListener("change", () => {
         const vol = volume_bar.value ;
@@ -686,6 +685,10 @@ function updateMusiqueBar(max){
     });
     console.log(musiqueBar.value);
 }
+let volume_bar = document.getElementById('volume-bar');
+volume_bar.value = document.getElementById('player').volume*10;
+
+console.log(volume_bar.value);
 
 setInterval(setVolume, 100);
 
