@@ -185,7 +185,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
 
             '<div class="page-playlist-flex">' +
             '<div id="titre-page-des-playlist">' +
-            '<h1>' + playlist["titre_playlist"] + '</h1>' +
+            '<h1 class="titre-playlist" id="'+playlist["id_playlist"]+'">' + playlist["titre_playlist"] + '</h1>' +
             '</div>' +
             '<div class="date-container">' +
             '<h4 class="titre-date">' + playlist["date_creation_playlist"] + '</h4>' +
@@ -201,7 +201,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             '<th scope="col">Album</th>' +
             '<th scope="col">Date dajout</th>' +
             '<th scope="col">Durée</th>' +
-            '<th scope="col"></th>' +
+            '<th></th>' +
             '</tr>' +
             '</thead>' +
             '<tbody>';
@@ -214,7 +214,9 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                 '<td><button type="button" class="album-bouton" value="' + musique["id_album"] + '">' + musique["titre_album"] + '</button></td>' +
                 '<td>' + musique["date_ajout_musique_playlist"] + '</td>' +
                 '<td>' + musique["duree_musique"] + '</td>' +
-                '<td>Bouton supprimer</td>' +
+                '<td><button type="button" class="delete-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">' +
+                '  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>' +
+                '</svg></button></td>' +
                 '</tr>'
         });
 
@@ -239,14 +241,20 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
             console.log(id);
             ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
-
+        })
+        $(".delete-musique").click(function (event){
+            console.log(playlist["id_playlist"])
+            let id = $(event.target).closest('.delete-musique').attr('value')
+            ajaxRequest("DELETE", "request.php/musique/" + id, ()=>{
+                ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
+            },"?playlist="+playlist['id_playlist'])
         })
 
 }
 
-$("#Accueil").click(function (event) {
-    ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-})
+    $("#Accueil").click(function (event) {
+        ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+    })
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -254,7 +262,7 @@ $("#Accueil").click(function (event) {
 /*--------------------------------------------------------------------------------------------------------------*/
 
 
-function showMusique(musique) {
+    function showMusique(musique) {
         console.log(musique)
         console.log(musique["titre_musique"])
         $(".flex-page").html(
@@ -281,7 +289,7 @@ function showMusique(musique) {
         })
 
 
-}
+    }
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -289,7 +297,7 @@ function showMusique(musique) {
 /*--------------------------------------------------------------------------------------------------------------*/
 
 
-function showAlbum(album) {
+    function showAlbum(album) {
         console.log(album)
         let html =
 
@@ -337,13 +345,13 @@ function showAlbum(album) {
             ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
         })
 
-}
+    }
 
-$("#id-bouton-user").click(function (event) {
+    $("#id-bouton-user").click(function (event) {
         ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
-})
+    })
 
-function loadProfil(profil) {
+    function loadProfil(profil) {
         console.log(profil)
         $(".flex-page").html(
             
@@ -431,11 +439,12 @@ function loadProfil(profil) {
                     }
                 }, 'nom=' + $('#nouveau_nom').val() + '&prenom=' + $('#nouveau_prenom').val() + '&date=' + $('#nouvelle_date').val() + '&mail=' + $('#nouveau_mail'))
             })
-
         })
-}
 
-function showArtiste(artiste) {
+
+    }
+
+    function showArtiste(artiste) {
         console.log(artiste)
         console.log(artiste["pseudo_artiste"])
         let html =
@@ -513,44 +522,58 @@ function showArtiste(artiste) {
             ajaxRequest("GET", "request.php/album/" + id, showAlbum)
         })
 
-}
+    }
 
     
 function lancer(){
-        console.log(getDuration());
-        console.log(getCurrentTime());
-        document.getElementById('musique-progerss-bar').max += getDuration();
+    let max = getDuration();
+    document.getElementById('musique-progerss-bar').max = getDuration();
 
-        myInterval = setInterval(updateProgressBar, 1000);
+    myInterval = setInterval(updateProgressBar, 1000, max);
 
-        document.getElementById('player').play(); 
-    
+
+    document.getElementById('player').play();
 }
 function pause(){
-        clearInterval(myInterval)
-        document.getElementById('player').pause();
+    clearInterval(myInterval);
+    document.getElementById('player').pause();
 }
 function volume_plus(){
-        document.getElementById('player').volume += 0.1;
+    document.getElementById('player').volume += 0.1;
 }
 function volume_moins(){
-        document.getElementById('player').volume -= 0.1;
+    document.getElementById('player').volume -= 0.1;
+}
+function boucle(){
+    if(document.getElementById('player').loop == true){
+        console.log('false');
+        document.getElementById('player').loop = false;
+    }
+    else{
+        console.log('true');
+        document.getElementById('player').loop = true;
+    }
 }
 function getDuration(){
-        let x = document.getElementById('player');
-        x.play();
-        return parseInt(x.duration);
+    let x = document.getElementById('player');
+    x.play();
+    return parseInt(x.duration);
 }
 function getCurrentTime(){
         let x = document.getElementById('player');
         x.play();
         return parseInt(x.currentTime);
     }
-    function updateProgressBar(){
-
-        document.getElementById('musique-progerss-bar').value += 1;
+function updateProgressBar(max){
+    document.getElementById('musique-progerss-bar').value += 1;
+    if(document.getElementById('musique-progerss-bar').value == max && document.getElementById('player').loop == false){
+        clearInterval(myInterval);
     }
-    
+    if(document.getElementById('musique-progerss-bar').value == max){
+        document.getElementById('musique-progerss-bar').value = 0;
+    }
+}
+
 
     
     
