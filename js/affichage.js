@@ -174,12 +174,11 @@ function loadPlaylists(playlists) {
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
-    /* Permet d'afficher ce que contient une playlist */
+/* Permet d'afficher ce que contient une playlist */
+/*--------------------------------------------------------------------------------------------------------------*/
 
-    /*--------------------------------------------------------------------------------------------------------------*/
 
-
-    function showPlaylist(playlist) {    //affiche les musiques d'une playlist
+function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         console.log(playlist);
 
         let html =
@@ -243,20 +242,19 @@ function loadPlaylists(playlists) {
 
         })
 
-    }
+}
 
-    $("#Accueil").click(function (event) {
-        ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-    })
-
-
-    /*--------------------------------------------------------------------------------------------------------------*/
-    /* Permet d'afficher les détails sur les musiques */
-
-    /*--------------------------------------------------------------------------------------------------------------*/
+$("#Accueil").click(function (event) {
+    ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+})
 
 
-    function showMusique(musique) {
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Permet d'afficher les détails sur les musiques */
+/*--------------------------------------------------------------------------------------------------------------*/
+
+
+function showMusique(musique) {
         console.log(musique)
         console.log(musique["titre_musique"])
         $(".flex-page").html(
@@ -283,16 +281,15 @@ function loadPlaylists(playlists) {
         })
 
 
-    }
+}
 
 
-    /*--------------------------------------------------------------------------------------------------------------*/
-    /* Permet d'afficher les détails sur les albums */
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Permet d'afficher les détails sur les albums */
+/*--------------------------------------------------------------------------------------------------------------*/
 
-    /*--------------------------------------------------------------------------------------------------------------*/
 
-
-    function showAlbum(album) {
+function showAlbum(album) {
         console.log(album)
         let html =
 
@@ -341,20 +338,36 @@ function loadPlaylists(playlists) {
             ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
         })
 
-    }
+}
 
-    $("#id-bouton-user").click(function (event) {
+$("#id-bouton-user").click(function (event) {
         ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
-    })
+})
 
-    function loadProfil(profil) {
+function loadProfil(profil) {
         console.log(profil)
-        $(".flex-page").html('<form action="Deconnexion.php"><button id="deco">Se déconnecter</button></form>' +
-            '<h1><div id="nom_user">' + profil["nom_user"] + '</div>' + ' ' + '<div id="prenom_user">' + profil["prenom_user"] + '</div></h1>' +
-            '<p><div id="date_naissance">' + profil["date_naissance_user"] + '</div></p>' +
-            '<p>' + profil["age"] + '</p>' +
-            '<div id="mail"><p id="mail">' + profil["mail_user"] + '</p></div>' +
-            '<button type="button" class="btn" id="modif_profil">Modifier votre profil</button>' //on pourra enlever class btn
+        $(".flex-page").html(
+            
+            '<div id="nom_user">' + 
+              '<h1>Nom : ' + profil["nom_user"] + '</h1>'  +
+            '</div>' + 
+            '<div id="prenom_user">' + 
+              '<h1> Prenom : ' +profil["prenom_user"] + '</h1>' +
+            '</div>'+
+            '<hr class="trait">' +
+            '<p><div id="date_naissance"> Date de naissance : ' + profil["date_naissance_user"] + '</div></p>' +
+            '<p> Age : ' + profil["age"] + '</p>' +
+            '<div id="mail">'+
+              '<p id="mail"> Courriel : ' + profil["mail_user"] + '</p>' + 
+            '</div>' +
+            '<hr class="trait">' +
+            '<div class="flex-bouton-modif-deco">' +
+              '<button type="button" class="bouton-user-modif" id="modif_profil">Modifier votre profil</button>' + 
+              '<form action="Deconnexion.php" class="bouton-user-deco">' + 
+                '<button class="bouton-user-deco-style" id="deco">Se déconnecter</button>' + 
+              '</form>' +
+            '</div>'
+
         )
         $('#modif_profil').click(function (event) {
 
@@ -394,12 +407,11 @@ function loadPlaylists(playlists) {
                     }
                 }, 'nom=' + $('#nouveau_nom').val() + '&prenom=' + $('#nouveau_prenom').val() + '&date=' + $('#nouvelle_date').val() + '&mail=' + $('#nouveau_mail'))
             })
+
         })
+}
 
-
-    }
-
-    function showArtiste(artiste) {
+function showArtiste(artiste) {
         console.log(artiste)
         console.log(artiste["pseudo_artiste"])
         let html =
@@ -477,40 +489,40 @@ function loadPlaylists(playlists) {
             ajaxRequest("GET", "request.php/album/" + id, showAlbum)
         })
 
-    }
+}
 
     
-    function lancer(){
+function lancer(){
         console.log(getDuration());
         console.log(getCurrentTime());
         myInterval = setInterval(drawMusiqueProgressBar, 1000)
         document.getElementById('player').play(); 
     
-    }
-    function pause(){
+}
+function pause(){
         clearInterval(myInterval)
         document.getElementById('player').pause();
-    }
-    function volume_plus(){
+}
+function volume_plus(){
         document.getElementById('player').volume += 0.1;
-    }
-    function volume_moins(){
+}
+function volume_moins(){
         document.getElementById('player').volume -= 0.1;
-    }
-    function getDuration(){
+}
+function getDuration(){
         let x = document.getElementById('player');
         x.play();
         return parseInt(x.duration);
-    }
-    function getCurrentTime(){
+}
+function getCurrentTime(){
         let x = document.getElementById('player');
         x.play();
         return parseInt(x.currentTime);
-    }
-    function drawMusiqueProgressBar(){
+}
+function drawMusiqueProgressBar(){
         
         document.getElementById('musique-progerss-bar').innerHTML ='<progress id="progerss-bar" max="'+ getDuration() +'" value="'+ getCurrentTime() +'"></progress>';
-    }
+}
     
 
     

@@ -103,10 +103,6 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
           <div id='demo'></div>
         </div>
       </div>
-
-      
-
-      
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
