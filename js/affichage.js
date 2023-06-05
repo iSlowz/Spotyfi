@@ -562,9 +562,9 @@ function playPause(){
 }
 function lancer(){
     let max = getDuration();
-    document.getElementById('musique-progerss-bar').max = getDuration();
+    document.getElementById('range-test').max = getDuration();
 
-    myInterval = setInterval(updateProgressBar, 1000, max);
+    myInterval = setInterval(updateMusiqueBar, 1000, max);
 
 
     document.getElementById('player').play();
@@ -597,19 +597,23 @@ function getDuration(){
     return parseInt(x.duration);
 }
 function getCurrentTime(){
-        let x = document.getElementById('player');
-        x.play();
-        return parseInt(x.currentTime);
-    }
-function updateProgressBar(max){
-    document.getElementById('musique-progerss-bar').value += 1;
-    if(document.getElementById('musique-progerss-bar').value == max && document.getElementById('player').loop == false){
+    let x = document.getElementById('player');
+    x.play();
+    return parseInt(x.currentTime);
+}
+function setCurrentTime(k){
+    let x = document.getElementById('player');
+    x.play();
+    x.currentTime = k;
+}
+function updateMusiqueBar(max){
+    document.getElementById('range-test').value = getCurrentTime();
+    if(document.getElementById('range-test').value == max && document.getElementById('player').loop == false){
         clearInterval(myInterval);
     }
-    if(document.getElementById('musique-progerss-bar').value == max){
-        document.getElementById('musique-progerss-bar').value = 0;
-    }
 }
+
+
 
 
     
