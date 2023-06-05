@@ -523,7 +523,16 @@ audio::-webkit-media-controls-mute-button {
     
     justify-content: center;
     align-items: center;
-    white-space: nowrap;
+
+}
+
+.flex-info-user{
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -625,5 +634,15 @@ audio::-webkit-media-controls-mute-button {
     border: rgb(25, 157, 166);
     background-color : rgb(25, 157, 166);
     color: white;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 1%;
+    margin-left: 1%;
+
+    padding-left: 1%;
+    padding-right: 1%;
 
 }

@@ -347,19 +347,39 @@ function loadProfil(profil) {
         console.log(profil)
         $(".flex-page").html(
             
-            '<div id="nom_user">' + 
-              '<h1>Nom : ' + profil["nom_user"] + '</h1>'  +
+            '<div class="flex-info-user">' +
+              '<h1>Nom : </h1>' +
+              '<div id="nom_user">' + 
+                '<h1>' + profil["nom_user"] + '</h1>'  +
+              '</div>' +
             '</div>' + 
-            '<div id="prenom_user">' + 
-              '<h1> Prenom : ' +profil["prenom_user"] + '</h1>' +
-            '</div>'+
+            '<div class="flex-info-user">' +
+              '<h1>Prenom : </h1>' +
+              '<div id="prenom_user">' + 
+                '<h1>' +profil["prenom_user"] + '</h1>' +
+              '</div>'+
+            '</div>' + 
+
             '<hr class="trait">' +
-            '<p><div id="date_naissance"> Date de naissance : ' + profil["date_naissance_user"] + '</div></p>' +
-            '<p> Age : ' + profil["age"] + '</p>' +
-            '<div id="mail">'+
-              '<p id="mail"> Courriel : ' + profil["mail_user"] + '</p>' + 
+            
+            '<div class="flex-info-user">' +
+              '<p> Date de naissance : </p>' +
+              '<div id="date_naissance">' +
+                '<p>' + profil["date_naissance_user"] + '</p>' +
+              '</div>' +
             '</div>' +
+
+            '<p> Age : ' + profil["age"] + '</p>' +
+
+            '<div class="flex-info-user">' +
+              '<p>Courriel : </p>' +
+              '<div id="mail">'+
+                '<p>' + profil["mail_user"] + '</p>' + 
+              '</div>' +
+            '</div>' +
+
             '<hr class="trait">' +
+            
             '<div class="flex-bouton-modif-deco">' +
               '<button type="button" class="bouton-user-modif" id="modif_profil">Modifier votre profil</button>' + 
               '<form action="Deconnexion.php" class="bouton-user-deco">' + 
@@ -383,7 +403,7 @@ function loadProfil(profil) {
                     '<label for="userInput" class="form-label-user">Mail :</label>' +
                     '<input type="text" class="form-control" id="nouveau_mail" aria-describedby="userInput" name="nouveau_mail" value="' + $("#mail").text() + '">' +
                     '<button class="bouton-valid-annule" id="valider" type="button">Valider</button>' +
-                    '<button  id="annuler" type="button">Annuler</button>' +
+                    '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button>' +
                   '</form>' + 
                 '</div>'
                 )
