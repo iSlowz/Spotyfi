@@ -86,7 +86,7 @@ function showRecherches(recherches) {
     $(".musique").click(function (event) {
         let id = $(event.target).closest(".card").find(".id_musique").text();
         console.log(id)
-        ajaxRequest("GET", "request.php/musique/" + id, showMusique)
+        ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
     })
     $(".album").click(function (event) {
         let id = $(event.target).closest(".card").find(".id_musique").text();
@@ -149,7 +149,7 @@ function loadHistorique(musiques) {
     $(".card-body").click(function (event) {
         let id = $(event.target).closest(".card").find(".id_musique").text();
         console.log(id)
-        ajaxRequest("GET", "request.php/musique/" + id, showMusique)
+        ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
     })
     $(".artiste-bouton").click(function (event){    //à laisser ou non
         let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
@@ -275,7 +275,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
             console.log(id)
-            ajaxRequest("GET", "request.php/musique/" + id, showMusique)
+            ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
         })
         $(".album-bouton").click(function (event) {
             let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album
@@ -398,7 +398,7 @@ function showAlbum(album) {
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
             console.log(id)
-            ajaxRequest("GET", "request.php/musique/" + id, showMusique)
+            ajaxRequest("GET", "request.php/musique/"+ id + "?id_user="+id_user, showMusique)
         })
 
         $(".artiste-bouton").click(function (event) {
@@ -572,7 +572,7 @@ function showArtiste(artiste) {
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
             console.log(id)
-            ajaxRequest("GET", "request.php/musique/" + id, showMusique)
+            ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
         })
         $(".album-bouton").click(function (event) {
             let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album

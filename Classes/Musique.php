@@ -24,7 +24,7 @@ class Musique
     }
     */
 
-    static function getMusique($id_musique){
+    static function getMusique($id_musique, $id_user=null){
         try {
             $conn = Database::connexionBD();
             $statement = $conn->prepare("SELECT m.id_musique, m.titre_musique, m.lien_musique, m.duree_musique, m.date_parution_musique,
@@ -40,6 +40,12 @@ class Musique
             list($heures, $minutes, $secondes) = explode(":", $result["duree_musique"]);
             $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
             $result["duree_musique"] = $dureeFormatee;
+            if (Musique::isFavori($id_user,$result["id_musique"])){
+                $result["like"]=true;
+            }
+            else{
+                $result["like"]=false;
+            }
             return $result;
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());

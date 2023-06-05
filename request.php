@@ -41,7 +41,8 @@ switch ($requestRessource) {
     case 'musique':
         switch ($requestMethod){
             case "GET":
-                $result=Musique::getMusique($id);
+                //$result=Array($id,$_GET["id_user"]);
+                $result=Musique::getMusique($id, $_GET["id_user"]);
                 break;
             case "DELETE":
 
@@ -49,6 +50,7 @@ switch ($requestRessource) {
                 $id_musique=array_shift($id_playlist);
                 $id_playlist=array_shift($id_playlist);
                 $result=Playlist::deleteMusique($id_musique,$id_playlist);
+                break;
         }
 
         break;
