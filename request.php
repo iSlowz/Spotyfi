@@ -43,7 +43,10 @@ switch ($requestRessource) {
             case "GET":
                 $result=Musique::getMusique($id);
                 break;
+            case "DELETE":
+                $result=Playlist::deleteMusique($id,$_GET["id_playlist"]);
         }
+
         break;
     case 'album':
         switch ($requestMethod){

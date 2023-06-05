@@ -22,6 +22,9 @@ $id_user = Utilisateur::Connexion()
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="icon" href="data:,">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 
     <title>Spotyfi</title>
 
@@ -97,6 +100,7 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
           <button id="btn-pause" onClick="pause()">Pause</button> 
           <button id="btn-vol-plus" onClick="volume_plus()">Vol +</button> 
           <button id="btn-vol-moins" onClick="volume_moins()">Vol -</button>
+          <button id="btn-boucle" onClick="boucle()">boucle</button>
           <progress id="musique-progerss-bar" max="0" value="0"></progress>
 
           
