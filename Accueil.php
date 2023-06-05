@@ -97,6 +97,7 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
           <button id="btn-pause" onClick="pause()">Pause</button> 
           <button id="btn-vol-plus" onClick="volume_plus()">Vol +</button> 
           <button id="btn-vol-moins" onClick="volume_moins()">Vol -</button>
+          <button id="btn-boucle" onClick="boucle()">boucle</button>
           <progress id="musique-progerss-bar" max="0" value="0"></progress>
 
           
