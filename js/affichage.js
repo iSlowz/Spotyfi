@@ -491,55 +491,54 @@ function showArtiste(artiste) {
 }
 
     
-    function lancer(){
-        let max = getDuration();
-        document.getElementById('musique-progerss-bar').max = getDuration();
+function lancer(){
+    let max = getDuration();
+    document.getElementById('musique-progerss-bar').max = getDuration();
 
-        myInterval = setInterval(updateProgressBar, 1000, max);
+    myInterval = setInterval(updateProgressBar, 1000, max);
         
 
-        document.getElementById('player').play(); 
-    }
-    function pause(){
-        clearInterval(myInterval);
-        document.getElementById('player').pause();
+    document.getElementById('player').play(); 
+}
+function pause(){
+    clearInterval(myInterval);
+    document.getElementById('player').pause();
 }
 function volume_plus(){
-        document.getElementById('player').volume += 0.1;
+    document.getElementById('player').volume += 0.1;
 }
 function volume_moins(){
-        document.getElementById('player').volume -= 0.1;
+    document.getElementById('player').volume -= 0.1;
 }
-    function boucle(){
-        if(document.getElementById('player').loop == true){
-            console.log('false');
-            document.getElementById('player').loop = false;
-        }
-        else{
-            console.log('true');
-            document.getElementById('player').loop = true;
-        }
-       
+function boucle(){
+    if(document.getElementById('player').loop == true){
+        console.log('false');
+        document.getElementById('player').loop = false;
     }
+    else{
+        console.log('true');
+        document.getElementById('player').loop = true;
+    }      
+}
 function getDuration(){
-        let x = document.getElementById('player');
-        x.play();
-        return parseInt(x.duration);
+    let x = document.getElementById('player');
+    x.play();
+    return parseInt(x.duration);
 }
 function getCurrentTime(){
         let x = document.getElementById('player');
         x.play();
         return parseInt(x.currentTime);
     }
-    function updateProgressBar(max){
-        document.getElementById('musique-progerss-bar').value += 1;
-        if(document.getElementById('musique-progerss-bar').value == max && document.getElementById('player').loop == false){
-            clearInterval(myInterval);
-        }
-        if(document.getElementById('musique-progerss-bar').value == max){
-            document.getElementById('musique-progerss-bar').value = 0;
-        }
+function updateProgressBar(max){
+    document.getElementById('musique-progerss-bar').value += 1;
+    if(document.getElementById('musique-progerss-bar').value == max && document.getElementById('player').loop == false){
+        clearInterval(myInterval);
     }
+    if(document.getElementById('musique-progerss-bar').value == max){
+        document.getElementById('musique-progerss-bar').value = 0;
+    }
+}
     
 
     
