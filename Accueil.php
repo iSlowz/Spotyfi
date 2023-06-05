@@ -105,7 +105,6 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
             </svg>
           </button>
           <input type="range" id="range-test" value="0" max="100" step="0">
-          <progress id="musique-progerss-bar" max="0" value="0"></progress>
           <input class="volume-bar" type="range" min="0" max="10">
 
           

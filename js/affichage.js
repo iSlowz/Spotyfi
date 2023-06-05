@@ -292,11 +292,18 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             },)
         })
         $(".like-musique").click(function (event) {
-            let id = $(event.target).closest('.delete-musique').attr('value')
+            let id = $(event.target).closest('.like-musique').attr('value')
             console.log(id);
             ajaxRequest("POST", "request.php/like/" + id,()=>{
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
-            },"?user="+id_user)
+            },"user="+id_user)
+        })
+        $(".like-musique").click(function (event) {
+            let id = $(event.target).closest('.like-musique').attr('value')
+            console.log(id);
+            ajaxRequest("POST", "request.php/like/" + id,()=>{
+                ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
+            },"user="+id_user)
         })
 
 

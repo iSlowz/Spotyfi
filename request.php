@@ -92,6 +92,7 @@ switch ($requestRessource) {
         switch ($requestMethod){
             case 'POST':
                 $result = Array($id, $_POST["user"]);
+                $result = Musique::likeMusic($_POST["user"], $id);
         }
 }
 
