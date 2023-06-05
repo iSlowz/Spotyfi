@@ -1,4 +1,5 @@
 <?php
+require_once('Musique.php');
 class Playlist
 {
     public $id_playlist;
@@ -30,7 +31,21 @@ class Playlist
         }
     }
 
-    static function getMusiques($id_playlist){  //prend les musiques d'une playlist
+    static function getMusiques($id_playlist){  //recupère l'utilisateur de la playlist
+        try {
+            $conn = Database::connexionBD();
+
+            $statement = $conn->prepare("SELECT id_user FROM playlist 
+                                                    WHERE id_playlist=:id_playlist");
+            $statement->bindParam(':id_musique', $id_musique);
+            $statement->bindParam(':id_playlist', $id_playlist);
+            $statement->execute();
+            $id_user = $statement->fetch()[0];
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+
         try {
             $conn = Database::connexionBD();
             $result=Array();
@@ -39,6 +54,7 @@ class Playlist
                                                 FROM musique_playlist JOIN musique m using (id_musique)
                                                 JOIN artiste ar using (id_artiste)
                                                 JOIN album  al using (id_album)
+
                                                 WHERE id_playlist=:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
@@ -48,6 +64,15 @@ class Playlist
                 list($heures, $minutes, $secondes) = explode(":", $result["musiques"][$i]["duree_musique"]);
                 $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
                 $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
+
+                if (Musique::isFavori($id_user,$result["musiques"][$i]["id_musique"])){
+                    $result["musiques"][$i]["like"]=true;
+                }
+                else{
+                    $result["musiques"][$i]["like"]=false;
+                }
+
+
             }
             $statement = $conn->prepare("SELECT id_playlist, titre_playlist, date_creation_playlist FROM playlist WHERE id_playlist=:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
