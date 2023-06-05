@@ -306,7 +306,6 @@ function loadPlaylists(playlists) {
             '<tr>' +
             '<th scope="col">Titre</th>' +
             '<th scope="col">Durée</th>' +
-            '<th scope="col">Sup</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody>'
@@ -318,7 +317,7 @@ function loadPlaylists(playlists) {
                 '<tr>' +
                 '<td><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></td>' +
                 '<td>' + musique["duree_musique"] + '</td>' +
-                '<td> suppr </td>'
+
             '</tr>';
 
         })
