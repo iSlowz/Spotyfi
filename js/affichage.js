@@ -33,6 +33,8 @@ function showRecherches(recherches) {
           '<button class="bouton-recherche-spécifique" type="button" id="album-search" value="album">Album</button>' +
         '</div>' +
 
+        // onClick="color()" à faire pour que le bouton change de couleur
+
         '<div id="liste-musique"><hr class="trait-long"><h1 class="text-gauche">Musiques : </h1>' +
           '<div class="flex-card-musique">'
 
@@ -472,27 +474,28 @@ function showArtiste(artiste) {
         let html =
 
             '<div class="titre-text-artiste">' +
-            '<h1> Artiste : ' + artiste["pseudo_artiste"] + '</h1>' +
-            '<br>' +
-            '<div class="text-artiste">' +
-            '<p> Nom artiste : ' + artiste["nom_artiste"] + '</p>' +
-            '<p> Prenom artiste : ' + artiste["prenom_artiste"] + '</p>' +
-            '<p> Type de chant : ' + artiste["type_artiste"] + '</p>' +
-            '<p> Style : ' + artiste["nom_style"] + '</p></div>' +
-            '</div>' +
-            '<hr class="trait">'
+              '<h1> Artiste : ' + artiste["pseudo_artiste"] + '</h1>' +
+              '<br>' +
+                '<div class="text-artiste">' +
+                  '<p> Nom : ' + artiste["nom_artiste"] + '</p>' +
+                  '<p> Prenom : ' + artiste["prenom_artiste"] + '</p>' +
+                  '<hr class="petit-trait">' +
+                  '<p> Type de chant : ' + artiste["type_artiste"] + '</p>' +
+                  '<p> Style : ' + artiste["nom_style"] + '</p></div>' +
+                '</div>' +
+                '<hr class="trait">'
 
         html+='<div id="liste-album"><h1>Albums : </h1>' +
             '<div class="flex-card-musique">'
         artiste["albums"].forEach(function (album){
             html +=
-                '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
-                '<div class="card-body album">' +
-                '<div class="id_musique" style="display: none">' + album["id_album"] + '</div>' +
-                '<h5 class="card-title">' + album["titre_album"] + '</h5>' +
-                '<p class="card-text">'+album["date_creation_album"]+'</p>' +
-                '</div>' +
-                '</div>'
+                '<div class="card page-album-card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+                  '<div class="card-body album">' +
+                    '<div class="id_musique" style="display: none">' + album["id_album"] + '</div>' +
+                      '<h5 class="card-title">' + album["titre_album"] + '</h5>' +
+                      '<p class="card-text">'+album["date_creation_album"]+'</p>' +
+                    '</div>' +
+                  '</div>'
         });
 
         html+='</div></div>';
@@ -614,7 +617,9 @@ function updateMusiqueBar(max){
 }
 
 
+    let bouton = document.getElementsByClassName('bouton-recherche-spécifique');
+    document.bouton.style.backgroundColor = black;
 
-
-    
+}
+*/  
     
