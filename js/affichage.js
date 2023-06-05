@@ -262,7 +262,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
 /*--------------------------------------------------------------------------------------------------------------*/
 
 
-    function showMusique(musique) {
+function showMusique(musique) {
         console.log(musique)
         console.log(musique["titre_musique"])
         $(".flex-page").html(
@@ -289,7 +289,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         })
 
 
-    }
+}
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -297,7 +297,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
 /*--------------------------------------------------------------------------------------------------------------*/
 
 
-    function showAlbum(album) {
+function showAlbum(album) {
         console.log(album)
         let html =
 
@@ -345,13 +345,13 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
         })
 
-    }
+}
 
-    $("#id-bouton-user").click(function (event) {
+$("#id-bouton-user").click(function (event) {
         ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
-    })
+})
 
-    function loadProfil(profil) {
+function loadProfil(profil) {
         console.log(profil)
         $(".flex-page").html(
             
@@ -442,9 +442,9 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         })
 
 
-    }
+}
 
-    function showArtiste(artiste) {
+function showArtiste(artiste) {
         console.log(artiste)
         console.log(artiste["pseudo_artiste"])
         let html =
@@ -522,7 +522,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             ajaxRequest("GET", "request.php/album/" + id, showAlbum)
         })
 
-    }
+}
 
     
 function lancer(){
