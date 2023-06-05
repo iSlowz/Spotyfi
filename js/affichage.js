@@ -486,10 +486,10 @@ function showArtiste(artiste) {
                 '<hr class="trait">'
 
         html+='<div id="liste-album"><h1>Albums : </h1>' +
-            '<div class="flex-card-musique">'
+            '<div class="flex-card-musique page-album-card">'
         artiste["albums"].forEach(function (album){
             html +=
-                '<div class="card page-album-card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+                '<div class="card " id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
                   '<div class="card-body album">' +
                     '<div class="id_musique" style="display: none">' + album["id_album"] + '</div>' +
                       '<h5 class="card-title">' + album["titre_album"] + '</h5>' +

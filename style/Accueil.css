@@ -343,16 +343,23 @@ html, body {
 
 }
 
+.page-album-card{
+
+    margin-left: 4%;
+
+}
+
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie des cards derniers morceaux sur la page d'accueil */
 /*--------------------------------------------------------------------------------------------------------------*/
+
 
 .flex-card-musique {
     flex-wrap: nowrap;
     overflow-x: auto;
     display: flex;
     justify-content: flex-start;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
     width: 100%;
 }
 
