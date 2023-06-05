@@ -337,6 +337,30 @@ function showMusique(musique) {
             '<p> Son artiste : <button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></p>' +
             '<p> Style : ' + musique["nom_style"] + '</p>' +
             '</div>')
+        if (musique["like"]===false) {
+            $(".flex-page").append('<button type="button" class="like-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">' +
+                '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>' +
+                '</svg></button>')
+            $(".like-musique").click(function (event) {
+                let id = $(event.target).closest('.like-musique').attr('value')
+                console.log(id);
+                ajaxRequest("POST", "request.php/like/" + id,()=>{
+                    ajaxRequest("GET", "request.php/musique/"+ id + "?id_user="+id_user, showMusique)
+                },"user="+id_user)
+            })
+        }
+        else{
+            $(".flex-page").append('<button type="button" class="unlike-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">'+
+                '<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>'+
+                '</svg></button>')
+            $(".unlike-musique").click(function (event) {
+                let id = $(event.target).closest('.unlike-musique').attr('value')
+                console.log(id);
+                ajaxRequest("DELETE", "request.php/like/" + id + "?user="+id_user,()=>{
+                    ajaxRequest("GET", "request.php/musique/"+ id + "?id_user="+id_user, showMusique)
+                },)
+            })
+        }
 
         $(".album-bouton").click(function (event) {
             let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album
@@ -538,8 +562,6 @@ function showArtiste(artiste) {
 
         html+='</div></div>';
 
-
-
         html+=
             '<hr class="trait">'+
             '<div class="page-table" id="titre-table">' +
@@ -549,7 +571,6 @@ function showArtiste(artiste) {
             '<th scope="col">Titre</th>' +
             '<th scope="col">Album</th>' +
             '<th scope="col">Durée</th>' +
-            '<th scope="col">Suppr</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody>'
@@ -559,7 +580,6 @@ function showArtiste(artiste) {
                 '<th scope="row"><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></th>' +
                 '<td><button type="button" class="album-bouton" value="' + musique["id_album"] + '">' + musique["titre_album"] + '</button></td>' +
                 '<td> ' + musique["duree_musique"] + '</td>' +
-                '<td> suppr </td>' +
                 '</tr>'
 
         })
@@ -667,5 +687,5 @@ function updateMusiqueBar(max){
     console.log(musiqueBar.value);
 }
 
-setInterval(setVolume, 500);
+setInterval(setVolume, 100);
 
