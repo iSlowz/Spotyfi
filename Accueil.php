@@ -33,19 +33,16 @@ $id_user = Utilisateur::Connexion()
 <body>
 <?php
 echo "<div id='id_user' style='display: none'>".$id_user."</div>";
-
 ?>
-  <div class="disposition">
-    
+
+  <div class="disposition">   
     <div class="Navbar-Accueil">
       <label id="Accueil">Spotyfi++</label>
     </div>
-
     <div class="Navbar-Recherche">
       <div class="flex-recherche">
         <form class="d-flex" role="search">
           <input class="form-control me-2" id="bar-recherche" type="search" placeholder="Recherche" aria-label="Search">
-
           <button class="btn btn-outline-success" type="submit" id="bouton-recherche">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -63,7 +60,6 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
         </button>
       </div>
     </div>
-
     <div class="Bar-Playlist">
       <div class="flex-playlist">
         <label id="Playlist">Playlists</label>
@@ -72,7 +68,6 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
         <button class="btn" id="id-bouton-créer" type="submit">Créer +</button>
       </div>
     </div>
-
     <div class="Page-Central">
       <div class="rectangle-page">
         <div class="flex-page">
@@ -81,41 +76,44 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
     </div>
 
     <div class="Bar-Footer">
-      <div class="musique-info">
-
-      </div>
-
-      <div class="musique-player">
-        <audio id="player">
-          <source src="musique/epic-power.mp3">
-        </audio>
-
-        <div id="musique-player"> 
-          <button id="btn-lancer" onClick="playPause()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
-            </svg>
-          </button> 
-          <button id="btn-vol-plus" onClick="volume_plus()">Vol +</button> 
-          <button id="btn-vol-moins" onClick="volume_moins()">Vol -</button>
-          <button id="btn-boucle" onClick="boucle()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-repeat-1" viewBox="0 0 16 16">
-              <path d="M11 4v1.466a.25.25 0 0 0 .41.192l2.36-1.966a.25.25 0 0 0 0-.384l-2.36-1.966a.25.25 0 0 0-.41.192V3H5a5 5 0 0 0-4.48 7.223.5.5 0 0 0 .896-.446A4 4 0 0 1 5 4h6Zm4.48 1.777a.5.5 0 0 0-.896.446A4 4 0 0 1 11 12H5.001v-1.466a.25.25 0 0 0-.41-.192l-2.36 1.966a.25.25 0 0 0 0 .384l2.36 1.966a.25.25 0 0 0 .41-.192V13h6a5 5 0 0 0 4.48-7.223Z"/>
-            </svg>
-          </button>
-          <input type="range" id="range-test" value="0" max="100" step="0">
-          <input class="volume-bar" type="range" min="0" max="10">
-
-          
+      <div class="flex-footer">
+        <div class="musique-info">
+          <button id="btn"">Musique info</button>
         </div>
-        <div id='player_button'>
-          <button id="like" onClick="pause()">like</button> 
-          <button id="ajouter" onClick="pause()">ajouter</button> 
+        <div class="musique-player">         
+          <audio id="player">
+            <source src="musique/epic-power.mp3">
+          </audio>
+          <div class="flex-footer-bouton">
+            <div id="musique-player"> 
+              <button id="btn-skip-gauche">Skip gauche</button>
+              <button id="btn-lancer" onClick="playPause()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                </svg>
+              </button> 
+              <button id="btn-skip-gauche">Skip droite</button>
+              <button id="btn-vol-plus" onClick="volume_plus()">Vol +</button> 
+              <button id="btn-vol-moins" onClick="volume_moins()">Vol -</button>
+              <button id="btn-boucle" onClick="boucle()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-repeat-1" viewBox="0 0 16 16">
+                  <path d="M11 4v1.466a.25.25 0 0 0 .41.192l2.36-1.966a.25.25 0 0 0 0-.384l-2.36-1.966a.25.25 0 0 0-.41.192V3H5a5 5 0 0 0-4.48 7.223.5.5 0 0 0 .896-.446A4 4 0 0 1 5 4h6Zm4.48 1.777a.5.5 0 0 0-.896.446A4 4 0 0 1 11 12H5.001v-1.466a.25.25 0 0 0-.41-.192l-2.36 1.966a.25.25 0 0 0 0 .384l2.36 1.966a.25.25 0 0 0 .41-.192V13h6a5 5 0 0 0 4.48-7.223Z"/>
+                </svg>
+              </button>
+              <div id='player_button'>
+                <button id="like" onClick="pause()">like</button> 
+                <button id="ajouter" onClick="pause()">ajouter</button> 
+              </div>
+            </div>
+            <input type="range" id="range-test" value="0" max="100" step="0">
+            <input class="volume-bar" type="range" min="0" max="10">
+          </div>
         </div>
       </div>
-    </div>
+    </div>  
   </div>
+
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="js/Ajax.js"></script>
   <script src="js/affichage.js"></script>

@@ -554,6 +554,20 @@ html, body {
 
 }
 
+.flex-footer{
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.flex-footer-bouton{
+
+    display: flex;
+    flex-direction: column;
+
+}
+
 audio::-webkit-media-controls-panel {
     background-color: rgb(2, 97, 103);
 }
@@ -575,6 +589,10 @@ audio::-webkit-media-controls-mute-button {
     text-align: left !important;
     padding-left: 2%;
 }
+
+
+
+
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
