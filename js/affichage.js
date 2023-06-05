@@ -303,7 +303,6 @@ function showAlbum(album) {
             '<tr>' +
             '<th scope="col">Titre</th>' +
             '<th scope="col">Durée</th>' +
-            '<th scope="col">Sup</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody>'
@@ -315,7 +314,7 @@ function showAlbum(album) {
                 '<tr>' +
                 '<td><button type="button" class="musique-bouton" value="' + musique["id_musique"] + '">' + musique["titre_musique"] + '</button></td>' +
                 '<td>' + musique["duree_musique"] + '</td>' +
-                '<td> suppr </td>'
+
             '</tr>';
 
         })
@@ -495,7 +494,10 @@ function showArtiste(artiste) {
 function lancer(){
         console.log(getDuration());
         console.log(getCurrentTime());
-        myInterval = setInterval(drawMusiqueProgressBar, 1000)
+        document.getElementById('musique-progerss-bar').max += getDuration();
+
+        myInterval = setInterval(updateProgressBar, 1000);
+
         document.getElementById('player').play(); 
     
 }
@@ -518,11 +520,11 @@ function getCurrentTime(){
         let x = document.getElementById('player');
         x.play();
         return parseInt(x.currentTime);
-}
-function drawMusiqueProgressBar(){
-        
-        document.getElementById('musique-progerss-bar').innerHTML ='<progress id="progerss-bar" max="'+ getDuration() +'" value="'+ getCurrentTime() +'"></progress>';
-}
+    }
+    function updateProgressBar(){
+
+        document.getElementById('musique-progerss-bar').value += 1;
+    }
     
 
     

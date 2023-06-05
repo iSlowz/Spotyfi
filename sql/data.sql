@@ -63,5 +63,3 @@ INSERT INTO public.musique_playlist(id_musique, id_playlist, date_ajout_musique_
 INSERT INTO public.musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) VALUES((SELECT id_musique FROM public.musique WHERE titre_musique = 'music8'), (SELECT id_playlist FROM public.playlist WHERE titre_playlist = 'Historique' AND id_user = (SELECT id_user FROM public.users WHERE mail_user = 'aa@isen.fr')), NOW());
 
 INSERT INTO playlist(titre_playlist, date_creation_playlist, id_user) VALUES ('Favoris',NOW(), 5);
-
-SELECT id_user FROM users WHERE mail_user = :mail and id_user!=:id
