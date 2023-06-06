@@ -70,7 +70,7 @@ $result=Utilisateur::sign_up();
                     <input type="date" class="form-control" id="userInput" aria-describedby="userInput" name="naissance">
                       <?php
                       if (isset($result["naissance"])){
-                          echo "<p id='erreur'>Veuillez rentrer votre date de naissance</p>";
+                          echo "<p id='erreur'>Veuillez rentrer une date de naissance valide</p>";
                       }
                       ?>
                   </div>
