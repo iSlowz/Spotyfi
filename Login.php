@@ -26,16 +26,6 @@
 <?php
 require_once ('Classes/Utilisateur.php');
 $result=Utilisateur::Connexion();
-//echo $_SESSION["user"];
-/*
-$dbh = Database::connexionBD();
-$id_playlist=1;
-$statement = $dbh->prepare("SELECT * FROM musique_playlist WHERE id_playlist=:id_playlist");
-$statement->bindParam(':id_playlist', $id_playlist);
-$statement->execute();
-$a=$statement->fetchAll(PDO::FETCH_ASSOC);
-print_r($a);
-*/
 ?>
 
   <div class="form">
