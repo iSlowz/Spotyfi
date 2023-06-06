@@ -21,6 +21,8 @@ switch ($requestRessource) {
             case "GET":
                 $result=Playlist::getHistorique($id);
                 break;
+            case "POST":
+                $result=Musique::addInHistorique($id, $_POST["id_musique"]);
         }
         break;
 
@@ -118,7 +120,7 @@ switch ($requestRessource) {
         break;
 }
 
-if (!empty($result) or $requestRessource=='recherche') {
+if (!empty($result) or $requestRessource=='recherche' or $requestRessource=='historique') {
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-control: no-store, no-cache, must-revalidate');
     header('Pragma: no-cache');

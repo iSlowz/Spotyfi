@@ -300,17 +300,21 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
 
         html += '</tbody>' +
             '</table>' +
-            '</div>' +
-            '<div class="flex-bouton-supprimer-ajouter">'+
-              '<div class="bouton-supprimer-style">' +
-                '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
-              '</div>' +
-              '<div class="bouton-ajouter-style">' +
-                '<button type="button" class="button-add">Ajouter musiques</button>' +
-              '</div>' +
-            '</div>' +
-          '</div>';
-    
+            '</div>'
+    if (playlist["titre_playlist"]!=="Favoris") {
+        html +=
+        '<div class="flex-bouton-supprimer-ajouter">'+
+          '<div class="bouton-supprimer-style">' +
+            '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
+          '</div>' +
+          '<div class="bouton-ajouter-style">' +
+            '<button type="button" class="button-add">Ajouter musiques</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+
         $(".flex-page").html(html);
 
         $(".musique-bouton").click(function (event) {

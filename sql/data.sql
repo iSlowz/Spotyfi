@@ -67,4 +67,3 @@ INSERT INTO playlist(titre_playlist, date_creation_playlist, id_user) VALUES ('F
 INSERT INTO public.musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) VALUES(10, 5, NOW());
 
 
-
