@@ -787,6 +787,8 @@ audio::-webkit-media-controls-mute-button {
     background-color : rgb(25, 157, 166);
     color: white;
 
+    font-size: 125%;
+
     border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 
     margin-top: 2%;
@@ -798,6 +800,25 @@ audio::-webkit-media-controls-mute-button {
     padding-right: 1%;
 
 }
+
+  
+.card-créer-playlist{
+   
+    margin-top: 2%;
+
+}
+
+.text-bar-style{
+
+    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+
+    width: 30%;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -893,5 +914,5 @@ audio::-webkit-media-controls-mute-button {
 
 
 }
-  
+
 

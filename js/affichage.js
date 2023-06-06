@@ -24,16 +24,21 @@ $('#bar-recherche').on('input',function (event){
 $('#id-bouton-creer').click(function() {
     console.log("creer");
     $('.flex-page').html(
-        
-        '<div class="card" id="id-card" style="width: 70%;">' +
-        '<div class="card-body">' +
-        '<h5 class="card-title">Créer une Playlist</h5>' +
-        '<form action="#" method="post" id="form-playlist">' +
-        '<label for="userInput" class="titre-nouvelle-playlist">Titre de la Playlist : </label>' +
-        '<input type="text" class="form-control" id="titre" aria-describedby="userInput" name="titre">' +
-        '<button class="bouton-valid-annule" id="valider" type="submit">Valider</button>' +
-        '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button>' +
-        '</form></div>' +
+            
+          '<div class="card-créer-playlist">' +
+            '<h1 class="card-title-créer-playlist">' +
+              'Créer une Playlist' +
+            '</h1>' +
+          '</div>' +
+          '<hr class="trait-long">' +
+          '<form action="#" method="post" id="form-playlist">' +
+            '<br>'+
+            '<h4 for="userInput" class="titre-nouvelle-playlist">Titre de la Playlist : </h4>' +
+            '<input type="text" class="text-bar-style" id="titre" aria-describedby="userInput" name="titre">' +
+            '<br>'+
+            '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button>' +
+            '<button class="bouton-valid-annule" id="valider" type="submit">Valider</button>' +
+          '</form>' + 
         '</div>');
 
     $('#annuler').click(function (event) {
