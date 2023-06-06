@@ -405,6 +405,8 @@ function showMusique(musique) {
             '</div>'
         
             )
+
+        $(".flex-page").append('<div class="flex-boutons-musique"')
         
         if (musique["like"]===false) {
             $(".flex-page").append(
@@ -463,6 +465,8 @@ function showMusique(musique) {
             '</button>' 
 
         )
+
+        $(".flex-page").append('</div>')
 
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
@@ -591,13 +595,13 @@ function loadProfil(profil) {
         $(".flex-page").html(
             
             '<div class="flex-info-user">' +
-              '<h1>Nom : </h1>' + ' '+
+              '<h1>Nom&ensp;:&ensp;</h1>' + ' '+
               '<div id="nom_user">' + 
                 '<h1>' + profil["nom_user"] + '</h1>'  +
               '</div>' +
             '</div>' + 
             '<div class="flex-info-user">' +
-              '<h1>Prenom : </h1>' + ' '+
+              '<h1>Prenom&ensp;:&ensp;</h1>' + ' '+
               '<div id="prenom_user">' + 
                 '<h1>' +profil["prenom_user"] + '</h1>' +
               '</div>'+
@@ -606,16 +610,16 @@ function loadProfil(profil) {
             '<hr class="trait">' +
             
             '<div class="flex-info-user">' +
-              '<p> Date de naissance : </p>' +
+              '<p>Date de naissance&ensp;:&ensp;</p>' +
               '<div id="date_naissance">' +
                 '<p>' + profil["date_naissance_user"] + '</p>' +
               '</div>' +
             '</div>' +
 
-            '<p> Age : ' + profil["age"] + '</p>' +
+            '<p> Age&ensp;:&ensp;' + profil["age"] + '</p>' +
 
             '<div class="flex-info-user">' +
-              '<p>Courriel : </p>' +
+              '<p>Courriel&ensp;:&ensp;</p>' +
               '<div id="mail">'+
                 '<p>' + profil["mail_user"] + '</p>' + 
               '</div>' +
