@@ -660,6 +660,17 @@ html, body {
 
 }
 
+.musique-info{
+
+    background-color: red;
+    width: auto;
+    height: auto;
+}
+#photo-album{
+    background-color: yellow;
+    max-height: 50px;
+}
+
 .flex-footer-bar-boucle{
 
     display: flex;
