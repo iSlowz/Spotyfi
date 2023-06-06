@@ -795,4 +795,4 @@ volume_bar.value = document.getElementById('player').volume*10;
 
 console.log(volume_bar.value);
 
-setInterval(setVolume, 100);Z
+setInterval(setVolume, 100);
