@@ -627,6 +627,7 @@ html, body {
 .Bar-Footer{
     
     display: grid;
+    grid-template-rows: 100%;
 
     grid-column: 2 / 6;
     grid-row: 3;
@@ -668,14 +669,17 @@ html, body {
 }
 
 .musique-info{
+    grid-row: 1;
 
-    background-color: red;
+    display: flex;
+    flex-direction: row;
+
     width: auto;
-    height: auto;
+    height: 100%;
 }
-#photo-album{
-    background-color: yellow;
-    max-height: 50px;
+img {
+    width: auto;  
+    height: 100%;  
 }
 
 .flex-footer-bar-boucle{
