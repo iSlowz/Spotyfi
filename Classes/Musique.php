@@ -180,6 +180,9 @@ class Musique
             error_log('Connection error: '.$exception->getMessage());
             return false;
         }
+
+        Playlist::deleteMusique($id_musique, $id_playlist);
+
         try {
             $conn = Database::connexionBD();
             $statement = $conn->prepare("INSERT INTO musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) 

@@ -2,10 +2,10 @@
 let id_user = $("#id-bouton-user").val()
 
 //Charge l'historique et la liste de playlist
-ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)//historique sert de page d'accueil
 ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
 
-
+//Si submit de la barre de recherche, lance la requete ajax pour la recherche si il y a une valeur, sinon recharge l'historique
 $('.flex-recherche').submit(function (event){
     event.preventDefault()
     console.log($('#bar-recherche').val())
@@ -16,17 +16,20 @@ $('.flex-recherche').submit(function (event){
         ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
     }
 })
+
+//Si l'utilisateur écrit dans la barre, lance la requete ajax à chaque changement, remet à l'accueil si barre vide
 $('#bar-recherche').on('input',function (event){
     console.log($('#bar-recherche').val())
     if ($('#bar-recherche').val()!="") {
-        ajaxRequest("GET", "request.php/recherche/", showRecherches, 'recherche=' + $('#bar-recherche').val())
+        ajaxRequest("GET", "request.php/recherche/", showRecherches, 'recherche=' + $('#bar-recherche').val())  //passe en POST la recherche
     }
     else{
         ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
     }
 })
+
+//Si click sur bouton Créer, charge dans flex-page la page de création d'une playlist
 $('#id-bouton-creer').click(function() {
-    console.log("creer");
     $('.flex-page').html(
             
           '<div class="card-créer-playlist">' +
@@ -46,25 +49,27 @@ $('#id-bouton-creer').click(function() {
         '</div>');
 
     $('#annuler').click(function (event) {
+        //S'il annule la création, retourne à l'accueil
         event.preventDefault()
         ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
     })
     $('#form-playlist').submit(function (event) {
+        //s'il crée sa playlist
         event.preventDefault()
         console.log($('#titre').val())
-        ajaxRequest("POST", "request.php/playlist_list/" + id_user, () => {
-            ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
-            ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-        }, 'titre=' + $("#titre").val())
+        ajaxRequest("POST", "request.php/playlist_list/" + id_user, () => { //crée la playlist
+            ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists) //raffiche la liste de playlist
+            ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique) //remet à l'accueil
+        }, 'titre=' + $("#titre").val())   //passe en POST le titre
 
     })
 });
-$('#btn-creer-playlist').click(function() {
-    var nomPlaylist = $('#nom-playlist').val();
-    // Traitez le nom de la playlist ici
-    $('#modal-creer-playlist').modal('hide');
-});
 
+/**
+ * Affiche le résultat d'une recherche
+ * @param recherches résulats de la recherche en fonction du texte
+ * recherches["musiques"] pour les musiques, recherches["artistes"] pour les artistes, recherches["albums"] pour les albums
+ */
 function showRecherches(recherches) {
     console.log(recherches);
     let html=
@@ -76,15 +81,15 @@ function showRecherches(recherches) {
           '<button class="bouton-recherche-spécifique" type="button" id="album-search" value="album">Album</button>' +
         '</div>' +
 
-        // onClick="color()" à faire pour que le bouton change de couleur
-
         '<div id="liste-musique"><hr class="trait-long"><h1 class="text-gauche">Musiques : </h1>' +
           '<div class="flex-card-musique">'
 
+    //Ajoute au html la liste des musiques
     recherches["musiques"].forEach(function (musique) {
         html +=
-        '<div class="card bouton-musique-select" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+        '<div class="card bouton-musique-select" id="id-card" style="width: 17%;">' +
           '<div class="card-body musique">' +
+            //id de la musique caché dans la card (car card n'a pas de value)
             '<div class="id_musique" style="display: none">' + musique["id_musique"] + '</div>' +
               '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
               '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+musique["id_artiste"] +'">' + musique["pseudo_artiste"] + '</button></p>' +
@@ -92,15 +97,17 @@ function showRecherches(recherches) {
             '</div>' +
           '</div>'
     });
-
+    //Ajoute au html la liste des albums
     $(".flex-page").html(html + '</div></div>');
 
     html='<div id="liste-album"><hr class="trait-long"><h1 class="text-gauche">Albums : </h1>' +
         '<div class="flex-card-musique">'
     recherches["albums"].forEach(function (album){
         html +=
-            '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+            '<div class="card" id="id-card" style="width: 17%;">' +
             '<div class="card-body album">' +
+
+            //id de l'album caché dans la card (car card n'a pas de value)
             '<div class="id_musique" style="display: none">' + album["id_album"] + '</div>' +
             '<h5 class="card-title">' + album["titre_album"] + '</h5>' +
             '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+album["id_artiste"] +'">' + album["pseudo_artiste"] + '</button></p>' +
@@ -112,11 +119,14 @@ function showRecherches(recherches) {
 
     html='<div id="liste-artiste"><hr class="trait-long"><h1 class="text-gauche">Artistes : </h1>' +
         '<div class="flex-card-musique">'
+    //Ajoute au html la liste des artistes
     recherches["artistes"].forEach(function (artiste) {
         console.log(artiste)
         html +=
-            '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+            '<div class="card" id="id-card" style="width: 17%;">' +
             '<div class="card-body artiste">' +
+
+            //id de l'artiste caché dans la card (car card n'a pas de value)
             '<div class="id_musique" style="display: none">' + artiste["id_artiste"] + '</div>' +
             '<h5 class="card-title">' + artiste["pseudo_artiste"] + '</h5>' +
             '<p class="card-text">' + artiste["nom_style"] + '</button></p>' +
@@ -125,39 +135,43 @@ function showRecherches(recherches) {
     });
     $(".flex-page").append(html + '</div></div>');
 
-
-    $(".musique").click(function (event) {
-        let id = $(event.target).closest(".card").find(".id_musique").text();
-        console.log(id)
-        ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
-    })
-    $(".album").click(function (event) {
-        let id = $(event.target).closest(".card").find(".id_musique").text();
-        console.log(id)
-        ajaxRequest("GET", "request.php/album/" + id, showAlbum)
-    })
-    $(".artiste").click(function (event) {
-        let id = $(event.target).closest(".card").find(".id_musique").text();
-        console.log(id)
-        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste)
-    })
     $(".artiste-bouton").click(function (event){    //à laisser ou non
         let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
         console.log(id);
-        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste)
+        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste)  //Vas récupérer les informations de l'artiste et les afficher
 
     })
-    $("#musique-search").click(function (){
+
+    $(".musique").click(function (event) { //Si clique sur une musique, affiche les détails de la musique
+        let id = $(event.target).closest(".card").find(".id_musique").text();   //récupère id caché dans la card
+        console.log(id)
+        ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique) //Vas récupérer information de musique et les afficher
+        //id_user en POST pour savoir si la musique est dans ses favories (dans le résultat musique[like] = true si like ou false si non)
+
+    })
+    $(".album").click(function (event) {    //Si clique sur une album, affiche les détails de la musique
+        let id = $(event.target).closest(".card").find(".id_musique").text();
+        console.log(id)
+        ajaxRequest("GET", "request.php/album/" + id, showAlbum) //Vas récupérer information de l'album et les afficher
+    })
+    $(".artiste").click(function (event) {
+        let id = $(event.target).closest(".card").find(".id_musique").text(); //Vas récupérer information de l'artiste et les afficher
+        console.log(id)
+        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste) //Vas récupérer les informations de l'artiste et les afficher
+    })
+
+
+    $("#musique-search").click(function (){//Si clique sur bouton musique, n'affiche que les musiques
         $("#liste-musique").show()
         $("#liste-album").hide()
         $("#liste-artiste").hide()
     })
-    $("#album-search").click(function (){
+    $("#album-search").click(function (){//Si clique sur bouton albums, n'affiche que les albums
         $("#liste-musique").hide()
         $("#liste-album").show()
         $("#liste-artiste").hide()
     })
-    $("#artiste-search").click(function (){
+    $("#artiste-search").click(function (){//Si clique sur bouton artiste, n'affiche que les artistes
         $("#liste-musique").hide()
         $("#liste-album").hide()
         $("#liste-artiste").show()
@@ -165,21 +179,25 @@ function showRecherches(recherches) {
      
 }
 
+/**
+ * Affiche l'historique de l'utilisateur, sert aussi de page d'accueil
+ * @param musiques les 10 musiques de l'historiques
+ */
 function loadHistorique(musiques) {
     console.log(musiques)
     $(".flex-page").html('')
-    let text = '<div class="titre-page">' +
+    let html = '<div class="titre-page">' +     //Titre de la div
         '            <label>Derniers morceaux écoutés</label>' +
         '          </div>' +
         '          <div class="barre-page">' +
         '            <hr>' +
         '          </div>' +
         '          <div class="flex-card" id="dernier-morceaux-page">'
-    musiques.forEach(function (musique) {
+    musiques.forEach(function (musique) {   //ajoute chaque musique à l'html
         console.log(musique)
 
-        text +=
-            '<div class="card" id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+        html +=
+            '<div class="card" id="id-card" style="width: 17%;">' +
             '<div class="card-body">' +
             '<div class="id_musique" style="display: none">' + musique["id_musique"] + '</div>' +
             '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
@@ -188,35 +206,47 @@ function loadHistorique(musiques) {
             '</div>'
 
     })
-    $(".flex-page").append(text + '</div>')
+    $(".flex-page").append(html + '</div>')
+
+
     $(".card-body").click(function (event) {
+        //Si on clique sur la carte d'une musique, cherche l'id_musique la plus proche de la card (dedans) et recupere son texte
         let id = $(event.target).closest(".card").find(".id_musique").text();
         console.log(id)
-        ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
+        ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique) //Vas récupérer information de musique et les afficher
+        //id_user en POST pour savoir si la musique est dans ses favories (dans le résultat musique[like] = true si like ou false si non)
+        //
     })
     $(".artiste-bouton").click(function (event){    //à laisser ou non
         let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
         console.log(id);
-        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste)
+        ajaxRequest("GET", "request.php/artiste/"+id, showArtiste) //Vas récupérer les informations de l'artiste et les afficher
 
     })
 }
 
+/**
+ * Affiche la liste des playlists
+ * @param playlists les playlists
+ * playlists a comme clé favoris et playlists (les autres playlists)
+ */
 function loadPlaylists(playlists) {
     console.log(playlists)
     $(".flex-playlist").html('<label id="Playlist">Playlists</label>'+
+        //Affiche la playlist like en premier
     '<button class="playlist-bouton" value="' + playlists["favoris"]["id_playlist"] + '" type="submit">' + playlists["favoris"]["titre_playlist"] + ' <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n' +
         '            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n' +
         '          </svg></button>')
-    playlists["playlists"].forEach(function (playlist) {
+    playlists["playlists"].forEach(function (playlist) {    //affiche toutes les autres platlists
         console.log(playlist)
         $(".flex-playlist").append('<button class="playlist-bouton" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>')
     })
 
+    //si clique sur une playlist
     $(".playlist-bouton").click(function (event) {
-            let id = $(event.target).closest('.playlist-bouton').attr('value')
+            let id = $(event.target).closest('.playlist-bouton').attr('value')  //recupère id de la playlist
             console.log(id)
-            ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
+            ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist) //Vas récupérer informations de la playlist et l'afficher
         }
     )
 
@@ -227,8 +257,11 @@ function loadPlaylists(playlists) {
 /* Permet d'afficher ce que contient une playlist */
 /*--------------------------------------------------------------------------------------------------------------*/
 
-
-function showPlaylist(playlist) {    //affiche les musiques d'une playlist
+/**
+ * Affiche les informations d'une playlist et les musiques qu'elle contient
+ * @param playlist la playlist
+ */
+function showPlaylist(playlist) {
         console.log(playlist);
 
         let html =
@@ -252,8 +285,8 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                       '<th scope="col">Album</th>' +
                       '<th scope="col">Date dajout</th>' +
                       '<th scope="col">Durée</th>' +
-                      '<th scope="col">Aimer</th>'
-        if (playlist["titre_playlist"]!=="Favoris") {
+                      '<th scope="col"></th>'
+        if (playlist["titre_playlist"]!=="Favoris") {   //Pas de colonne supprimer pour la playlist car on a déjà la colonne de boutons supprimer
             html +=
                 '<th>Supprimer</th>'
         }
@@ -262,7 +295,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                   '</thead>' +
                   '<tbody>';
 
-        playlist["musiques"].forEach(function (musique) {
+        playlist["musiques"].forEach(function (musique) {   //Ajoute chaque musique dans le tableau
             console.log(musique)
             html +=
                 '<tr id="tableau-playlist">' +
@@ -293,18 +326,19 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                   '<td>'
                     + musique["duree_musique"] +
                   '</td>'
-            if (musique["like"]===false) {
+            if (musique["like"]===false) {  //Si la musique n'est pas aimée, bouton coeur vide + id qui sera utilisée sur l'évènement pour l'aimer
                 html+='<td><button type="button" class="like-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">' +
                     '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>' +
                     '</svg></button></td>'
             }
-            else{
+            else{ //Si la musique n'est pas aimée, bouton coeur plein + id qui sera utilisée sur l'évènement pour ne plus l'aimer
                 html+='<td><button type="button" class="unlike-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">'+
                     '<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>'+
                     '</svg></button></td>'
             }
 
-            if (playlist["titre_playlist"]!=="Favoris") {
+            if (playlist["titre_playlist"]!=="Favoris") {   //Si on est dans la playlist Favoris, pas de bouton supprimer car
+                                                            //il y a déjà le bouton coeur pour ça
                 html+='<td><button type="button" class="delete-musique" value="' + musique["id_musique"] + '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">' +
                     '  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>' +
                     '</svg></button></td>'
@@ -314,46 +348,77 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         html += '</tbody>' +
             '</table>' +
             '</div>'
-    if (playlist["titre_playlist"]!=="Favoris") {
+    if (playlist["titre_playlist"]!=="Favoris") { //Pas de possibilité de supprimer la playlist Favoris de l'uitilisateur
         html +=
         '<div class="flex-bouton-supprimer-ajouter">'+
           '<div class="bouton-supprimer-style">' +
             '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
-          '</div>' +
+            '<button type="button" class="button-modif" value="' + playlist["id_playlist"] + '">Modifier nom playlist</button>' +
+            '</div>' +
         '</div>';
     }
 
 
         $(".flex-page").html(html);
 
-        $(".play-musique").click(function (event) {
+        $(".play-musique").click(function (event) { //Si clique dessus, lance playlist
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
             ajaxRequest("POST", "request.php/historique/" + id,()=>{},"id_user="+id_user)
         })
+
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
             console.log(id)
             ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
         })
+
         $(".album-bouton").click(function (event) {
             let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album
             console.log(id)
-            ajaxRequest("GET", "request.php/album/" + id, showAlbum)
+            ajaxRequest("GET", "request.php/album/" + id, showAlbum) //Vas récupérer information de l'album et les afficher
         })
 
         $(".artiste-bouton").click(function (event) {
             let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
             console.log(id);
-            ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
+            ajaxRequest("GET", "request.php/artiste/" + id, showArtiste) //Vas récupérer les informations de l'artiste et les afficher
         })
-        $(".delete-musique").click(function (event){
-            console.log(playlist["id_playlist"])
-            let id = $(event.target).closest('.delete-musique').attr('value')
-            ajaxRequest("DELETE", "request.php/musique/" + id+"."+playlist["id_playlist"], ()=>{
+
+        $(".delete-musique").click(function (event){ //Delete musique
+            let id = $(event.target).closest('.delete-musique').attr('value') //
+            ajaxRequest("DELETE", "request.php/musique/" + id+"?playlist="+playlist["id_playlist"], ()=>{
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
             },)
         })
+        $(".button-modif").click(function (event){
+            $(".flex-page").html(html +
+                '<label for="userInput" class="form-label-playlist">Nouveau titre : </label>' +
+                '<input type="text" class="form-control" id="nouveau_titre" aria-describedby="userInput" name="nouveau_titre">' +
+                '<div class="flex-bouton-modif-deco">' +
+                '<button class="bouton-valid-annule" id="valider" type="button">Valider</button>' +
+                '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button></div>' )
+            $("#valider").click(function (event){ //Modif le nom de la playlist
+                event.preventDefault()
+                let titre = $('#nouveau_titre').val()
+                console.log(titre)
+
+                if ($('#nouveau_titre').val()!=='') {
+                    ajaxRequest("PUT", "request.php/playlist/" + playlist["id_playlist"], () => {
+                        ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
+                        ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+                    }, "titre=" +titre)
+                }
+            })
+            $('#annuler').click(function (event) {
+                event.preventDefault()
+                ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
+            })
+        })
+
+
+
+
         $(".like-musique").click(function (event) {
             let id = $(event.target).closest('.like-musique').attr('value')
             console.log(id);
@@ -361,6 +426,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
             },"user="+id_user)
         })
+
         $(".unlike-musique").click(function (event) {
             let id = $(event.target).closest('.unlike-musique').attr('value')
             console.log(id);
@@ -368,8 +434,8 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
             },)
         })
+
         $(".button-delete").click(function (event){
-            console.log("button-delete")
             let id = $(event.target).closest('.button-delete').attr('value')
             console.log(id)
             ajaxRequest("DELETE", "request.php/playlist/" + id, ()=>{
@@ -507,7 +573,7 @@ function showMusique(musique) {
         $(".artiste-bouton").click(function (event) {
             let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
             console.log(id);
-            ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
+            ajaxRequest("GET", "request.php/artiste/" + id, showArtiste) //Vas récupérer les informations de l'artiste et les afficher
         })
 
 }
@@ -604,7 +670,7 @@ function showAlbum(album) {
         $(".artiste-bouton").click(function (event) {
             let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
             console.log(id);
-            ajaxRequest("GET", "request.php/artiste/" + id, showArtiste)
+            ajaxRequest("GET", "request.php/artiste/" + id, showArtiste) //Vas récupérer les informations de l'artiste et les afficher
         })
 
 }
@@ -664,13 +730,15 @@ function loadProfil(profil) {
                 '<div class="form-modif-profil" ' +
                   '<form id="changement_profil" action="#" method="post">' +
                     '<label for="userInput" class="form-label-user">Nom : </label>\n' +
-                    '<input type="text" class="form-control" id="nouveau_nom" aria-describedby="userInput" name="nouveau_nom" value="' + $("#nom_user").text() + '">' +
+                    '<input type="text" class="form-control" id="nouveau_nom" aria-describedby="userInput" name="nouveau_nom" value="' + $("#nom_user").text() + '" required>' +
                     '<label for="userInput" class="form-label-user">Prenom : </label>' +
-                    '<input type="text" class="form-control" id="nouveau_prenom" aria-describedby="userInput" name="nouveau_prenom" value="' + $("#prenom_user").text() + '">' +
+                    '<input type="text" class="form-control" id="nouveau_prenom" aria-describedby="userInput" name="nouveau_prenom" value="' + $("#prenom_user").text() + '" required>' +
                     '<label for="userInput" class="form-label-user">Date de naissance : </label>' +
-                    '<input type="text" class="form-control" id="nouvelle_date" aria-describedby="userInput" name="nouvelle_date" value="' + $("#date_naissance").text() + '">' +
+                    '<input type="text" class="form-control" id="nouvelle_date" aria-describedby="userInput" name="nouvelle_date" value="' + $("#date_naissance").text() + '" required>' +
                     '<label for="userInput" class="form-label-user">Mail : </label>' +
-                    '<input type="text" class="form-control" id="nouveau_mail" aria-describedby="userInput" name="nouveau_mail" value="' + $("#mail").text() + '">' +
+                    '<input type="text" class="form-control" id="nouveau_mail" aria-describedby="userInput" name="nouveau_mail" value="' + $("#mail").text() + '" required>' +
+                    '<label for="userInput" class="form-label-user">Mot de passe : </label>' +
+                    '<input type="text" class="form-control" id="nouveau_mdp" aria-describedby="userInput" name="nouveau_mdp" required>' +
                     '<button class="bouton-valid-annule" id="valider" type="button">Valider</button>' +
                     '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button>' +
                   '</form>' + 
@@ -688,23 +756,29 @@ function loadProfil(profil) {
                 console.log($('#nouvelle_date').val())
                 console.log($('#nouveau_mail').val())
 
-                ajaxRequest("PUT", "request.php/profil/" + id_user, (result) => {
-                    let resultat = JSON.stringify(result)
-                    console.log("resuuult", resultat)
-                    ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
-                    if (resultat === '"Mail déjà utilisé"') {
-                        console.log('aaaa')
-                        setTimeout(() => {
-                            $(".flex-page").append('<p class="erreur_mail">Mail déjà utilisé</p>')
-                        }, 200)
-                    }
-                }, 'nom=' + $('#nouveau_nom').val() + '&prenom=' + $('#nouveau_prenom').val() + '&date=' + $('#nouvelle_date').val() + '&mail=' + $('#nouveau_mail'))
+                if ($('#nouveau_nom').val()!=='' && $('#nouveau_prenom').val()!=='' && $('#nouvelle_date').val()!=='' && $('#nouveau_mail').val()!=='' && $('#nouveau_mdp').val()!='') {
+                    ajaxRequest("PUT", "request.php/profil/" + id_user, (result) => {
+                        let resultat = JSON.stringify(result)
+                        console.log("resuuult", resultat)
+                        ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
+                        if (resultat === '"Mail déjà utilisé"') {
+                            console.log('aaaa')
+                            setTimeout(() => {
+                                $(".flex-page").append('<p class="erreur_mail">Mail déjà utilisé</p>')
+                            }, 200)
+                        }
+                    }, 'nom=' + $('#nouveau_nom').val() + '&prenom=' + $('#nouveau_prenom').val() + '&date=' + $('#nouvelle_date').val() + '&mail=' + $('#nouveau_mail').val()+'&mdp='+$('#nouveau_mdp').val())
+                }
             })
         })
 
 
 }
 
+/**
+ * Affiche les informations d'un artiste
+ * @param artiste l'artiste
+ */
 function showArtiste(artiste) {
         console.log(artiste)
         console.log(artiste["pseudo_artiste"])

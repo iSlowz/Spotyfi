@@ -54,7 +54,9 @@ switch ($requestRessource) {
             case "DELETE":
                 $result=Playlist::deletePlaylist($id);
                 break;
-
+            case "PUT":
+                parse_str(file_get_contents('php://input'), $_PUT);
+                $result=Playlist::modifyName($id,$_PUT["titre"]);
         }
         break;
     case 'musique':
@@ -64,11 +66,7 @@ switch ($requestRessource) {
                 $result=Musique::getMusique($id, $_GET["id_user"]);
                 break;
             case "DELETE":
-
-                $id_playlist=explode('.',$id);
-                $id_musique=array_shift($id_playlist);
-                $id_playlist=array_shift($id_playlist);
-                $result=Playlist::deleteMusique($id_musique,$id_playlist);
+                $result=Playlist::deleteMusique($id,$_GET["playlist"]);
                 break;
         }
 
@@ -87,7 +85,7 @@ switch ($requestRessource) {
                 break;
             case "PUT":
                 parse_str(file_get_contents('php://input'), $_PUT);
-                $result=User::modify($id, $_PUT["nom"], $_PUT["prenom"], $_PUT["date"], $_PUT["mail"]);
+                $result=User::modify($id, $_PUT["nom"], $_PUT["prenom"], $_PUT["date"], $_PUT["mail"], $_PUT["mdp"]);
                 break;
         }
         break;

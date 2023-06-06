@@ -59,7 +59,7 @@ class Utilisateur
                 $valide = False;
             }
 
-            if (empty($_POST['naissance'])) {
+            if (empty($_POST['naissance']) or strtotime($_POST['naissance'])>time()){
                 $manquant['naissance']=True;
                 $valide = False;
             }

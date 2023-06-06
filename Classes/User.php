@@ -75,7 +75,7 @@ class User
         }
     }
 
-    static function modify($id, $nom, $prenom, $date, $mail){
+    static function modify($id, $nom, $prenom, $date, $mail,$mdp){
 
         try
         {
@@ -92,20 +92,22 @@ class User
             error_log('Request error: '.$exception->getMessage());
             return false;
         }
-        /*
-        if (empty($result)) {
-            $a = 'Mail déjà utilisé';
-            return $a;
+
+        if (!empty($result)) {
+            $erreur = 'Mail déjà utilisé';
+            return $erreur;
         }
-        */
         try
         {
+            $password = password_hash($mdp, PASSWORD_BCRYPT);
             $dbh = Database::connexionBD();
-            $statement = $dbh->prepare('UPDATE users SET nom_user=:nom, prenom_user=:prenom, date_naissance_user=:date WHERE id_user=:id');
+            $statement = $dbh->prepare('UPDATE users SET nom_user=:nom, prenom_user=:prenom, date_naissance_user=:date, mail_user=:mail, mot_de_passe=:mdp WHERE id_user=:id');
             $statement->bindParam(':id', $id);
             $statement->bindParam(':nom', $nom);
             $statement->bindParam(':prenom', $prenom);
             $statement->bindParam(':date', $date);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':mdp',$password);
             $statement->execute();
         }
         catch (PDOException $exception)
