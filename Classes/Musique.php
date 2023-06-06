@@ -28,7 +28,7 @@ class Musique
         try {
             $conn = Database::connexionBD();
             $statement = $conn->prepare("SELECT m.id_musique, m.titre_musique, m.lien_musique, m.duree_musique, m.date_parution_musique,
-       al.id_album, al.titre_album, al.id_artiste, ar.pseudo_artiste, s.id_style,s.nom_style
+       al.id_album, al.titre_album, al.photo_album, al.id_artiste, ar.pseudo_artiste, s.id_style,s.nom_style
                                     FROM musique m
                                     JOIN album al on m.id_album=al.id_album
                                     JOIN artiste ar on ar.id_artiste=m.id_artiste

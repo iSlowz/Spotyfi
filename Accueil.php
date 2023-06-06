@@ -77,7 +77,7 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
     <div class="Bar-Footer">
       <div class="d-flex flex-footer">
         <div class="p-2 flex-fill musique-info">
-          <button id="btn">Musique info</button>
+          <button id="musique-info">Musique info</button>
         </div>
         <div class="p-2 flex-fill musique-player">         
           <audio id="player">
