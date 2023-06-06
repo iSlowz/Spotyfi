@@ -1,11 +1,7 @@
-//recupère l'id de l'uilisateur présente dans la value du bouton du profil
-let id_user = document.getElementById("id_user").innerText
-
-//Charge l'historique et la liste de playlist
+//recupère l'id de l'uilisateur présente dans la value du bouton du profillet id_user = document.getElementById("id_user").innerText
 ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
-
-
+ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)   //id_user sera ce qu'on va retrouver
+//dans id dans request.php (car après le /)
 $('.flex-recherche').submit(function (event){
     event.preventDefault()
     console.log($('#bar-recherche').val())
@@ -405,8 +401,6 @@ function showMusique(musique) {
             '</div>'
         
             )
-
-        $(".flex-page").append('<div class="flex-boutons-musique"')
         
         if (musique["like"]===false) {
             $(".flex-page").append(
@@ -466,7 +460,7 @@ function showMusique(musique) {
 
         )
 
-        $(".flex-page").append('</div>')
+        //$(".flex-page").append('</div>')
 
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
@@ -504,18 +498,18 @@ function loadPlaylistsMain(playlists){
         '<hr class="trait-long">'
     )
 
-    $(".flex-page").append('<div class="liste-playlist-ajoute">')
+    //$(".flex-page").append('<div class="liste-playlist-ajoute">')
 
     playlists["playlists"].forEach(function (playlist) {
         console.log(playlist)
         $(".flex-page").append(
         
-        '<button type="button" class="add-in-one-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>'
+        '<button class="add-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>'
         
         )
     })
 
-    $(".flex-page").append('</div>')
+    //$(".flex-page").append('</div>')
 
 
     $(".add-playlist").click(function (event) {
