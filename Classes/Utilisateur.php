@@ -29,7 +29,6 @@ class Utilisateur
                 $statement->bindParam(':mail', $_POST['mail']);
                 $statement->execute();
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
-                print_r($result);
             } catch (PDOException $exception) {
                 error_log('Connection error: ' . $exception->getMessage());
                 return false;
