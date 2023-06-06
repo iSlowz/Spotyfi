@@ -359,6 +359,25 @@ html, body {
 
 }
 
+.flex-titre-text-album-photo{
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+
+}
+
+.photo-album-resize{
+
+    height: 40%;
+    width: 40%;
+    margin-top: 2%;
+
+}
+
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie des cards derniers morceaux sur la page d'accueil */
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -500,13 +519,18 @@ html, body {
 
 }
 
+.artiste-bouton{
+
+    font-style: italic;
+
+}
+
 .bouton-like-add-play{
 
     display: flex;
     flex-direction: row;
 
 }
-
 
 .like-musique{
 
