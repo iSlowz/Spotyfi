@@ -55,8 +55,8 @@ switch ($requestRessource) {
                 $result=Playlist::deletePlaylist($id);
                 break;
             case "PUT":
-                //$result=Playlist::modifyName($id); Si plus de temps
-
+                parse_str(file_get_contents('php://input'), $_PUT);
+                $result=Playlist::modifyName($id,$_PUT["titre"]);
         }
         break;
     case 'musique':

@@ -887,7 +887,7 @@ audio::-webkit-media-controls-mute-button {
 
 }
 
-#nouveau_nom, #nouveau_mdp{
+#nouveau_nom, #nouveau_mdp, #nouveau_titre{
 
     border: rgb(25, 157, 166);
     background-color : rgb(25, 157, 166);
@@ -1016,7 +1016,7 @@ audio::-webkit-media-controls-mute-button {
 
 }
 
-.button-delete, button-modif{
+.button-delete, .button-modif{
 
     border : solid white;
     background-color: rgb(25, 157, 166);
