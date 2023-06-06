@@ -493,6 +493,79 @@ html, body {
 
 }
 
+.bouton-like-add-play{
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+.like-musique{
+
+    border: none;
+
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+    margin-left: 48%;
+    margin-right: 48%;
+
+}
+
+.unlike-musique{
+
+    border: none;
+
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 48%;
+    margin-right: 48%;
+
+}
+
+.add-playlist{
+
+    border: none;
+
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 48%;
+    margin-right: 48%;
+
+}
+
+.add-in-one-playlist{
+
+    border: none;
+
+    color: white;
+    background-color: rgb(25, 157, 166);
+
+    font-size: 150%;
+
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+}
+
 .play-musique{
 
     border: none;
@@ -502,31 +575,14 @@ html, body {
 
     border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
 
-}
-
-.like-musique{
-
-    border: none;
-
-    color: white;
-    background-color: rgb(25, 157, 166);
-
-    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 48%;
+    margin-right: 48%;
 
 }
 
 .delete-musique{
-
-    border: none;
-
-    color: white;
-    background-color: rgb(25, 157, 166);
-
-    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
-
-}
-
-.like-musique{
 
     border: none;
 
@@ -818,7 +874,6 @@ audio::-webkit-media-controls-mute-button {
     margin-bottom: 2%;
 
 }
-
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
