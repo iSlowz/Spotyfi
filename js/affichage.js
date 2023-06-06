@@ -1,7 +1,11 @@
+//recupère l'id de l'uilisateur présente dans la value du bouton du profil
 let id_user = document.getElementById("id_user").innerText
+
+//Charge l'historique et la liste de playlist
 ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)   //id_user sera ce qu'on va retrouver
-//dans id dans request.php (car après le /)
+ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+
+
 $('.flex-recherche').submit(function (event){
     event.preventDefault()
     console.log($('#bar-recherche').val())
