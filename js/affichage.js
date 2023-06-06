@@ -490,9 +490,15 @@ function showMusique(musique) {
 function loadPlaylistsMain(playlists){
     console.log(playlists)
     $(".flex-page").html(
-        '<h2>A quelle playlist souhaitez vous ajoutez '+playlists["musique"]["titre_musique"] +
-        ' de '+playlists["musique"]["pseudo_artiste"]+' ? </h2>'
+        '<div class="titre-ajoute">'+
+        '<h2>A quelle playlist souhaitez vous ajoutez : "'+playlists["musique"]["titre_musique"] +
+        '" de "'+playlists["musique"]["pseudo_artiste"]+'" ? </h2>'+
+        '</div>'+
+        '<hr class="trait-long">'
     )
+
+    $(".flex-page").append('<div class="liste-playlist-ajoute">')
+
     playlists["playlists"].forEach(function (playlist) {
         console.log(playlist)
         $(".flex-page").append(
@@ -501,6 +507,9 @@ function loadPlaylistsMain(playlists){
         
         )
     })
+
+    $(".flex-page").append('</div>')
+
 
     $(".add-playlist").click(function (event) {
             let id = $(event.target).closest('.add-playlist').attr('value')
