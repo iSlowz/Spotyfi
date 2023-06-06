@@ -35,7 +35,7 @@ class Utilisateur
                 return false;
             }
 
-            if ($_POST['password'] == $result['mot_de_passe'] && !empty($result)) {
+            if (password_verify($_POST['password'], $result['mot_de_passe']) && !empty($result)) {
                 $_SESSION['user'] = $result['id_user'];
                 header('Location: Accueil.php');
             } else {
@@ -106,12 +106,12 @@ class Utilisateur
                     $statement = $conn->prepare("INSERT INTO users(prenom_user, nom_user, date_naissance_user, mail_user, mot_de_passe) 
                                                 VALUES (:prenom, :nom, :naissance, :mail, :mot_de_passe)");
 
-                    //$password = password_hash($_POST['password'], PASSWORD_BCRYPT); plus tard
+                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                     $statement->bindParam(":prenom", $_POST['prenom']);
                     $statement->bindParam(":nom", $_POST['nom']);
                     $statement->bindParam(":naissance", $naissance);
                     $statement->bindParam(":mail", $_POST["mail"]);
-                    $statement->bindParam(":mot_de_passe", $_POST['password']);
+                    $statement->bindParam(":mot_de_passe", $password);
                     $statement->execute();
                 } catch (PDOException $exception) {
                     error_log('Connection error: '.$exception->getMessage());
@@ -147,7 +147,7 @@ class Utilisateur
                     error_log('Connection error: '.$exception->getMessage());
                     return false;
                 }
-                header('Location: private/Accueil.php');
+                header('Location: Accueil.php');
             }
         }
         return False;

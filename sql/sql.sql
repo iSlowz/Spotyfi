@@ -19,7 +19,7 @@ CREATE TABLE public.users(
 	nom_user              VARCHAR (20) NOT NULL ,
 	date_naissance_user   DATE  NOT NULL ,
 	mail_user             VARCHAR (50) NOT NULL ,
-	mot_de_passe          VARCHAR (50) NOT NULL  ,
+	mot_de_passe          VARCHAR (260) NOT NULL  ,
 	CONSTRAINT users_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 

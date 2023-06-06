@@ -300,11 +300,13 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
 
         html += '</tbody>' +
             '</table>' +
-            '</div>' +
-            '<div class="bouton-delete-style">' +
-              '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
-            '</div>';
-    
+            '</div>'
+    if (playlist["titre_playlist"]!=="Favoris") {
+        html +=
+            '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>';
+    }
+
+
         $(".flex-page").html(html);
 
         $(".musique-bouton").click(function (event) {
@@ -682,6 +684,7 @@ function showArtiste(artiste) {
 
 }
 
+let playing = false;
 function playPauseFrom(lien){
     document.getElementById('player').innerHTML = '<source src="' + lien + '" >';
     document.getElementById('player').load();
@@ -689,7 +692,6 @@ function playPauseFrom(lien){
 
 }
 
-let playing = false;
 function playPause(){
     if(!playing){
         playing = true;
