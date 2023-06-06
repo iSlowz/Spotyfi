@@ -330,7 +330,6 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
             ajaxRequest("POST", "request.php/historique/" + id,()=>{
-                ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
             },"id_user="+id_user)
         })
         $(".musique-bouton").click(function (event) {
