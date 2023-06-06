@@ -675,6 +675,7 @@ function showArtiste(artiste) {
 let playing = false;
 function playPauseFrom(lien){
     document.getElementById('player').innerHTML = '<source src="' + lien + '" >';
+    document.getElementById('player').load();
     playPause();
 
 }
@@ -703,15 +704,17 @@ function pause(){
     document.getElementById('player').pause();
 }
 function updateMusiqueBar(){
+
     let max = getDuration()-1;
     document.getElementById('range-test').max = max;
 
     let musiqueBar = document.getElementById('range-test');
     musiqueBar.value = getCurrentTime();
-    if(musiqueBar.value == max && document.getElementById('player').loop == false){
+
+    $("#player").bind('ended', function(){
         musiqueBar.value = 0;
         pause();
-    }
+    });
     musiqueBar.addEventListener("change", () => {
         const val = musiqueBar.value ;
         setCurrentTime(val);
