@@ -546,6 +546,8 @@ function loadPlaylistsMain(playlists){
             }
         )
 
+}
+
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les albums */
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -813,6 +815,7 @@ function playPause(){
         pause();
     }
 }
+
 function lancer(){
     playing = true;
 
@@ -822,6 +825,7 @@ function lancer(){
 
     document.getElementById('player').play();
 }
+
 function pause(){
     playing = false;
 
@@ -830,6 +834,7 @@ function pause(){
     clearInterval(myInterval);
     document.getElementById('player').pause();
 }
+
 function updateMusiqueBar(){
 
     let max = getDuration()-1;
@@ -847,7 +852,6 @@ function updateMusiqueBar(){
         setCurrentTime(val);
     });
 }
-
 
 function boucle(){
     if(document.getElementById('player').loop == true){
@@ -883,12 +887,12 @@ function plus5s(){
     x.play();
     x.currentTime += 5;
 }
+
 function moins5s(){
     let x = document.getElementById('player');
     x.play();
     x.currentTime -= 5;
 }
-
 
 function setVolume(){
     
