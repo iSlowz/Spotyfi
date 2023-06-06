@@ -325,7 +325,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/historique/" + id,()=>{},"id_user="+id_user)
+            ajaxRequest("POST", "request.php/historique/" + id,function(){},"id_user="+id_user)
         })
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
@@ -463,7 +463,7 @@ function showMusique(musique) {
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/historique/" + id,()=>{},"id_user="+id_user)
+            ajaxRequest("POST", "request.php/historique/" + id,function(){},"id_user="+id_user)
         })
         $("#add-playlist").click(function (event){
             let id = $(event.target).closest('#add-playlist').attr('value')   // id de la musique
