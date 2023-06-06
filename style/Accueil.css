@@ -7,7 +7,6 @@
 /* Définition de la page */
 /*--------------------------------------------------------------------------------------------------------------*/
 
-
 html, body {
         
     height: 100%;
@@ -20,7 +19,6 @@ html, body {
 /* Definition d'un grid pour la positionnement des élements dans la page*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
-
 .disposition {
 
     height: 100%;
@@ -32,9 +30,19 @@ html, body {
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
-/* Partie de la barre d'Accueil */
+/* Definition de la couleur lorsqu'on a une erreur*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
+.erreur_mail{
+   
+    color: red;
+
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Partie de la barre d'Accueil */
+/*--------------------------------------------------------------------------------------------------------------*/
 
 .Navbar-Accueil {
 
@@ -492,6 +500,7 @@ de tous les titress, album, artistes et leur détails*/
 /* Partie tableau pour les playlist */
 /*--------------------------------------------------------------------------------------------------------------*/
 
+/*Permet pour répartir les élements du tableau lorsque qu'on affiche une playlist*/
 
 .page-playlist-flex {
     display: flex; 
@@ -502,24 +511,8 @@ de tous les titress, album, artistes et leur détails*/
     margin-top: 1%;
 }
   
-.date-container { 
-    margin-top: 2.2%;
-    margin-left: auto; 
-    margin-right: 5%;
-}
-  
-.trait {
-    
-    border: none; 
-    border-top: 3px solid;
-    
-    margin: 10px 0;
 
-    margin-right: 5%;
-    margin-left: 5%;
-
-
-}
+/*Elements du tableau*/
 
 #titre-table{
 
@@ -562,12 +555,21 @@ de tous les titress, album, artistes et leur détails*/
 
 }
 
+.date-container { 
+    margin-top: 2.2%;
+    margin-left: auto; 
+    margin-right: 5%;
+}
+  
 .bouton-like-add-play{
 
     display: flex;
     flex-direction: row;
 
 }
+
+
+/*Partie qui permet de jouer, ajouter, supprimer, like des morceaux de la playlist*/
 
 .like-musique{
 
@@ -631,6 +633,8 @@ de tous les titress, album, artistes et leur détails*/
 
     margin-top: 1%;
     margin-bottom: 1%;
+    margin-left: 40%;
+    margin-right: 40%;
 
 }
 
@@ -668,22 +672,13 @@ de tous les titress, album, artistes et leur détails*/
 
 }
 
-.add-in-one-playlist{
-
-    font-size: 125%;
-
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-left: 40%;
-    margin-right: 40%;
-
-}
-
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie pour le footer */
 /*--------------------------------------------------------------------------------------------------------------*/
 
+/*Partie qui gère tout le footer, c'est à dire
+les boutons, les images, l'audio et les bars*/
 
 .Bar-Footer{
     
@@ -729,7 +724,14 @@ de tous les titress, album, artistes et leur détails*/
 
 }
 
+
+/*Pour avoir les infos sur le son qu'on est actuellement entrain d'écouter*/
+
 .musique-info{
+
+    text-align: center;
+    justify-content: center;
+
     grid-row: 1;
 
     display: flex;
@@ -738,10 +740,14 @@ de tous les titress, album, artistes et leur détails*/
     width: auto;
     height: 100%;
 }
+
 img {
     width: auto;  
     height: 100%;  
 }
+
+
+/*Différents boutons qu'on retrouve dans le footer*/
 
 .flex-footer-bar-boucle{
 
@@ -791,39 +797,29 @@ img {
 
 }
 
+
+/*Audio du son qui passe*/
+
 audio::-webkit-media-controls-panel {
+
     background-color: rgb(2, 97, 103);
+
 }
   
 audio::-webkit-media-controls-mute-button {
+    
     background-color: #B1D4E0;
     border-radius: 50%;
-}
-
-.erreur_mail{
-    color: red;
-}
-
-.souligne:hover{
-    text-decoration: underline;
-}
-
-.text-gauche{
-    text-align: left !important;
-    padding-left: 2%;
-}
-
-.musique-info{
-
-    text-align: center;
-    justify-content: center;
 
 }
+
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie de la page user */
 /*--------------------------------------------------------------------------------------------------------------*/
 
+
+/*Répartiton des boutons dans la page*/
 
 .flex-bouton-modif-deco{
 
@@ -844,6 +840,15 @@ audio::-webkit-media-controls-mute-button {
     align-items: center;
 
 }
+
+.card-créer-playlist{
+   
+    margin-top: 2%;
+
+}
+
+
+/*Differents boutons de la page user*/
 
 .bouton-user-modif{
 
@@ -883,6 +888,40 @@ audio::-webkit-media-controls-mute-button {
     margin-bottom: 2%;
 
 }
+
+.bouton-valid-annule{
+
+    border: rgb(25, 157, 166);
+    background-color : rgb(25, 157, 166);
+    color: white;
+
+    font-size: 125%;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 1%;
+    margin-left: 1%;
+
+    padding-left: 1%;
+    padding-right: 1%;
+
+}
+
+.text-bar-style{
+
+    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+
+    width: 30%;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
+
+/*Lorsque'on modifie notre compte*/
 
 .form-modif-profil{
 
@@ -932,44 +971,6 @@ audio::-webkit-media-controls-mute-button {
 
 }
 
-.bouton-valid-annule{
-
-    border: rgb(25, 157, 166);
-    background-color : rgb(25, 157, 166);
-    color: white;
-
-    font-size: 125%;
-
-    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
-
-    margin-top: 2%;
-    margin-bottom: 2%;
-    margin-right: 1%;
-    margin-left: 1%;
-
-    padding-left: 1%;
-    padding-right: 1%;
-
-}
-
-  
-.card-créer-playlist{
-   
-    margin-top: 2%;
-
-}
-
-.text-bar-style{
-
-    border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
-
-    width: 30%;
-
-    margin-top: 2%;
-    margin-bottom: 2%;
-
-}
-
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Partie quand une recherche est faite */
@@ -1015,18 +1016,6 @@ audio::-webkit-media-controls-mute-button {
 
 }
 
-.trait-long{
-
-    border: none; 
-    border-top: 3px solid;
-    
-    margin: 10px 0;
-
-    margin-right: 2%;
-    margin-left: 2%;
-
-}
-
 .bouton-musique-select{
 
     margin-left: 2%;
@@ -1066,7 +1055,22 @@ audio::-webkit-media-controls-mute-button {
 }
 
 
-/*Outils*/
+/*--------------------------------------------------------------------------------------------------------------*/
+/*Outils qu'on a utilisé pour le projet*/
+/*--------------------------------------------------------------------------------------------------------------*/
+
+.trait {
+    
+    border: none; 
+    border-top: 3px solid;
+    
+    margin: 10px 0;
+
+    margin-right: 5%;
+    margin-left: 5%;
+
+
+}
 
 .petit-trait{
 
@@ -1077,5 +1081,28 @@ audio::-webkit-media-controls-mute-button {
 
     margin-right: 35%;
     margin-left: 35%;
+
+}
+
+.trait-long{
+
+    border: none; 
+    border-top: 3px solid;
+    
+    margin: 10px 0;
+
+    margin-right: 2%;
+    margin-left: 2%;
+
+}
+
+.text-gauche{
+    text-align: left !important;
+    padding-left: 2%;
+}
+
+.souligne:hover{
+    
+    text-decoration: underline;
 
 }
