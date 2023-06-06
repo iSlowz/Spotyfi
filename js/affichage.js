@@ -267,7 +267,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             html +=
                 '<tr id="tableau-playlist">' +
                   '<td>' +
-                    '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\', \'' + musique["photo_album"] + '\' )">' +
+                    '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\', \'' + musique["photo_album"] + '\', \'' + musique["titre_musique"] + '\', \'' + musique["pseudo_artiste"] + '\' )">' +
                       '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
                         '<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'+
                         '<path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>'+
@@ -329,9 +329,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/historique/" + id,()=>{
-                ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
-            },"id_user="+id_user)
+            ajaxRequest("POST", "request.php/historique/" + id,()=>{},"id_user="+id_user)
         })
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
@@ -408,6 +406,23 @@ function showMusique(musique) {
         
             )
 
+        $(".flex-page").append('<div class="flex-boutons-musique"')
+        
+        console.log(musique)
+        console.log(musique["titre_musique"])
+        $(".flex-page").html(
+            '<h1 id="titre-page-de-recherche"> Titre : ' + musique["titre_musique"] + '</h1>' +
+            '<br>' +
+            '<div class="text-musique">' +
+            '<p> Durée : ' + musique["duree_musique"] + '</p>' +
+            '<p>Date de parution : ' + musique["date_parution_musique"] + '</p>' +
+            '<p> Son album : <button type="button" class="album-bouton" value="' + musique["id_album"] + '">' + musique["titre_album"] + '</button></p>' +
+            '<p> Son artiste : <button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></p>' +
+            '<p> Style : ' + musique["nom_style"] + '</p>' +
+            '</div>'
+        
+            )
+
         $(".flex-page").append('<div class="flex-boutons-musique>"')
         
         if (musique["like"]===false) {
@@ -450,20 +465,20 @@ function showMusique(musique) {
         $(".flex-page").append( //bouton +
             
             '<button type="button" class="add-playlist" id="add-playlist" value="'+musique["id_musique"]+'">' +
-            '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">' +
+              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">' +
                 '<path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>' +
                 '<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>' +
-            '</svg>' +
+              '</svg>' +
             '</button>'
         
         )
         $(".flex-page").append( //bouton jouer
             
             '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\' )">' +
-            '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
+              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
                 '<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'+
                 '<path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>'+
-            '</svg>' +
+              '</svg>' +
             '</button>' 
 
         )
@@ -508,6 +523,8 @@ function loadPlaylistsMain(playlists){
             '<hr class="trait-long">'
         )
 
+        $(".flex-page").append('<div class="liste-playlist-ajoute">')
+
         playlists["playlists"].forEach(function (playlist) {
             console.log(playlist)
             $(".flex-page").append(
@@ -517,6 +534,9 @@ function loadPlaylistsMain(playlists){
             )
         })
 
+        $(".flex-page").append('</div>')
+
+
         $(".add-in-one-playlist").click(function (event) {
                 let id = $(event.target).closest('.add-in-one-playlist').attr('value')
                 console.log(id,playlists["musique"]["id_musique"])
@@ -525,9 +545,6 @@ function loadPlaylistsMain(playlists){
                 },"id_musique="+playlists["musique"]["id_musique"])
             }
         )
-
-
-}
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les albums */
@@ -597,8 +614,7 @@ $("#id-bouton-user").click(function (event) {
 
 function loadProfil(profil) {
         console.log(profil)
-        $(".flex-page").html(
-            
+        let html=
             '<div class="flex-info-user">' +
               '<h1>Nom&ensp;:&ensp;</h1>' + ' '+
               '<div id="nom_user">' + 
@@ -639,10 +655,10 @@ function loadProfil(profil) {
               '</form>' +
             '</div>'
 
-        )
+        $(".flex-page").html(html)
         $('#modif_profil').click(function (event) {
 
-            $('.flex-page').append(
+            $('.flex-page').html(html+
                 '<hr class="trait">' +
                 '<div class="form-modif-profil" ' +
                   '<form id="changement_profil" action="#" method="post">' +
@@ -775,7 +791,9 @@ let playing = false;
 function playPauseFrom(lien_musique, lien_photo){
     document.getElementById('player').innerHTML = '<source src="' + lien_musique + '" >';
     
-    document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">';
+    document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">' + titre_musique + '  ' + nom_artiste;
+
+    document.getElementById('musique-info').innerHTML
 
     document.getElementById('musique-info').innerHTML
 
@@ -828,12 +846,8 @@ function updateMusiqueBar(){
         const val = musiqueBar.value ;
         setCurrentTime(val);
     });
-    console.log(musiqueBar.value);
 }
 
-function like(){
-
-}
 
 function boucle(){
     if(document.getElementById('player').loop == true){
