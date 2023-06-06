@@ -123,7 +123,7 @@ class Playlist
             $statement = $conn->prepare("DELETE FROM musique_playlist WHERE id_playlist =:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
-            $statement = $conn->prepare("DELETE FROM playlist WHERE id_playlist =: id_playlist");
+            $statement = $conn->prepare("DELETE FROM playlist WHERE id_playlist =:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
             return true;

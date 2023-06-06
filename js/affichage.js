@@ -301,7 +301,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         html += '</tbody>' +
             '</table>' +
             '</div>' +
-            '<button type="button" class="button-delete value="' + playlist["id_playlist"] + '>Supprimer playlist</button>';
+            '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>';
 
         $(".flex-page").html(html);
 
@@ -344,13 +344,12 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         })
         $(".button-delete").click(function (event){
             console.log("button-delete")
-            console.log(playlist["id_playlist"])
             let id = $(event.target).closest('.button-delete').attr('value')
+            console.log(id)
             ajaxRequest("DELETE", "request.php/playlist/" + id, ()=>{
                 ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
                 ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
             })
-        
         },)
 
     $("#Accueil").click(function (event) {
