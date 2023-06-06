@@ -21,7 +21,8 @@ class Playlist
                                                                 JOIN playlist p using (id_playlist)  
                                                                 JOIN musique m using (id_musique)
                                                                 JOIN artiste ar using (id_artiste)
-                                                                WHERE id_user=:id_user AND titre_playlist='Historique' ORDER BY mp.date_ajout_musique_playlist DESC LIMIT 10");
+                                                                WHERE id_user=:id_user AND titre_playlist='Historique' 
+                                                            ORDER BY mp.date_ajout_musique_playlist DESC LIMIT 10");
             $statement->bindParam(':id_user', $id_user);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
