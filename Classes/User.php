@@ -94,8 +94,8 @@ class User
         }
 
         if (!empty($result)) {
-            $a = 'Mail déjà utilisé';
-            return $a;
+            $erreur = 'Mail déjà utilisé';
+            return $erreur;
         }
         try
         {

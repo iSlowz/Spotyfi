@@ -1016,7 +1016,7 @@ audio::-webkit-media-controls-mute-button {
 
 }
 
-.button-delete{
+.button-delete, button-modif{
 
     border : solid white;
     background-color: rgb(25, 157, 166);

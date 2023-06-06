@@ -138,6 +138,24 @@ class Playlist
         }
 
     }
+    /*Si plus de temps (pas fini)
+    static function modifyName($id_playlist){
+        try{
+            $conn = Database::connexionBD();
+
+            $statement = $conn->prepare("UPDATE playlist SET  WHERE id_playlist =:id_playlist");
+            $statement->bindParam(':id_playlist', $id_playlist);
+            $statement->execute();
+            $statement = $conn->prepare("DELETE FROM playlist WHERE id_playlist =:id_playlist");
+            $statement->bindParam(':id_playlist', $id_playlist);
+            $statement->execute();
+            return true;
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+    }
+    */
 }
 
 ?>

@@ -353,7 +353,7 @@ function showPlaylist(playlist) {
         '<div class="flex-bouton-supprimer-ajouter">'+
           '<div class="bouton-supprimer-style">' +
             '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
-            //'<button type="button" class="button-modif" value="' + playlist["id_playlist"] + '">Modifier playlist</button>' +
+            '<button type="button" class="button-modif" value="' + playlist["id_playlist"] + '">Modifier playlist</button>' +
             '</div>' +
         '</div>';
     }
@@ -385,23 +385,23 @@ function showPlaylist(playlist) {
             ajaxRequest("GET", "request.php/artiste/" + id, showArtiste) //Vas récupérer les informations de l'artiste et les afficher
         })
 
-        /*
-        $(".delete-musique").click(function (event){    //Delete musique
-            console.log(playlist["id_playlist"])
-            let id = $(event.target).closest('.delete-musique').attr('value') //
-            ajaxRequest("DELETE", "request.php/musique/" + id+"."+playlist["id_playlist"], ()=>{
-                ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
-            },)
-        })
-         */
-
         $(".delete-musique").click(function (event){ //Delete musique
-            console.log(playlist["id_playlist"])
             let id = $(event.target).closest('.delete-musique').attr('value') //
             ajaxRequest("DELETE", "request.php/musique/" + id+"?playlist="+playlist["id_playlist"], ()=>{
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
             },)
         })
+        /* Si plus de temps
+        $(".button-modif").click(function (event){ //Modif le nom de la playlist
+            let id = $(event.target).closest('.button-modif').attr('value')
+            console.log(id)
+            ajaxRequest("PUT", "request.php/playlist/" + id, ()=>{
+                ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
+                ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+            })
+        })
+
+         */
 
         $(".like-musique").click(function (event) {
             let id = $(event.target).closest('.like-musique').attr('value')
@@ -420,7 +420,6 @@ function showPlaylist(playlist) {
         })
 
         $(".button-delete").click(function (event){
-            console.log("button-delete")
             let id = $(event.target).closest('.button-delete').attr('value')
             console.log(id)
             ajaxRequest("DELETE", "request.php/playlist/" + id, ()=>{

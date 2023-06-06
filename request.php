@@ -54,6 +54,8 @@ switch ($requestRessource) {
             case "DELETE":
                 $result=Playlist::deletePlaylist($id);
                 break;
+            case "PUT":
+                //$result=Playlist::modifyName($id); Si plus de temps
 
         }
         break;
