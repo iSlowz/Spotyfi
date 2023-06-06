@@ -325,7 +325,9 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/historique/" + id,function(){},"id_user="+id_user)
+            ajaxRequest("POST", "request.php/historique/" + id,()=>{
+                ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
+            },"id_user="+id_user)
         })
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
@@ -421,7 +423,7 @@ function showMusique(musique) {
         }
 
         else{
-            $(".flex-page").append(
+            $(".flex-page").append( //bouton coeur
                 
                 '<button type="button" class="unlike-musique" value="' + musique["id_musique"] + '">'+
                   '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">'+
@@ -439,7 +441,7 @@ function showMusique(musique) {
             })
         }
 
-        $(".flex-page").append(
+        $(".flex-page").append( //bouton +
             
             '<button type="button" class="add-playlist" id="add-playlist" value="'+musique["id_musique"]+'">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">' +
@@ -449,7 +451,7 @@ function showMusique(musique) {
             '</button>'
         
         )
-        $(".flex-page").append(
+        $(".flex-page").append( //bouton jouer
             
             '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\' )">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
@@ -465,7 +467,9 @@ function showMusique(musique) {
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/historique/" + id,function(){},"id_user="+id_user)
+            ajaxRequest("POST", "request.php/historique/" + id,()=>{
+                ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
+            },"id_user="+id_user)
         })
         $("#add-playlist").click(function (event){
             let id = $(event.target).closest('#add-playlist').attr('value')   // id de la musique
@@ -512,10 +516,9 @@ function loadPlaylistsMain(playlists){
     //$(".flex-page").append('</div>')
 
 
-    $(".add-playlist").click(function (event) {
-            let id = $(event.target).closest('.add-playlist').attr('value')
-            console.log(id)
-            console.log(playlists["musique"]["id_musique"])
+    $(".add-in-one-playlist").click(function (event) {
+            let id = $(event.target).closest('.add-in-one-playlist').attr('value')
+            console.log(id,playlists["musique"]["id_musique"])
             ajaxRequest("POST", "request.php/playlist/" + id, ()=>{
                 ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
             },"id_musique="+playlists["musique"]["id_musique"])
