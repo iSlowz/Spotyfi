@@ -672,7 +672,6 @@ function showArtiste(artiste) {
 
 }
 
-let playing = false;
 function playPauseFrom(lien){
     document.getElementById('player').innerHTML = '<source src="' + lien + '" >';
     document.getElementById('player').load();
@@ -680,6 +679,7 @@ function playPauseFrom(lien){
 
 }
 
+let playing = false;
 function playPause(){
     if(!playing){
         playing = true;
