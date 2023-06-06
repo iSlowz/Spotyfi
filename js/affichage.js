@@ -353,7 +353,8 @@ function showPlaylist(playlist) {
         '<div class="flex-bouton-supprimer-ajouter">'+
           '<div class="bouton-supprimer-style">' +
             '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
-          '</div>' +
+            //'<button type="button" class="button-modif" value="' + playlist["id_playlist"] + '">Modifier playlist</button>' +
+            '</div>' +
         '</div>';
     }
 
@@ -714,13 +715,15 @@ function loadProfil(profil) {
                 '<div class="form-modif-profil" ' +
                   '<form id="changement_profil" action="#" method="post">' +
                     '<label for="userInput" class="form-label-user">Nom : </label>\n' +
-                    '<input type="text" class="form-control" id="nouveau_nom" aria-describedby="userInput" name="nouveau_nom" value="' + $("#nom_user").text() + '">' +
+                    '<input type="text" class="form-control" id="nouveau_nom" aria-describedby="userInput" name="nouveau_nom" value="' + $("#nom_user").text() + '" required>' +
                     '<label for="userInput" class="form-label-user">Prenom : </label>' +
-                    '<input type="text" class="form-control" id="nouveau_prenom" aria-describedby="userInput" name="nouveau_prenom" value="' + $("#prenom_user").text() + '">' +
+                    '<input type="text" class="form-control" id="nouveau_prenom" aria-describedby="userInput" name="nouveau_prenom" value="' + $("#prenom_user").text() + '" required>' +
                     '<label for="userInput" class="form-label-user">Date de naissance : </label>' +
-                    '<input type="text" class="form-control" id="nouvelle_date" aria-describedby="userInput" name="nouvelle_date" value="' + $("#date_naissance").text() + '">' +
+                    '<input type="text" class="form-control" id="nouvelle_date" aria-describedby="userInput" name="nouvelle_date" value="' + $("#date_naissance").text() + '" required>' +
                     '<label for="userInput" class="form-label-user">Mail : </label>' +
-                    '<input type="text" class="form-control" id="nouveau_mail" aria-describedby="userInput" name="nouveau_mail" value="' + $("#mail").text() + '">' +
+                    '<input type="text" class="form-control" id="nouveau_mail" aria-describedby="userInput" name="nouveau_mail" value="' + $("#mail").text() + '" required>' +
+                    '<label for="userInput" class="form-label-user">Mot de passe : </label>' +
+                    '<input type="text" class="form-control" id="nouveau_mdp" aria-describedby="userInput" name="nouveau_mdp" required>' +
                     '<button class="bouton-valid-annule" id="valider" type="button">Valider</button>' +
                     '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button>' +
                   '</form>' + 
@@ -738,17 +741,19 @@ function loadProfil(profil) {
                 console.log($('#nouvelle_date').val())
                 console.log($('#nouveau_mail').val())
 
-                ajaxRequest("PUT", "request.php/profil/" + id_user, (result) => {
-                    let resultat = JSON.stringify(result)
-                    console.log("resuuult", resultat)
-                    ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
-                    if (resultat === '"Mail déjà utilisé"') {
-                        console.log('aaaa')
-                        setTimeout(() => {
-                            $(".flex-page").append('<p class="erreur_mail">Mail déjà utilisé</p>')
-                        }, 200)
-                    }
-                }, 'nom=' + $('#nouveau_nom').val() + '&prenom=' + $('#nouveau_prenom').val() + '&date=' + $('#nouvelle_date').val() + '&mail=' + $('#nouveau_mail').val())
+                if ($('#nouveau_nom').val()!=='' && $('#nouveau_prenom').val()!=='' && $('#nouvelle_date').val()!=='' && $('#nouveau_mail').val()!=='' && $('#nouveau_mdp').val()!='') {
+                    ajaxRequest("PUT", "request.php/profil/" + id_user, (result) => {
+                        let resultat = JSON.stringify(result)
+                        console.log("resuuult", resultat)
+                        ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
+                        if (resultat === '"Mail déjà utilisé"') {
+                            console.log('aaaa')
+                            setTimeout(() => {
+                                $(".flex-page").append('<p class="erreur_mail">Mail déjà utilisé</p>')
+                            }, 200)
+                        }
+                    }, 'nom=' + $('#nouveau_nom').val() + '&prenom=' + $('#nouveau_prenom').val() + '&date=' + $('#nouvelle_date').val() + '&mail=' + $('#nouveau_mail').val()+'&mdp='+$('#nouveau_mdp').val())
+                }
             })
         })
 

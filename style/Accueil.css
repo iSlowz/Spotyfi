@@ -887,7 +887,7 @@ audio::-webkit-media-controls-mute-button {
 
 }
 
-#nouveau_nom{
+#nouveau_nom, #nouveau_mdp{
 
     border: rgb(25, 157, 166);
     background-color : rgb(25, 157, 166);
