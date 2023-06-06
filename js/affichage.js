@@ -301,8 +301,10 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         html += '</tbody>' +
             '</table>' +
             '</div>' +
-            '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>';
-
+            '<div class="bouton-delete-style">' +
+              '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
+            '</div>';
+    
         $(".flex-page").html(html);
 
         $(".musique-bouton").click(function (event) {
