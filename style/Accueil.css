@@ -862,3 +862,15 @@ audio::-webkit-media-controls-mute-button {
     margin-left: 2%;
 
 }
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Partie de boutons qui sont sur le site en géneral */
+/*--------------------------------------------------------------------------------------------------------------*/
+
+.flex-bouton-supprimer-ajouter {
+    display: flex; 
+    background-color: black;
+}
+  
+

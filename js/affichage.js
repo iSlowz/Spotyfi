@@ -303,7 +303,15 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             '</div>'
     if (playlist["titre_playlist"]!=="Favoris") {
         html +=
-            '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>';
+        '<div class="flex-bouton-supprimer-ajouter">'+
+          '<div class="bouton-supprimer-style">' +
+            '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
+          '</div>' +
+          '<div class="bouton-ajouter-style">' +
+            '<button type="button" class="button-add">Ajouter musiques</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
     }
 
 
