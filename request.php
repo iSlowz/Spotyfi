@@ -23,6 +23,7 @@ switch ($requestRessource) {
                 break;
             case "POST":
                 $result=Musique::addInHistorique($id, $_POST["id_musique"]);
+                break;
         }
         break;
 
@@ -38,6 +39,7 @@ switch ($requestRessource) {
             case "POST":
                 //$result=Array($id,$_POST["titre"]);
                 $result=User::addPlaylist($id,$_POST["titre"]);
+                break;
         }
         break;
     case 'playlist':
@@ -48,8 +50,10 @@ switch ($requestRessource) {
             case "POST":
                 //$result=Array($id, $_POST["id_musique"]);
                 $result=Playlist::addMusique($id, $_POST["id_musique"]);
+                break;
             case "DELETE":
                 $result=Playlist::deletePlaylist($id);
+                break;
 
         }
         break;
@@ -84,6 +88,7 @@ switch ($requestRessource) {
             case "PUT":
                 parse_str(file_get_contents('php://input'), $_PUT);
                 $result=User::modify($id, $_PUT["nom"], $_PUT["prenom"], $_PUT["date"], $_PUT["mail"]);
+                break;
         }
         break;
     case 'artiste':
@@ -103,6 +108,7 @@ switch ($requestRessource) {
                     $result["artistes"]=Artiste::getArtisteBySearch($recherche);
                     break;
                     }
+                break;
         }
         break;
     case 'like':
