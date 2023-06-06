@@ -789,7 +789,7 @@ function showArtiste(artiste) {
 
 let playing = false;
 
-function playPauseFrom(lien_musique, lien_photo){
+function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
     document.getElementById('player').innerHTML = '<source src="' + lien_musique + '" >';
     
     document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">' + titre_musique + '  ' + nom_artiste;
