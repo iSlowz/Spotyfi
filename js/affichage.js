@@ -547,8 +547,6 @@ function loadPlaylistsMain(playlists){
         )
     }
 
-}
-
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les albums */
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -794,11 +792,10 @@ let playing = false;
 function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
     document.getElementById('player').innerHTML = '<source src="' + lien_musique + '" >';
     
-    document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">' + titre_musique + '  ' + nom_artiste;
+    document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">';
 
-    document.getElementById('musique-info').innerHTML
-
-    document.getElementById('musique-info').innerHTML
+    document.getElementById('musique-info').innerHTML ='<p>' + titre_musique + '</p>';
+    document.getElementById('musique-info').innerHTML = '<p>' + nom_artiste + '</p>';
 
     if(playing){
         pause();
