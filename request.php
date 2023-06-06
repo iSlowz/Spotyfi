@@ -64,11 +64,7 @@ switch ($requestRessource) {
                 $result=Musique::getMusique($id, $_GET["id_user"]);
                 break;
             case "DELETE":
-
-                $id_playlist=explode('.',$id);
-                $id_musique=array_shift($id_playlist);
-                $id_playlist=array_shift($id_playlist);
-                $result=Playlist::deleteMusique($id_musique,$id_playlist);
+                $result=Playlist::deleteMusique($id,$_GET["playlist"]);
                 break;
         }
 
