@@ -23,7 +23,9 @@ $('#bar-recherche').on('input',function (event){
 })
 $('#id-bouton-creer').click(function() {
     console.log("creer");
-    $('.flex-page').html('<div class="card" id="id-card" style="width: 70%;">' +
+    $('.flex-page').html(
+        
+        '<div class="card" id="id-card" style="width: 70%;">' +
         '<div class="card-body">' +
         '<h5 class="card-title">Créer une Playlist</h5>' +
         '<form action="#" method="post" id="form-playlist">' +
@@ -308,16 +310,17 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
           '<div class="bouton-supprimer-style">' +
             '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
           '</div>' +
-          '<div class="bouton-ajouter-style">' +
-            '<button type="button" class="button-add">Ajouter musiques</button>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
+        '</div>';
     }
 
 
         $(".flex-page").html(html);
 
+        $(".play-musique").click(function (event) {
+            let id = $(event.target).closest('.play-musique').attr('value')
+            console.log(id);
+            ajaxRequest("POST", "request.php/historique/" + id + "?user="+id_user)
+        })
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
             console.log(id)

@@ -102,7 +102,6 @@ html, body {
     border : solid white;
     background-color: rgb(25, 157, 166);
     color : white;
-    
 
 }  
 
@@ -232,7 +231,7 @@ html, body {
 
 }
 
-#id-bouton-créer{
+.bouton-créer-style{
 
     color : white;
     border: rgb(25, 157, 166);
@@ -868,9 +867,31 @@ audio::-webkit-media-controls-mute-button {
 /* Partie de boutons qui sont sur le site en géneral */
 /*--------------------------------------------------------------------------------------------------------------*/
 
-.flex-bouton-supprimer-ajouter {
+.flex-bouton-supprimer-ajouter{
+    
     display: flex; 
-    background-color: black;
+    flex-direction: row;
+
+}
+
+.bouton-supprimer-style{
+    
+    margin-left: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+}
+
+.button-delete{
+
+    border : solid white;
+    background-color: rgb(25, 157, 166);
+    color : white;
+
+    border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+
+
+
 }
   
 
