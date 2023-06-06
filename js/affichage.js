@@ -545,6 +545,7 @@ function loadPlaylistsMain(playlists){
                 },"id_musique="+playlists["musique"]["id_musique"])
             }
         )
+    }
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les albums */
