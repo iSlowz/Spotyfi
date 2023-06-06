@@ -825,9 +825,6 @@ function updateMusiqueBar(){
     console.log(musiqueBar.value);
 }
 
-function like(){
-
-}
 
 function boucle(){
     if(document.getElementById('player').loop == true){
