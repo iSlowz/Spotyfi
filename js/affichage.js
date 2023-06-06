@@ -794,8 +794,11 @@ function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
     
     document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">';
 
-    document.getElementById('musique-info').innerHTML ='<p>' + titre_musique + '</p>';
-    document.getElementById('musique-info').innerHTML = '<p>' + nom_artiste + '</p>';
+    document.getElementById('musique-info').innerHTML +=
+    '<p>' + 
+      titre_musique + 
+    '</p>';
+    document.getElementById('musique-info').innerHTML += '<p>' + nom_artiste + '</p>';
 
     if(playing){
         pause();
