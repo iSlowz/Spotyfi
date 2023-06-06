@@ -38,13 +38,14 @@ $('#id-bouton-creer').click(function() {
         event.preventDefault()
         ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
     })
-    $('#form-playlist').submit(function (event){
+    $('#form-playlist').submit(function (event) {
         event.preventDefault()
         console.log($('#titre').val())
-        ajaxRequest("POST", "request.php/playlist_list/" + id_user, ()=>{
+        ajaxRequest("POST", "request.php/playlist_list/" + id_user, () => {
             ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
             ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-        },'titre='+$("#titre").val())
+        }, 'titre=' + $("#titre").val())
+
     })
 });
 $('#btn-creer-playlist').click(function() {
