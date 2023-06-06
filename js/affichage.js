@@ -300,8 +300,11 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
 
         html += '</tbody>' +
             '</table>' +
+            '</div>' +
+            '<div class="bouton-delete-style">' +
+              '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
             '</div>';
-
+    
         $(".flex-page").html(html);
 
         $(".musique-bouton").click(function (event) {
@@ -341,14 +344,21 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
             },)
         })
-
-
-
-}
+        $(".button-delete").click(function (event){
+            console.log("button-delete")
+            let id = $(event.target).closest('.button-delete').attr('value')
+            console.log(id)
+            ajaxRequest("DELETE", "request.php/playlist/" + id, ()=>{
+                ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+                ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+            })
+        },)
 
     $("#Accueil").click(function (event) {
         ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
     })
+
+}
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -783,5 +793,4 @@ volume_bar.value = document.getElementById('player').volume*10;
 
 console.log(volume_bar.value);
 
-setInterval(setVolume, 100);
-
+setInterval(setVolume, 100);Z

@@ -48,6 +48,9 @@ switch ($requestRessource) {
             case "POST":
                 //$result=Array($id, $_POST["id_musique"]);
                 $result=Playlist::addMusique($id, $_POST["id_musique"]);
+            case "DELETE":
+                $result=Playlist::deletePlaylist($id);
+
         }
         break;
     case 'musique':
