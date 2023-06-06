@@ -315,6 +315,11 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
 
         $(".flex-page").html(html);
 
+        $(".play-musique").click(function (event) {
+            let id = $(event.target).closest('.play-musique').attr('value')
+            console.log(id);
+            ajaxRequest("POST", "request.php/historique/" + id + "?user="+id_user)
+        })
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
             console.log(id)
