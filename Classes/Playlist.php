@@ -66,6 +66,10 @@ class Playlist
                 $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
                 $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
 
+                $timestamp = $result["musiques"][$i]["date_ajout_musique_playlist"];
+                $date = date("d-m-Y", strtotime($timestamp));
+                $result["musiques"][$i]["date_ajout_musique_playlist"] = $date;
+
                 if (Musique::isFavori($id_user,$result["musiques"][$i]["id_musique"])){
                     $result["musiques"][$i]["like"]=true;
                 }

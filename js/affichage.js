@@ -329,8 +329,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/historique/" + id,()=>{
-            },"id_user="+id_user)
+            ajaxRequest("POST", "request.php/historique/" + id,()=>{},"id_user="+id_user)
         })
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
@@ -594,8 +593,7 @@ $("#id-bouton-user").click(function (event) {
 
 function loadProfil(profil) {
         console.log(profil)
-        $(".flex-page").html(
-            
+        let html=
             '<div class="flex-info-user">' +
               '<h1>Nom&ensp;:&ensp;</h1>' + ' '+
               '<div id="nom_user">' + 
@@ -636,10 +634,10 @@ function loadProfil(profil) {
               '</form>' +
             '</div>'
 
-        )
+        $(".flex-page").html(html)
         $('#modif_profil').click(function (event) {
 
-            $('.flex-page').append(
+            $('.flex-page').html(html+
                 '<hr class="trait">' +
                 '<div class="form-modif-profil" ' +
                   '<form id="changement_profil" action="#" method="post">' +
