@@ -50,7 +50,7 @@ class Playlist
             $conn = Database::connexionBD();
             $result=Array();
             $statement = $conn->prepare("SELECT id_musique, date_ajout_musique_playlist, titre_musique,
-                                 lien_musique, duree_musique, ar.id_artiste, pseudo_artiste, id_album, titre_album
+                                 lien_musique, duree_musique, ar.id_artiste, pseudo_artiste, id_album, photo_album, titre_album
                                                 FROM musique_playlist JOIN musique m using (id_musique)
                                                 JOIN artiste ar using (id_artiste)
                                                 JOIN album  al using (id_album)

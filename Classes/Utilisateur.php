@@ -15,11 +15,9 @@ class Utilisateur
             return $_SESSION['user'];
         }
 
-
         if (!isset($_SESSION['id_utilisateur']) && $file != 'Login.php') {    //deco
             header('Location: Login.php');
         }
-
 
 
         if (!empty($_POST['mail']) && !empty($_POST['password'])) {
@@ -146,7 +144,7 @@ class Utilisateur
                     error_log('Connection error: '.$exception->getMessage());
                     return false;
                 }
-                header('Location: Accueil.php');
+                header('Location: Login.php');
             }
         }
         return False;
