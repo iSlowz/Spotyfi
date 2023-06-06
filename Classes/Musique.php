@@ -167,10 +167,10 @@ class Musique
         }
     }
 
-    static function addInHistorique($id_user, $id_musique){
+    static function addInHistorique($id_musique, $id_user){
         try {
             $conn = Database::connexionBD();
-
+            //On trouve la playlist historique de l'utilisateur
             $statement = $conn->prepare("SELECT playlist.id_playlist FROM playlist 
                                                     WHERE id_user=:id_user AND titre_playlist='Historique'");
             $statement->bindParam(':id_user', $id_user);

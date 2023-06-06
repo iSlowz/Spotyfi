@@ -22,7 +22,7 @@ switch ($requestRessource) {
                 $result=Playlist::getHistorique($id);
                 break;
             case "POST":
-                $result=Musique::addInHistorique($id, $_POST["id_musique"]);
+                $result=Musique::addInHistorique($id,$_POST["id_user"]);
                 break;
         }
         break;
