@@ -1,11 +1,7 @@
-//recupère l'id de l'uilisateur présente dans la value du bouton du profil
-let id_user = document.getElementById("id_user").innerText
-
-//Charge l'historique et la liste de playlist
+//recupère l'id de l'uilisateur présente dans la value du bouton du profillet id_user = document.getElementById("id_user").innerText
 ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
-
-
+ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)   //id_user sera ce qu'on va retrouver
+//dans id dans request.php (car après le /)
 $('.flex-recherche').submit(function (event){
     event.preventDefault()
     console.log($('#bar-recherche').val())
@@ -329,7 +325,9 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/historique/" + id,function(){},"id_user="+id_user)
+            ajaxRequest("POST", "request.php/historique/" + id,()=>{
+                ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
+            },"id_user="+id_user)
         })
         $(".musique-bouton").click(function (event) {
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
@@ -403,10 +401,7 @@ function showMusique(musique) {
             '<p> Son artiste : <button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></p>' +
             '<p> Style : ' + musique["nom_style"] + '</p>' +
             '</div>'
-        
             )
-
-        $(".flex-page").append('<div class="flex-boutons-musique"')
         
         if (musique["like"]===false) {
             $(".flex-page").append(
@@ -427,7 +422,7 @@ function showMusique(musique) {
         }
 
         else{
-            $(".flex-page").append(
+            $(".flex-page").append( //bouton coeur
                 
                 '<button type="button" class="unlike-musique" value="' + musique["id_musique"] + '">'+
                   '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">'+
@@ -445,7 +440,7 @@ function showMusique(musique) {
             })
         }
 
-        $(".flex-page").append(
+        $(".flex-page").append( //bouton +
             
             '<button type="button" class="add-playlist" id="add-playlist" value="'+musique["id_musique"]+'">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">' +
@@ -455,7 +450,7 @@ function showMusique(musique) {
             '</button>'
         
         )
-        $(".flex-page").append(
+        $(".flex-page").append( //bouton jouer
             
             '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\' )">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
@@ -466,12 +461,12 @@ function showMusique(musique) {
 
         )
 
-        $(".flex-page").append('</div>')
-
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/historique/" + id,function(){},"id_user="+id_user)
+            ajaxRequest("POST", "request.php/historique/" + id,()=>{
+                ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
+            },"id_user="+id_user)
         })
         $("#add-playlist").click(function (event){
             let id = $(event.target).closest('#add-playlist').attr('value')   // id de la musique
@@ -509,19 +504,18 @@ function loadPlaylistsMain(playlists){
     playlists["playlists"].forEach(function (playlist) {
         console.log(playlist)
         $(".flex-page").append(
-        
+
         '<button type="button" class="add-in-one-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>'
-        
+
         )
     })
 
     $(".flex-page").append('</div>')
 
 
-    $(".add-playlist").click(function (event) {
-            let id = $(event.target).closest('.add-playlist').attr('value')
-            console.log(id)
-            console.log(playlists["musique"]["id_musique"])
+    $(".add-in-one-playlist").click(function (event) {
+            let id = $(event.target).closest('.add-in-one-playlist').attr('value')
+            console.log(id,playlists["musique"]["id_musique"])
             ajaxRequest("POST", "request.php/playlist/" + id, ()=>{
                 ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
             },"id_musique="+playlists["musique"]["id_musique"])
