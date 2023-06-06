@@ -23,7 +23,9 @@ $('#bar-recherche').on('input',function (event){
 })
 $('#id-bouton-creer').click(function() {
     console.log("creer");
-    $('.flex-page').html('<div class="card" id="id-card" style="width: 70%;">' +
+    $('.flex-page').html(
+        
+        '<div class="card" id="id-card" style="width: 70%;">' +
         '<div class="card-body">' +
         '<h5 class="card-title">Créer une Playlist</h5>' +
         '<form action="#" method="post" id="form-playlist">' +
@@ -306,9 +308,6 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
         '<div class="flex-bouton-supprimer-ajouter">'+
           '<div class="bouton-supprimer-style">' +
             '<button type="button" class="button-delete" value="' + playlist["id_playlist"] + '">Supprimer playlist</button>' +
-          '</div>' +
-          '<div class="bouton-ajouter-style">' +
-            '<button type="button" class="button-add">Ajouter musiques</button>' +
           '</div>' +
         '</div>';
     }

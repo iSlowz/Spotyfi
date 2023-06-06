@@ -64,7 +64,7 @@ echo "<div id='id_user' style='display: none'>".$id_user."</div>";
       <div class="flex-playlist">
       </div>
       <div class="bouton-créer">
-        <button class="btn" id="id-bouton-creer" type="submit">Créer +</button>
+        <button class="bouton-créer-style" id="id-bouton-creer">Créer +</button>
       </div>
     </div>
     <div class="Page-Central">
