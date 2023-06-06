@@ -19,7 +19,6 @@ INSERT INTO public.artiste(nom_artiste, type_artiste, prenom_artiste, pseudo_art
 INSERT INTO public.artiste(nom_artiste, type_artiste, prenom_artiste, pseudo_artiste, id_style) VALUES('Chill', 'chanteur', 'Low', 'LO-FI-sleep', (SELECT id_style FROM public.style WHERE nom_style = 'lo-fi'));
 INSERT INTO public.artiste(nom_artiste, type_artiste, prenom_artiste, pseudo_artiste, id_style) VALUES('Stark', 'groupe', 'Tony', 'METAL-soldiers', (SELECT id_style FROM public.style WHERE nom_style = 'heavy-metal'));
 
-
 /*création des albums*/
 INSERT INTO public.album(titre_album, photo_album, date_creation_album, id_artiste, id_style) VALUES('first_album', 'album_cover/album1.png', DATE '2022-08-08', (SELECT id_artiste FROM public.artiste WHERE pseudo_artiste = 'Mariooo'), (SELECT id_style FROM public.style WHERE nom_style = 'pop'));
 INSERT INTO public.album(titre_album, photo_album, date_creation_album, id_artiste, id_style) VALUES('second_album', 'album_cover/album2.png', DATE '2023-08-08', (SELECT id_artiste FROM public.artiste WHERE pseudo_artiste = 'Mariooo'), (SELECT id_style FROM public.style WHERE nom_style = 'rock'));
