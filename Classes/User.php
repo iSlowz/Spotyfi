@@ -33,7 +33,7 @@ class User
         try {
             $conn = Database::connexionBD();
 
-            $statement = $conn->prepare("SELECT id_playlist, titre_playlist FROM playlist WHERE id_user=:id_user AND titre_playlist='Favoris'");
+            $statement = $conn->prepare("SELECT id_playlist, titre_playlist FROM playlist WHERE id_user=:id_user AND titre_playlist='Favoris' ORDER BY date_creation_playlist DESC");
             $statement->bindParam(':id_user', $id_user);
             $statement->execute();
             $result["favoris"] = $statement->fetch(PDO::FETCH_ASSOC);
