@@ -820,7 +820,6 @@ function updateMusiqueBar(){
         const val = musiqueBar.value ;
         setCurrentTime(val);
     });
-    console.log(musiqueBar.value);
 }
 
 
