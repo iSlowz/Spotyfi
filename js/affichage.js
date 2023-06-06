@@ -1,7 +1,11 @@
-//recupère l'id de l'uilisateur présente dans la value du bouton du profillet id_user = document.getElementById("id_user").innerText
+//recupère l'id de l'uilisateur présente dans la value du bouton du profil
+let id_user = $("#id-bouton-user").val()
+
+//Charge l'historique et la liste de playlist
 ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)   //id_user sera ce qu'on va retrouver
-//dans id dans request.php (car après le /)
+ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+
+
 $('.flex-recherche').submit(function (event){
     event.preventDefault()
     console.log($('#bar-recherche').val())
@@ -401,7 +405,10 @@ function showMusique(musique) {
             '<p> Son artiste : <button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></p>' +
             '<p> Style : ' + musique["nom_style"] + '</p>' +
             '</div>'
+        
             )
+
+        $(".flex-page").append('<div class="flex-boutons-musique"')
         
         if (musique["like"]===false) {
             $(".flex-page").append(
@@ -461,6 +468,8 @@ function showMusique(musique) {
 
         )
 
+        $(".flex-page").append('</div>')
+
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
@@ -489,41 +498,41 @@ function showMusique(musique) {
 }
 
 
-function loadPlaylistsMain(playlists){
-    console.log(playlists)
-    $(".flex-page").html(
-        '<div class="titre-ajoute">'+
-        '<h2>A quelle playlist souhaitez vous ajoutez : "'+playlists["musique"]["titre_musique"] +
-        '" de "'+playlists["musique"]["pseudo_artiste"]+'" ? </h2>'+
-        '</div>'+
-        '<hr class="trait-long">'
-    )
-
-    $(".flex-page").append('<div class="liste-playlist-ajoute">')
-
-    playlists["playlists"].forEach(function (playlist) {
-        console.log(playlist)
-        $(".flex-page").append(
-
-        '<button type="button" class="add-in-one-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>'
-
+    function loadPlaylistsMain(playlists){
+        console.log(playlists)
+        $(".flex-page").html(
+            '<div class="titre-ajoute">'+
+            '<h2>A quelle playlist souhaitez vous ajoutez : "'+playlists["musique"]["titre_musique"] +
+            '" de "'+playlists["musique"]["pseudo_artiste"]+'" ? </h2>'+
+            '</div>'+
+            '<hr class="trait-long">'
         )
-    })
 
-    $(".flex-page").append('</div>')
+        $(".flex-page").append('<div class="liste-playlist-ajoute">')
+
+        playlists["playlists"].forEach(function (playlist) {
+            console.log(playlist)
+            $(".flex-page").append(
+
+            '<button type="button" class="add-in-one-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>'
+
+            )
+        })
+
+        $(".flex-page").append('</div>')
 
 
-    $(".add-in-one-playlist").click(function (event) {
-            let id = $(event.target).closest('.add-in-one-playlist').attr('value')
-            console.log(id,playlists["musique"]["id_musique"])
-            ajaxRequest("POST", "request.php/playlist/" + id, ()=>{
-                ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
-            },"id_musique="+playlists["musique"]["id_musique"])
-        }
-    )
+        $(".add-in-one-playlist").click(function (event) {
+                let id = $(event.target).closest('.add-in-one-playlist').attr('value')
+                console.log(id,playlists["musique"]["id_musique"])
+                ajaxRequest("POST", "request.php/playlist/" + id, ()=>{
+                    ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
+                },"id_musique="+playlists["musique"]["id_musique"])
+            }
+        )
 
 
-}
+    }
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les albums */
