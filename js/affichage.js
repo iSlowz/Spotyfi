@@ -401,7 +401,6 @@ function showMusique(musique) {
             '<p> Son artiste : <button type="button" class="artiste-bouton" value="' + musique["id_artiste"] + '">' + musique["pseudo_artiste"] + '</button></p>' +
             '<p> Style : ' + musique["nom_style"] + '</p>' +
             '</div>'
-        
             )
         
         if (musique["like"]===false) {
@@ -462,8 +461,6 @@ function showMusique(musique) {
 
         )
 
-        //$(".flex-page").append('</div>')
-
         $(".play-musique").click(function (event) {
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
@@ -502,18 +499,18 @@ function loadPlaylistsMain(playlists){
         '<hr class="trait-long">'
     )
 
-    //$(".flex-page").append('<div class="liste-playlist-ajoute">')
+    $(".flex-page").append('<div class="liste-playlist-ajoute">')
 
     playlists["playlists"].forEach(function (playlist) {
         console.log(playlist)
         $(".flex-page").append(
-        
-        '<button class="add-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>'
-        
+
+        '<button type="button" class="add-in-one-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>'
+
         )
     })
 
-    //$(".flex-page").append('</div>')
+    $(".flex-page").append('</div>')
 
 
     $(".add-in-one-playlist").click(function (event) {
