@@ -6,6 +6,7 @@ ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)//histori
 ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
 
 //Si submit de la barre de recherche, lance la requete ajax pour la recherche si il y a une valeur, sinon recharge l'historique
+
 $('.flex-recherche').submit(function (event){
     event.preventDefault()
     console.log($('#bar-recherche').val())
@@ -18,6 +19,7 @@ $('.flex-recherche').submit(function (event){
 })
 
 //Si l'utilisateur écrit dans la barre, lance la requete ajax à chaque changement, remet à l'accueil si barre vide
+
 $('#bar-recherche').on('input',function (event){
     console.log($('#bar-recherche').val())
     if ($('#bar-recherche').val()!="") {
@@ -29,6 +31,7 @@ $('#bar-recherche').on('input',function (event){
 })
 
 //Si click sur bouton Créer, charge dans flex-page la page de création d'une playlist
+
 $('#id-bouton-creer').click(function() {
     $('.flex-page').html(
             
@@ -70,6 +73,7 @@ $('#id-bouton-creer').click(function() {
  * @param recherches résulats de la recherche en fonction du texte
  * recherches["musiques"] pour les musiques, recherches["artistes"] pour les artistes, recherches["albums"] pour les albums
  */
+
 function showRecherches(recherches) {
     console.log(recherches);
     let html=
@@ -183,6 +187,7 @@ function showRecherches(recherches) {
  * Affiche l'historique de l'utilisateur, sert aussi de page d'accueil
  * @param musiques les 10 musiques de l'historiques
  */
+
 function loadHistorique(musiques) {
     console.log(musiques)
     $(".flex-page").html('')
@@ -261,6 +266,7 @@ function loadPlaylists(playlists) {
  * Affiche les informations d'une playlist et les musiques qu'elle contient
  * @param playlist la playlist
  */
+
 function showPlaylist(playlist) {
         console.log(playlist);
 
@@ -779,6 +785,7 @@ function loadProfil(profil) {
  * Affiche les informations d'un artiste
  * @param artiste l'artiste
  */
+
 function showArtiste(artiste) {
         console.log(artiste)
         console.log(artiste["pseudo_artiste"])
@@ -946,11 +953,13 @@ function getDuration(){
     x.play();
     return parseInt(x.duration);
 }
+
 function getCurrentTime(){
     let x = document.getElementById('player');
     x.play();
     return parseInt(x.currentTime);
 }
+
 function setCurrentTime(k){
     let x = document.getElementById('player');
     x.play();
@@ -986,6 +995,7 @@ function setVolume(){
     }
     
 }
+
 let volume_bar = document.getElementById('volume-bar');
 volume_bar.value = document.getElementById('player').volume*10;
 
