@@ -28,7 +28,14 @@ switch ($requestRessource) {
         switch ($requestMethod){
             case "GET":
                 $result=User::getPlaylists($id);
+                if (isset($_GET["musique"])){
+                    //$result = json_decode($_GET["musique"]);
+                    $result["musique"]=json_decode($_GET["musique"]);
+                }
                 break;
+            case "POST":
+                //$result=Array($id,$_POST["titre"]);
+                $result=User::addPlaylist($id,$_POST["titre"]);
         }
         break;
     case 'playlist':
@@ -36,6 +43,9 @@ switch ($requestRessource) {
             case "GET":
                 $result=Playlist::getMusiques($id);
                 break;
+            case "POST":
+                //$result=Array($id, $_POST["id_musique"]);
+                $result=Playlist::addMusique($id, $_POST["id_musique"]);
         }
         break;
     case 'musique':

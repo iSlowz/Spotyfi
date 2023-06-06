@@ -115,6 +115,20 @@ class User
         }
         return true;
     }
+
+    static function addPlaylist($id_user, $titre){
+        try {
+            $conn = Database::connexionBD();
+            $statement = $conn->prepare("INSERT INTO playlist(titre_playlist, date_creation_playlist, id_user) VALUES(:titre, NOW(), :id_user)");
+            $statement->bindParam(':id_user', $id_user);
+            $statement->bindParam(':titre', $titre);
+            $statement->execute();
+            return true;
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+    }
 }
 
 ?>

@@ -21,6 +21,37 @@ $('#bar-recherche').on('input',function (event){
         ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
     }
 })
+$('#id-bouton-creer').click(function() {
+    console.log("creer");
+    $('.flex-page').html('<div class="card" id="id-card" style="width: 70%;">' +
+        '<div class="card-body">' +
+        '<h5 class="card-title">Créer une Playlist</h5>' +
+        '<form action="#" method="post" id="form-playlist">' +
+        '<label for="userInput" class="titre-nouvelle-playlist">Titre de la Playlist : </label>' +
+        '<input type="text" class="form-control" id="titre" aria-describedby="userInput" name="titre">' +
+        '<button class="bouton-valid-annule" id="valider" type="submit">Valider</button>' +
+        '<button class="bouton-valid-annule" id="annuler" type="button">Annuler</button>' +
+        '</form></div>' +
+        '</div>');
+
+    $('#annuler').click(function (event) {
+        event.preventDefault()
+        ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+    })
+    $('#form-playlist').submit(function (event){
+        event.preventDefault()
+        console.log($('#titre').val())
+        ajaxRequest("POST", "request.php/playlist_list/" + id_user, ()=>{
+            ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+            ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+        },'titre='+$("#titre").val())
+    })
+});
+$('#btn-creer-playlist').click(function() {
+    var nomPlaylist = $('#nom-playlist').val();
+    // Traitez le nom de la playlist ici
+    $('#modal-creer-playlist').modal('hide');
+});
 
 function showRecherches(recherches) {
     console.log(recherches);
@@ -161,7 +192,8 @@ function loadHistorique(musiques) {
 
 function loadPlaylists(playlists) {
     console.log(playlists)
-    $(".flex-playlist").append('<button class="playlist-bouton" value="' + playlists["favoris"]["id_playlist"] + '" type="submit">' + playlists["favoris"]["titre_playlist"] + ' <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n' +
+    $(".flex-playlist").html('<label id="Playlist">Playlists</label>'+
+    '<button class="playlist-bouton" value="' + playlists["favoris"]["id_playlist"] + '" type="submit">' + playlists["favoris"]["titre_playlist"] + ' <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n' +
         '            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n' +
         '          </svg></button>')
     playlists["playlists"].forEach(function (playlist) {
@@ -222,7 +254,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
             html +=
                 '<tr id="tableau-playlist">' +
                   '<td>' +
-                    '<button type="button" class="play-musique" value="' + musique["id_musique"] + '">' +
+                    '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\' )">' +
                       '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
                         '<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'+
                         '<path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>'+
@@ -361,6 +393,18 @@ function showMusique(musique) {
                 },)
             })
         }
+        $(".flex-page").append('<button type="button" id="add-playlist" value="'+musique["id_musique"]+'">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">' +
+            '  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>' +
+            '  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>' +
+            '</svg>' +
+            '</button>')
+
+        $("#add-playlist").click(function (event){
+            let id = $(event.target).closest('#add-playlist').attr('value')   // id de la musique
+            console.log(id)
+            ajaxRequest("GET", "request.php/playlist_list/" + id_user + "?musique="+JSON.stringify(musique), loadPlaylistsMain)
+        })
 
         $(".album-bouton").click(function (event) {
             let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album
@@ -377,6 +421,27 @@ function showMusique(musique) {
 
 }
 
+function loadPlaylistsMain(playlists){
+    console.log(playlists)
+    $(".flex-page").html('<p>A quelle playlist souhaitez vous ajoutez '+playlists["musique"]["titre_musique"] +
+        ' de '+playlists["musique"]["pseudo_artiste"]+' ? </p>')
+    playlists["playlists"].forEach(function (playlist) {
+        console.log(playlist)
+        $(".flex-page").append('<button class="add-playlist" value="' + playlist["id_playlist"] + '" type="submit">' + playlist["titre_playlist"] + '</button>')
+    })
+
+    $(".add-playlist").click(function (event) {
+            let id = $(event.target).closest('.add-playlist').attr('value')
+            console.log(id)
+            console.log(playlists["musique"]["id_musique"])
+            ajaxRequest("POST", "request.php/playlist/" + id, ()=>{
+                ajaxRequest("GET", "request.php/playlist/" + id, showPlaylist)
+            },"id_musique="+playlists["musique"]["id_musique"])
+        }
+    )
+
+
+}
 
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les albums */
@@ -608,27 +673,26 @@ function showArtiste(artiste) {
 }
 
 let playing = false;
+function playPauseFrom(lien){
+    document.getElementById('player').innerHTML = '<source src="' + lien + '" >';
+    playPause();
+
+}
+
 function playPause(){
     if(!playing){
-        lancer();
         playing = true;
+        lancer();
     }
     else{
-        pause();
         playing = false;
+        pause();
     }
-
 }
 function lancer(){
     document.getElementById('btn-lancer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/></svg>';
 
-    let max = getDuration()-1;
-    document.getElementById('range-test').max = max;
-
-    console.log(max);
-
-    myInterval = setInterval(updateMusiqueBar, 1000, max);
-
+    myInterval = setInterval(updateMusiqueBar, 1001);
 
     document.getElementById('player').play();
 }
@@ -638,15 +702,23 @@ function pause(){
     clearInterval(myInterval);
     document.getElementById('player').pause();
 }
-function setVolume(){
-    let volume_bar = document.getElementById('volume-bar');
-    volume_bar.value = document.getElementById('player').volume*10;
+function updateMusiqueBar(){
+    let max = getDuration()-1;
+    document.getElementById('range-test').max = max;
 
-    volume_bar.addEventListener("change", () => {
-        const vol = volume_bar.value ;
-        document.getElementById('player').volume = vol*0.1;
-    }); 
+    let musiqueBar = document.getElementById('range-test');
+    musiqueBar.value = getCurrentTime();
+    if(musiqueBar.value == max && document.getElementById('player').loop == false){
+        musiqueBar.value = 0;
+        pause();
+    }
+    musiqueBar.addEventListener("change", () => {
+        const val = musiqueBar.value ;
+        setCurrentTime(val);
+    });
+    console.log(musiqueBar.value);
 }
+
 function boucle(){
     if(document.getElementById('player').loop == true){
         console.log('false');
@@ -674,18 +746,39 @@ function setCurrentTime(k){
     x.play();
     x.currentTime = k;
 }
-function updateMusiqueBar(max){
-    let musiqueBar = document.getElementById('range-test');
-    musiqueBar.value = getCurrentTime();
-    if(musiqueBar.value == max && document.getElementById('player').loop == false){
-        pause();
-    }
-    musiqueBar.addEventListener("change", () => {
-        const val = musiqueBar.value ;
-        setCurrentTime(val);
-    });
-    console.log(musiqueBar.value);
+function plus5s(){
+    let x = document.getElementById('player');
+    x.play();
+    x.currentTime += 5;
 }
+function moins5s(){
+    let x = document.getElementById('player');
+    x.play();
+    x.currentTime -= 5;
+}
+
+
+function setVolume(){
+    
+    volume_bar.addEventListener("change", () => {
+        const vol = volume_bar.value ;
+        document.getElementById('player').volume = vol*0.1;
+    }); 
+    if(volume_bar.value <= 10 && volume_bar.value >= 7){
+        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-up" viewBox="0 0 16 16"> <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/> <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/> <path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"/> </svg>';
+    }
+    else{
+        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-down" viewBox="0 0 16 16"> <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zM6.312 6.39 8 5.04v5.92L6.312 9.61A.5.5 0 0 0 6 9.5H4v-3h2a.5.5 0 0 0 .312-.11zM12.025 8a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/> </svg>';
+    }
+    if(volume_bar.value == 0){
+        document.getElementById('logo-volume').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-volume-mute" viewBox="0 0 16 16"> <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/> </svg>';
+    }
+    
+}
+let volume_bar = document.getElementById('volume-bar');
+volume_bar.value = document.getElementById('player').volume*10;
+
+console.log(volume_bar.value);
 
 setInterval(setVolume, 100);
 
