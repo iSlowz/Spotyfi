@@ -868,9 +868,11 @@ audio::-webkit-media-controls-mute-button {
 /* Partie de boutons qui sont sur le site en géneral */
 /*--------------------------------------------------------------------------------------------------------------*/
 
-.flex-bouton-supprimer-ajouter {
+.flex-bouton-supprimer-ajouter{
+    
     display: flex; 
-    background-color: black;
+    flex-direction: row;
+
 }
   
 

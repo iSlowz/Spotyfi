@@ -310,8 +310,7 @@ function showPlaylist(playlist) {    //affiche les musiques d'une playlist
           '<div class="bouton-ajouter-style">' +
             '<button type="button" class="button-add">Ajouter musiques</button>' +
           '</div>' +
-        '</div>' +
-      '</div>';
+        '</div>';
     }
 
 
