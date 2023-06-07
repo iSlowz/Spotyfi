@@ -1,8 +1,10 @@
 <?php
 require_once('Musique.php');
-class Playlist
+class Playlist  //gère les playlists
 {
-    
+    /**Récupére l'historique d'un utilisateur
+     * @param $id_user, son id
+     */
     static function getHistorique($id_user){
         try {
             $conn = Database::connexionBD();
@@ -22,8 +24,11 @@ class Playlist
         }
     }
 
-    static function getMusiques($id_playlist){  //recupère l'utilisateur de la playlist
-        try {
+    /**Récupère les musiques d'un playlist
+     * @param $id_playlist
+     */
+    static function getMusiques($id_playlist){
+        try {//recupère l'utilisateur de la playlist, pour savoir ensuite s'il a like les musiques
             $conn = Database::connexionBD();
 
             $statement = $conn->prepare("SELECT id_user FROM playlist 
@@ -37,7 +42,7 @@ class Playlist
             return false;
         }
 
-        try {
+        try {   //Récupère toutes les musiques et leurs infos
             $conn = Database::connexionBD();
             $result=Array();
             $statement = $conn->prepare("SELECT id_musique, date_ajout_musique_playlist, titre_musique,
@@ -50,16 +55,18 @@ class Playlist
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
             $result["musiques"] = $statement->fetchAll(PDO::FETCH_ASSOC);
-
             for ($i=0;$i<count($result["musiques"]);$i++) {
+                //Formate la durée de la musique
                 list($heures, $minutes, $secondes) = explode(":", $result["musiques"][$i]["duree_musique"]);
                 $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
                 $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
 
+                //formate la date d'ajout de la musique
                 $timestamp = $result["musiques"][$i]["date_ajout_musique_playlist"];
                 $date = date("d-m-Y", strtotime($timestamp));
                 $result["musiques"][$i]["date_ajout_musique_playlist"] = $date;
 
+                //ajoute un bolléen au tableau pour savoir si la playlist est like
                 if (Musique::isFavori($id_user,$result["musiques"][$i]["id_musique"])){
                     $result["musiques"][$i]["like"]=true;
                 }
@@ -69,6 +76,8 @@ class Playlist
 
 
             }
+
+            //récupère les informations de la playlist
             $statement = $conn->prepare("SELECT id_playlist, titre_playlist, date_creation_playlist FROM playlist WHERE id_playlist=:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
@@ -80,6 +89,11 @@ class Playlist
             return false;
         }
     }
+
+    /**Ajoute une musique à une playlist
+     * @param $id_playlist, la playlist
+     * @param $id_musique, la musique
+     */
     static function addMusique($id_playlist ,$id_musique){
         try {
             $conn = Database::connexionBD();
@@ -95,6 +109,11 @@ class Playlist
         }
     }
 
+    /**Supprime une musique de la playlist
+     * @param $id_musique, id de la musique
+     * @param $id_playlist, id de la playlist
+     * @return bool
+     */
     static function deleteMusique($id_musique, $id_playlist){
         try {
             $conn = Database::connexionBD();
@@ -110,14 +129,21 @@ class Playlist
         }
     }
 
+    /**Supprime une playlist
+     * @param $id_playlist
+     * @return bool
+     */
     static function deletePlaylist($id_playlist){
 
         try{
+            //Supprime toutes les musiques de la playlist qui apparaisseent dans la table musique_playlist
             $conn = Database::connexionBD();
 
             $statement = $conn->prepare("DELETE FROM musique_playlist WHERE id_playlist =:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
+
+            //Supprime la playlist
             $statement = $conn->prepare("DELETE FROM playlist WHERE id_playlist =:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
@@ -129,6 +155,11 @@ class Playlist
 
     }
 
+    /**Modifie le titre d'une playlist
+     * @param $id_playlist, id de la playlist
+     * @param $titre, le nouveau titre
+
+     */
     static function modifyName($id_playlist, $titre){
         try{
             $conn = Database::connexionBD();

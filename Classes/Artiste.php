@@ -1,10 +1,12 @@
 <?php
 
-class Artiste
+class Artiste //Classe qui gère les artistes
 {
-    
+    /**Récupère les informations, musiques et albums d'un artiste
+     * @param $id_artiste, id de l'artiste
+     */
     static function getArtiste($id_artiste){
-        try {
+        try {   //récupère ses infos
             $conn = Database::connexionBD();
             $statement = $conn->prepare("SELECT id_artiste, pseudo_artiste, nom_artiste, prenom_artiste, type_artiste, s.id_style, nom_style
                     FROM artiste JOIN style s on artiste.id_style = s.id_style
@@ -13,6 +15,7 @@ class Artiste
             $statement->execute();
             $result= $statement->fetch(PDO::FETCH_ASSOC);
 
+            //récupère ses musiques
             $statement = $conn->prepare("SELECT id_musique,  titre_musique, lien_musique, duree_musique, a.id_album, titre_album FROM musique JOIN album a on musique.id_album = a.id_album WHERE musique.id_artiste=:id_artiste");
             $statement->bindParam(':id_artiste', $id_artiste);
             $statement->execute();
@@ -23,6 +26,7 @@ class Artiste
                 $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
             }
             try{
+                //récupère ses albums
                 $conn = Database::connexionBD();
                 $statement = $conn->prepare("SELECT id_album, titre_album, photo_album, date_creation_album
                                             FROM album
@@ -39,8 +43,11 @@ class Artiste
             error_log('Connection error: '.$exception->getMessage());
             return false;
         }
-    }   
+    }
 
+    /** Récupère la liste des artistes dont le pseudo correspond à la chaine entrée
+     * @param $artiste
+     */
     static function getArtisteBySearch($artiste){
 
         try{

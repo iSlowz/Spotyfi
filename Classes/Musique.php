@@ -1,10 +1,17 @@
 <?php
 
-class Musique
+class Musique   //Classe qui gère les musiques
 {
 
+    /**Récupère les informations d'une playlist
+     * @param $id_musique, id de la musique
+     * @param null $id_user, id de l'utilisateur, entrée si besoin de ssavoir s'il aime la musique
+
+     */
     static function getMusique($id_musique, $id_user=null){
         try {
+
+            //Récupère les informations de la musique
             $conn = Database::connexionBD();
             $statement = $conn->prepare("SELECT m.id_musique, m.titre_musique, m.lien_musique, m.duree_musique, m.date_parution_musique,
        al.id_album, al.titre_album, al.photo_album, al.id_artiste, ar.pseudo_artiste, s.id_style,s.nom_style
@@ -16,9 +23,12 @@ class Musique
             $statement->bindParam(':id_musique', $id_musique);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
+            //formate durée de la musique
             list($heures, $minutes, $secondes) = explode(":", $result["duree_musique"]);
             $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
             $result["duree_musique"] = $dureeFormatee;
+
+            //Ajoute un booléen de si l'utilisateur aime ou non la musique
             if (Musique::isFavori($id_user,$result["id_musique"])){
                 $result["like"]=true;
             }
@@ -32,10 +42,13 @@ class Musique
         }
     }
 
+    /**Récupère la liste des musiques dont le titre correspond à la chaine entrée
+     * @param $musique, la chaine entrée
+     * @return array|false
+     */
     static function getMusiquesBySearch($musique){
 
         try{
-
             $conn = Database::connexionBD();
             $statement = $conn->prepare("SELECT id_musique, titre_musique,
                                  lien_musique, duree_musique, ar.id_artiste, pseudo_artiste
@@ -47,6 +60,7 @@ class Musique
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+            //formate durée de chaque musique
             for ($i=0;$i<count($result);$i++) {
                 list($heures, $minutes, $secondes) = explode(":", $result[$i]["duree_musique"]);
                 $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
@@ -60,8 +74,12 @@ class Musique
 
     }
 
+    /** Ajoute à la playlist Favoris de l'utilisateur une musique
+     * @param $id_user, id de l'utilisateur
+     * @param $id_musique, id de la musique
+     */
     static function likeMusic($id_user, $id_musique){
-        try {
+        try { //récupère l'id de la playlist Favoris de l'utilisateur grace à son id
             $conn = Database::connexionBD();
 
             $statement = $conn->prepare("SELECT playlist.id_playlist FROM playlist 
@@ -73,7 +91,7 @@ class Musique
             error_log('Connection error: '.$exception->getMessage());
             return false;
         }
-        try {
+        try {   //Ajoute la musique à la playlist
             $conn = Database::connexionBD();
             $statement = $conn->prepare("INSERT INTO musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) 
                                                 VALUES(:id_musique, :id_playlist, NOW())");
@@ -87,8 +105,12 @@ class Musique
         }
     }
 
+    /**Enlève des favoris une musique
+     * @param $id_user
+     * @param $id_musique
+     */
     static function unlikeMusic($id_user, $id_musique){
-        try {
+        try {//récupère l'id de la playlist Favoris de l'utilisateur grace à son id
             $conn = Database::connexionBD();
 
             $statement = $conn->prepare("SELECT playlist.id_playlist FROM playlist 
@@ -100,7 +122,7 @@ class Musique
             error_log('Connection error: '.$exception->getMessage());
             return false;
         }
-        try {
+        try {//Enleve la musique de la playlist
             $conn = Database::connexionBD();
 
             $statement = $conn->prepare("DELETE FROM musique_playlist 
@@ -115,8 +137,12 @@ class Musique
         }
     }
 
+    /**Vérifie si la musique est dans les Favoris de l'utilisateur
+     * @param $id_user, id de l'utilisateur
+     * @param $id_musique, id de la musique
+     */
     static function isFavori($id_user, $id_musique){
-        try {
+        try {//récupère l'id de la playlist Favoris de l'utilisateur grace à son id
             $conn = Database::connexionBD();
 
             $statement = $conn->prepare("SELECT playlist.id_playlist FROM playlist 
@@ -128,7 +154,7 @@ class Musique
             error_log('Connection error: '.$exception->getMessage());
             return false;
         }
-        try {
+        try {   //Regarde si musique dans favoris
             $conn = Database::connexionBD();
             $statement = $conn->prepare("SELECT id_musique FROM musique_playlist
                                                     WHERE id_musique=:id_musique AND id_playlist=:id_playlist");
@@ -136,16 +162,20 @@ class Musique
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
             $result=$statement->fetch()[0];
-            if (empty($result)){
+            if (empty($result)){    //Si pas de resultar, non
                 return false;
             }
-            return true;
+            return true; //sinon oui
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;
         }
     }
 
+    /** Ajoute dans l'historique de l'utilisateur une musique
+     * @param $id_musique, id de la musique
+     * @param $id_user, id de l'utilisateur
+     */
     static function addInHistorique($id_musique, $id_user){
         try {
             $conn = Database::connexionBD();
@@ -160,9 +190,11 @@ class Musique
             return false;
         }
 
+        //supprime la musique de l'historique si elle y est (pour la remettre en dernière écoutée)
         Playlist::deleteMusique($id_musique, $id_playlist);
 
         try {
+            //Ajoute la musique à la playlist Historique de l'utilisateur
             $conn = Database::connexionBD();
             $statement = $conn->prepare("INSERT INTO musique_playlist(id_musique, id_playlist, date_ajout_musique_playlist) 
                                                 VALUES(:id_musique, :id_playlist, NOW())");

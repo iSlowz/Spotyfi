@@ -1,10 +1,13 @@
 <?php
 
-class Album
+class Album //classe qui gère les albums de la bdd
 {
-
+    /**Récupère les informations et musiques d'un album
+     * @param $id_album
+     * @return array|false|mixed
+     */
     static function getAlbum($id_album){
-        try {
+        try {   //récupère ses musiques
             $result=Array();
             $conn = Database::connexionBD();
             $statement = $conn->prepare("SELECT id_musique,  titre_musique, lien_musique, duree_musique FROM musique JOIN album using (id_album) WHERE id_album=:id_album");
@@ -18,6 +21,7 @@ class Album
                 $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
             }
 
+            //récupère ses informations
             $statement = $conn->prepare("SELECT id_album, titre_album, photo_album, date_creation_album, al.id_artiste, al.id_style, ar.pseudo_artiste
                                     FROM album al
                                     JOIN artiste ar using (id_artiste)
@@ -55,6 +59,10 @@ class Album
         }
     }
 
+    /**Récupère la liste des albums dont le titre correspond à la chaine entrée
+     * @param $album
+     * @return array|false
+     */
     static function getAlbumBySearch($album){
 
         try{
