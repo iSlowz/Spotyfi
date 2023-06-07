@@ -4,8 +4,9 @@
             "previewLimit": 50,
             "server": "localhost",
             "port": 5432,
+            "askForPassword": true,
             "driver": "PostgreSQL",
-            "name": "spotyfyDB",
+            "name": "Spotyfi",
             "database": "spotyfi",
             "username": "spotyfi_admin"
         }
