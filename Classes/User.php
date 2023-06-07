@@ -1,6 +1,6 @@
 <?php
 require_once('Database.php');
-class User
+class User  //Classe qui gère les playlists et activités de l'utilisateur (sa consommation)
 {
 
     static function getPlaylists($id_user){
