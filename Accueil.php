@@ -1,6 +1,6 @@
 <?php
-require_once ('Classes/Utilisateur.php');
-$id_user = Utilisateur::Connexion()
+require_once ('Classes/User.php');
+$id_user = User::Connexion()
 ?>
 
 <!-- /-------------------- HTML --------------------/ -->

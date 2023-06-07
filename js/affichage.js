@@ -18,6 +18,14 @@ $('.flex-recherche').submit(function (event){
     }
 })
 
+$("#id-bouton-user").click(function (event) {   //load le profil de l'utilisateur si click sur le bouton
+    ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
+})
+
+$("#Accueil").click(function (event) { //Si clique sur Spotyfi++, renvoie à l'accueil (l'historique)
+    ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+})
+
 //Si l'utilisateur écrit dans la barre, lance la requete ajax à chaque changement, remet à l'accueil si barre vide
 
 $('#bar-recherche').on('input',function (event){
@@ -206,7 +214,7 @@ function loadHistorique(musiques) {
             '<div class="card-body">' +
             '<div class="id_musique" style="display: none">' + musique["id_musique"] + '</div>' +
             '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
-            '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+musique["id_artiste"] +'">' + musique["pseudo_artiste"] + '</button></p>' +
+            '<p class="card-text">' + musique["pseudo_artiste"] + '</p>' +
             '</div>' +
             '</div>'
 
@@ -426,15 +434,15 @@ function showPlaylist(playlist) {
 
 
 
-        $(".like-musique").click(function (event) {
+        $(".like-musique").click(function (event) { //met en favoris une musique
             let id = $(event.target).closest('.like-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/like/" + id,()=>{
+            ajaxRequest("POST", "request.php/like/" + id,()=>{  //id de la musique en id et id_user en param
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
             },"user="+id_user)
         })
 
-        $(".unlike-musique").click(function (event) {
+        $(".unlike-musique").click(function (event) {   //enleve de favoris la musique
             let id = $(event.target).closest('.unlike-musique').attr('value')
             console.log(id);
             ajaxRequest("DELETE", "request.php/like/" + id + "?user="+id_user,()=>{
@@ -442,12 +450,12 @@ function showPlaylist(playlist) {
             },)
         })
 
-        $(".button-delete").click(function (event){
+        $(".button-delete").click(function (event){ //supprime la playlist de la liste des playlists
             let id = $(event.target).closest('.button-delete').attr('value')
             console.log(id)
             ajaxRequest("DELETE", "request.php/playlist/" + id, ()=>{
-                ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-                ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+                ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique) //renvoie à l'accueil
+                ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)//raffiche la liste de playlists
             })
         },)
 
@@ -461,7 +469,6 @@ function showPlaylist(playlist) {
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les musiques */
 /*--------------------------------------------------------------------------------------------------------------*/
-
 
 function showMusique(musique) {
         console.log(musique)
@@ -498,7 +505,7 @@ function showMusique(musique) {
 
         $(".flex-page").append('<div class="flex-boutons-musique>"')
         
-        if (musique["like"]===false) {
+        if (musique["like"]===false) {  //si c'est pas like, coeur vide, possibilité de like
             $(".flex-page").append(
                 '<button type="button" class="like-musique like-recherche-page" value="' + musique["id_musique"] + '">' + 
                   '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">' +
@@ -507,7 +514,7 @@ function showMusique(musique) {
                 '</button>'
             
             )
-            $(".like-musique").click(function (event) {
+            $(".like-musique").click(function (event) { //si c'est like, coeur plein, possibilité de unlike
                 let id = $(event.target).closest('.like-musique').attr('value')
                 console.log(id);
                 ajaxRequest("POST", "request.php/like/" + id,()=>{
@@ -517,7 +524,7 @@ function showMusique(musique) {
         }
 
         else{
-            $(".flex-page").append( //bouton coeur
+            $(".flex-page").append( //sinon bouton coeur plein pour unlike
                 
                 '<button type="button" class="unlike-musique" value="' + musique["id_musique"] + '">'+
                   '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">'+
@@ -535,7 +542,7 @@ function showMusique(musique) {
             })
         }
 
-        $(".flex-page").append( //bouton +
+        $(".flex-page").append( //bouton ajouter à une playlist
             
             '<button type="button" class="add-playlist" id="add-playlist" value="'+musique["id_musique"]+'">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">' +
@@ -545,7 +552,7 @@ function showMusique(musique) {
             '</button>'
         
         )
-        $(".flex-page").append( //bouton jouer
+        $(".flex-page").append( //bouton jouer la musique
             
             '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\', \'' + musique["photo_album"] + '\', \'' + musique["titre_musique"] + '\', \'' + musique["pseudo_artiste"] + '\' )">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
@@ -558,17 +565,20 @@ function showMusique(musique) {
 
         $(".flex-page").append('</div>')
 
-        $(".play-musique").click(function (event) {
+
+        $(".play-musique").click(function (event) { //jouer musique
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
             ajaxRequest("POST", "request.php/historique/" + id,()=>{
                 ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
             },"id_user="+id_user)
         })
-        $("#add-playlist").click(function (event){
+        $("#add-playlist").click(function (event){  //envoie sur la page pour ajouter la musique à une playlist
+
             let id = $(event.target).closest('#add-playlist').attr('value')   // id de la musique
             console.log(id)
             ajaxRequest("GET", "request.php/playlist_list/" + id_user + "?musique="+JSON.stringify(musique), loadPlaylistsMain)
+            //récupère la liste des playlists de l'utilisateur et garde les informations de la musique pour la callback
         })
 
         $(".album-bouton").click(function (event) {
@@ -585,7 +595,10 @@ function showMusique(musique) {
 
 }
 
-
+/**
+ * Affiche la liste de playlist de l'utilisateur
+ * @param playlists les playlists
+ */
 function loadPlaylistsMain(playlists){
     console.log(playlists)
     $(".flex-page").html(
@@ -620,11 +633,10 @@ function loadPlaylistsMain(playlists){
         )
     }
 
-/*--------------------------------------------------------------------------------------------------------------*/
-/* Permet d'afficher les détails sur les albums */
-/*--------------------------------------------------------------------------------------------------------------*/
-
-
+/**
+ * Permet d'afficher les détails sur les albums
+ * @param album l'album
+ */
 function showAlbum(album) {
         console.log(album)
         let html =
@@ -682,9 +694,6 @@ function showAlbum(album) {
 
 }
 
-$("#id-bouton-user").click(function (event) {
-        ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
-})
 
 function loadProfil(profil) {
         console.log(profil)
@@ -808,7 +817,7 @@ function showArtiste(artiste) {
             '<div class="flex-card-musique page-album-card">'
         artiste["albums"].forEach(function (album){
             html +=
-                '<div class="card " id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+                '<div class="card " id="id-card" style="width: 17%;">' +
                   '<div class="card-body album">' +
                     '<div class="id_musique" style="display: none">' + album["id_album"] + '</div>' +
                       '<h5 class="card-title">' + album["titre_album"] + '</h5>' +

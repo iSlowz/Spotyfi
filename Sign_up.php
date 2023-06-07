@@ -25,8 +25,8 @@
 <body>
 
 <?php
-require_once ('Classes/Utilisateur.php');
-$result=Utilisateur::sign_up();
+require_once ('Classes/User.php');
+$result=User::sign_up();
 ?>
 
   <div class="form">
