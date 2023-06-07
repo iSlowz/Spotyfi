@@ -96,7 +96,7 @@ function showRecherches(recherches) {
             //id de la musique caché dans la card (car card n'a pas de value)
             '<div class="id_musique" style="display: none">' + musique["id_musique"] + '</div>' +
               '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
-              '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+musique["id_artiste"] +'">' + musique["pseudo_artiste"] + '</button></p>' +
+              '<p class="card-text">' + musique["pseudo_artiste"] + '</p>' +
               '<p>'+musique["duree_musique"]+'</p>' +
             '</div>' +
           '</div>'
@@ -114,7 +114,7 @@ function showRecherches(recherches) {
             //id de l'album caché dans la card (car card n'a pas de value)
             '<div class="id_musique" style="display: none">' + album["id_album"] + '</div>' +
             '<h5 class="card-title">' + album["titre_album"] + '</h5>' +
-            '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+album["id_artiste"] +'">' + album["pseudo_artiste"] + '</button></p>' +
+            '<p class="card-text">' + album["pseudo_artiste"] + '</p>' +
             '</div>' +
             '</div>'
     });
@@ -354,7 +354,8 @@ function showPlaylist(playlist) {
         html += '</tbody>' +
             '</table>' +
             '</div>'
-    if (playlist["titre_playlist"]!=="Favoris") { //Pas de possibilité de supprimer la playlist Favoris de l'uitilisateur
+    if (playlist["titre_playlist"]!=="Favoris") { //Pas de possibilité de supprimer ou modifier le nom de
+                                                    // la playlist Favoris de l'uitilisateur
         html +=
         '<div class="flex-bouton-supprimer-ajouter">'+
           '<div class="bouton-supprimer-style">' +
@@ -367,34 +368,34 @@ function showPlaylist(playlist) {
 
         $(".flex-page").html(html);
 
-        $(".play-musique").click(function (event) { //Si clique dessus, lance playlist
+        $(".play-musique").click(function (event) { //Si clique dessus, lance musique et ajoute la musique à l'historique
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
             ajaxRequest("POST", "request.php/historique/" + id,()=>{},"id_user="+id_user)
         })
 
-        $(".musique-bouton").click(function (event) {
+        $(".musique-bouton").click(function (event) {   //affiche details musique
             let id = $(event.target).closest('.musique-bouton').attr('value')   // id de la musique
             console.log(id)
             ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
         })
 
-        $(".album-bouton").click(function (event) {
+        $(".album-bouton").click(function (event) { //affiche details album
             let id = $(event.target).closest('.album-bouton').attr('value')   // id de l'album
             console.log(id)
             ajaxRequest("GET", "request.php/album/" + id, showAlbum) //Vas récupérer information de l'album et les afficher
         })
 
-        $(".artiste-bouton").click(function (event) {
+        $(".artiste-bouton").click(function (event) {   //affiche details artiste
             let id = $(event.target).closest('.artiste-bouton').attr('value')   //id de l'artiste
             console.log(id);
             ajaxRequest("GET", "request.php/artiste/" + id, showArtiste) //Vas récupérer les informations de l'artiste et les afficher
         })
 
-        $(".delete-musique").click(function (event){ //Delete musique
+        $(".delete-musique").click(function (event){ //Delete musique de la playlist
             let id = $(event.target).closest('.delete-musique').attr('value') //
             ajaxRequest("DELETE", "request.php/musique/" + id+"?playlist="+playlist["id_playlist"], ()=>{
-                ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
+                ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist) //raffiche la playlist
             },)
         })
         $(".button-modif").click(function (event){
@@ -410,7 +411,8 @@ function showPlaylist(playlist) {
                 console.log(titre)
 
                 if ($('#nouveau_titre').val()!=='') {
-                    ajaxRequest("PUT", "request.php/playlist/" + playlist["id_playlist"], () => {
+                    ajaxRequest("PUT", "request.php/playlist/" + playlist["id_playlist"], () => {   //modif nom playlist
+                        //avec id playlist en id et titre en parametre
                         ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
                         ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
                     }, "titre=" +titre)
