@@ -797,6 +797,13 @@ img {
 
 }
 
+.flex-text-titre-footer{
+
+    display: flex;
+    flex-direction: column;
+
+}
+
 
 /*Audio du son qui passe*/
 

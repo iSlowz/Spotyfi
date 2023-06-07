@@ -873,15 +873,15 @@ function showArtiste(artiste) {
 let playing = false;
 
 function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
+
     document.getElementById('player').innerHTML = '<source src="' + lien_musique + '" >';
     
     document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">';
 
-    document.getElementById('musique-info').innerHTML +=
-    '<p>' + 
-      titre_musique + 
-    '</p>';
-    document.getElementById('musique-info').innerHTML += '<p>' + nom_artiste + '</p>';
+    document.getElementById('musique-info').innerHTML += '<p>Titre&ensp;:&ensp;' + titre_musique + '</p>'
+    document.getElementById('musique-info').innerHTML += '<p>Artiste&ensp;:&ensp;' + nom_artiste + '</p>';
+
+    console.log("TEST1");
 
     if(playing){
         pause();
