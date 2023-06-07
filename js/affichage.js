@@ -869,9 +869,9 @@ function showArtiste(artiste) {
 /* Fonctions relié à la balise audio */
 /*--------------------------------------------------------------------------------------------------------------*/
 
-let playing = false;
+let playing = false; // permet de savoir si un morceau est jouer
 
-function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
+function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){ // met à jour le footer et lance un nouvelle musique
     document.getElementById('player').innerHTML = '<source src="' + lien_musique + '" >';
     
     console.log("test");
@@ -892,7 +892,7 @@ function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
 
 }
 
-function playPause(){
+function playPause(){ // lance ou met en pause la musique
     if(!playing){
         lancer();
     }
@@ -901,7 +901,7 @@ function playPause(){
     }
 }
 
-function lancer(){
+function lancer(){ // lance la musique
     playing = true;
 
     document.getElementById('btn-lancer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/></svg>';
@@ -911,7 +911,7 @@ function lancer(){
     document.getElementById('player').play();
 }
 
-function pause(){
+function pause(){ // met en paus la musique
     playing = false;
 
     document.getElementById('btn-lancer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg>';
@@ -920,7 +920,7 @@ function pause(){
     document.getElementById('player').pause();
 }
 
-function updateMusiqueBar(){
+function updateMusiqueBar(){ // met a jour la bar de progression et met a jour la musique lorsqu'on l'avance
 
     let max = getDuration()-1;
     document.getElementById('range-test').max = max;
@@ -938,7 +938,7 @@ function updateMusiqueBar(){
     });
 }
 
-function boucle(){
+function boucle(){ // rejoue la musique un fois fini ou non
     if(document.getElementById('player').loop == true){
         console.log('false');
         document.getElementById('player').loop = false;
@@ -951,37 +951,37 @@ function boucle(){
     }
 }
 
-function getDuration(){
+function getDuration(){ // retourne la durrée de la musique
     let x = document.getElementById('player');
     x.play();
     return parseInt(x.duration);
 }
 
-function getCurrentTime(){
+function getCurrentTime(){ // retourne le temps auquel on est
     let x = document.getElementById('player');
     x.play();
     return parseInt(x.currentTime);
 }
 
-function setCurrentTime(k){
+function setCurrentTime(k){ // change le temps auquel on est
     let x = document.getElementById('player');
     x.play();
     x.currentTime = k;
 }
 
-function plus5s(){
+function plus5s(){ // avance de 5 seconde dans le morceau
     let x = document.getElementById('player');
     x.play();
     x.currentTime += 5;
 }
 
-function moins5s(){
+function moins5s(){ // recule de 5 seconde dans le morceau
     let x = document.getElementById('player');
     x.play();
     x.currentTime -= 5;
 }
 
-function setVolume(){
+function setVolume(){ // gère la barre de volume
     
     volume_bar.addEventListener("change", () => {
         const vol = volume_bar.value ;
@@ -1002,6 +1002,4 @@ function setVolume(){
 let volume_bar = document.getElementById('volume-bar');
 volume_bar.value = document.getElementById('player').volume*10;
 
-console.log(volume_bar.value);
-
-setInterval(setVolume, 100);
+setInterval(setVolume, 100); // met a jour le volume
