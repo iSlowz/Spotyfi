@@ -302,7 +302,6 @@ function showPlaylist(playlist) {
                   '<tbody>';
 
         playlist["musiques"].forEach(function (musique) {   //Ajoute chaque musique dans le tableau
-            console.log(musique)
             html +=
                 '<tr id="tableau-playlist">' +
                   '<td>' +
@@ -548,7 +547,7 @@ function showMusique(musique) {
         )
         $(".flex-page").append( //bouton jouer
             
-            '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\' )">' +
+            '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\', \'' + musique["photo_album"] + '\', \'' + musique["titre_musique"] + '\', \'' + musique["pseudo_artiste"] + '\' )">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
                 '<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'+
                 '<path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>'+
@@ -875,6 +874,8 @@ let playing = false;
 function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
     document.getElementById('player').innerHTML = '<source src="' + lien_musique + '" >';
     
+    console.log("test");
+    console.log(lien_photo);
     document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">';
 
     document.getElementById('musique-info').innerHTML +=
