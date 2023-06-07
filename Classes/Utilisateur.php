@@ -101,9 +101,10 @@ class Utilisateur   //Classe qui gere l'ajout et le changement d'informations de
                     error_log('Connection error: '.$exception->getMessage());
                     return false;
                 }
-                if (!empty($result)) {  //s'il existe pas on arrête
+                if (!empty($result)) {  //s'il adresse mail déjà présente on arrête
                     return 'Adresse déjà utilisée !';
                 }
+                //sinon on rentre ses informations
                 try {
                     $timestamp = strtotime($_POST["naissance"]); // Formatage du timestamp en SQL DATE
                     $naissance = date('Y-m-d', $timestamp);
@@ -111,7 +112,7 @@ class Utilisateur   //Classe qui gere l'ajout et le changement d'informations de
                     $statement = $conn->prepare("INSERT INTO users(prenom_user, nom_user, date_naissance_user, mail_user, mot_de_passe) 
                                                 VALUES (:prenom, :nom, :naissance, :mail, :mot_de_passe)");
 
-                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); //on crypte le mot de passe
                     $statement->bindParam(":prenom", $_POST['prenom']);
                     $statement->bindParam(":nom", $_POST['nom']);
                     $statement->bindParam(":naissance", $naissance);
@@ -128,7 +129,7 @@ class Utilisateur   //Classe qui gere l'ajout et le changement d'informations de
                 $statement->execute();
                 $id=$statement->fetch(PDO::FETCH_ASSOC)["id_user"];
 
-                //on ajoute Favoris et Historique
+                //on ajoute dans ses playlists une playlist Favoris et une playlist Historique
                 try {
                     $titre='Historique';
                     $statement = $conn->prepare("INSERT INTO playlist(titre_playlist, date_creation_playlist, id_user) 
@@ -158,10 +159,13 @@ class Utilisateur   //Classe qui gere l'ajout et le changement d'informations de
         return False;
     }
 
+    /**
+     * déconnecte l'utilisateur
+     */
     static function deconnexion()
     {
-        unset($_SESSION['user']);
-        header('Location: Login.php');
+        unset($_SESSION['user']);       //supprime sa session
+        header('Location: Login.php');  //Le renvoie à la page de connexion
     }
 
 }
