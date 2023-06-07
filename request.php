@@ -99,7 +99,7 @@ switch ($requestRessource) {
     case 'recherche':
         switch ($requestMethod){
             case "GET":
-                if (!empty($_GET["recherche"])) {
+                if (!empty($_GET["recherche"])) { //recherche pour musique artiste et album en meme temps
                     $recherche=$_GET["recherche"];
                     $result["musiques"] = Musique::getMusiquesBySearch($recherche);
                     $result["albums"] = Album::getAlbumBySearch($recherche);

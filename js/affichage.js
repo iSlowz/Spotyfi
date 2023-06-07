@@ -623,7 +623,7 @@ function loadPlaylistsMain(playlists){
         $(".flex-page").append('</div>')
 
 
-        $(".add-in-one-playlist").click(function (event) {
+        $(".add-in-one-playlist").click(function (event) {  //Ajoute une musique à la playlist
                 let id = $(event.target).closest('.add-in-one-playlist').attr('value')
                 console.log(id,playlists["musique"]["id_musique"])
                 ajaxRequest("POST", "request.php/playlist/" + id, ()=>{
@@ -694,7 +694,10 @@ function showAlbum(album) {
 
 }
 
-
+/**
+ *
+ * @param profil
+ */
 function loadProfil(profil) {
         console.log(profil)
         let html=
