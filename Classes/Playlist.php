@@ -61,11 +61,12 @@ class Playlist  //gère les playlists
                 $dureeFormatee = sprintf("%02d:%02d", $minutes, $secondes);
                 $result["musiques"][$i]["duree_musique"] = $dureeFormatee;
 
-                //formate la date d'ajout de
+                //formate la date d'ajout de la musique
                 $timestamp = $result["musiques"][$i]["date_ajout_musique_playlist"];
                 $date = date("d-m-Y", strtotime($timestamp));
                 $result["musiques"][$i]["date_ajout_musique_playlist"] = $date;
 
+                //ajoute un bolléen au tableau pour savoir si la playlist est like
                 if (Musique::isFavori($id_user,$result["musiques"][$i]["id_musique"])){
                     $result["musiques"][$i]["like"]=true;
                 }
@@ -75,6 +76,8 @@ class Playlist  //gère les playlists
 
 
             }
+
+            //récupère les informations de la playlist
             $statement = $conn->prepare("SELECT id_playlist, titre_playlist, date_creation_playlist FROM playlist WHERE id_playlist=:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
@@ -86,6 +89,11 @@ class Playlist  //gère les playlists
             return false;
         }
     }
+
+    /**Ajoute une musique à une playlist
+     * @param $id_playlist, la playlist
+     * @param $id_musique, la musique
+     */
     static function addMusique($id_playlist ,$id_musique){
         try {
             $conn = Database::connexionBD();
@@ -101,6 +109,11 @@ class Playlist  //gère les playlists
         }
     }
 
+    /**Supprime une musique de la playlist
+     * @param $id_musique, id de la musique
+     * @param $id_playlist, id de la playlist
+     * @return bool
+     */
     static function deleteMusique($id_musique, $id_playlist){
         try {
             $conn = Database::connexionBD();
@@ -116,14 +129,21 @@ class Playlist  //gère les playlists
         }
     }
 
+    /**Supprime une playlist
+     * @param $id_playlist
+     * @return bool
+     */
     static function deletePlaylist($id_playlist){
 
         try{
+            //Supprime toutes les musiques de la playlist qui apparaisseent dans la table musique_playlist
             $conn = Database::connexionBD();
 
             $statement = $conn->prepare("DELETE FROM musique_playlist WHERE id_playlist =:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
+
+            //Supprime la playlist
             $statement = $conn->prepare("DELETE FROM playlist WHERE id_playlist =:id_playlist");
             $statement->bindParam(':id_playlist', $id_playlist);
             $statement->execute();
@@ -135,6 +155,11 @@ class Playlist  //gère les playlists
 
     }
 
+    /**Modifie le titre d'une playlist
+     * @param $id_playlist, id de la playlist
+     * @param $titre, le nouveau titre
+
+     */
     static function modifyName($id_playlist, $titre){
         try{
             $conn = Database::connexionBD();
