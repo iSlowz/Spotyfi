@@ -1,3 +1,3 @@
 <?php
-require_once('Classes/Utilisateur.php');
-Utilisateur::deconnexion();
+require_once('Classes/User.php');
+User::deconnexion();

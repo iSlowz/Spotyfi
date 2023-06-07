@@ -24,8 +24,8 @@
 
 <body>
 <?php
-require_once ('Classes/Utilisateur.php');
-$result=Utilisateur::Connexion();
+require_once ('Classes/User.php');
+$result=User::Connexion();
 ?>
 
   <div class="form">

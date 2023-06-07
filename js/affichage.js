@@ -18,6 +18,14 @@ $('.flex-recherche').submit(function (event){
     }
 })
 
+$("#id-bouton-user").click(function (event) {   //load le profil de l'utilisateur si click sur le bouton
+    ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
+})
+
+$("#Accueil").click(function (event) { //Si clique sur Spotyfi++, renvoie à l'accueil (l'historique)
+    ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
+})
+
 //Si l'utilisateur écrit dans la barre, lance la requete ajax à chaque changement, remet à l'accueil si barre vide
 
 $('#bar-recherche').on('input',function (event){
@@ -206,7 +214,7 @@ function loadHistorique(musiques) {
             '<div class="card-body">' +
             '<div class="id_musique" style="display: none">' + musique["id_musique"] + '</div>' +
             '<h5 class="card-title">' + musique["titre_musique"] + '</h5>' +
-            '<p class="card-text"><button type="button" class="artiste-bouton souligne" value="'+musique["id_artiste"] +'">' + musique["pseudo_artiste"] + '</button></p>' +
+            '<p class="card-text">' + musique["pseudo_artiste"] + '</p>' +
             '</div>' +
             '</div>'
 
@@ -302,7 +310,6 @@ function showPlaylist(playlist) {
                   '<tbody>';
 
         playlist["musiques"].forEach(function (musique) {   //Ajoute chaque musique dans le tableau
-            console.log(musique)
             html +=
                 '<tr id="tableau-playlist">' +
                   '<td>' +
@@ -427,15 +434,15 @@ function showPlaylist(playlist) {
 
 
 
-        $(".like-musique").click(function (event) {
+        $(".like-musique").click(function (event) { //met en favoris une musique
             let id = $(event.target).closest('.like-musique').attr('value')
             console.log(id);
-            ajaxRequest("POST", "request.php/like/" + id,()=>{
+            ajaxRequest("POST", "request.php/like/" + id,()=>{  //id de la musique en id et id_user en param
                 ajaxRequest("GET", "request.php/playlist/" + playlist["id_playlist"], showPlaylist)
             },"user="+id_user)
         })
 
-        $(".unlike-musique").click(function (event) {
+        $(".unlike-musique").click(function (event) {   //enleve de favoris la musique
             let id = $(event.target).closest('.unlike-musique').attr('value')
             console.log(id);
             ajaxRequest("DELETE", "request.php/like/" + id + "?user="+id_user,()=>{
@@ -443,12 +450,12 @@ function showPlaylist(playlist) {
             },)
         })
 
-        $(".button-delete").click(function (event){
+        $(".button-delete").click(function (event){ //supprime la playlist de la liste des playlists
             let id = $(event.target).closest('.button-delete').attr('value')
             console.log(id)
             ajaxRequest("DELETE", "request.php/playlist/" + id, ()=>{
-                ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique)
-                ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)
+                ajaxRequest("GET", "request.php/historique/" + id_user, loadHistorique) //renvoie à l'accueil
+                ajaxRequest("GET", "request.php/playlist_list/" + id_user, loadPlaylists)//raffiche la liste de playlists
             })
         },)
 
@@ -462,7 +469,6 @@ function showPlaylist(playlist) {
 /*--------------------------------------------------------------------------------------------------------------*/
 /* Permet d'afficher les détails sur les musiques */
 /*--------------------------------------------------------------------------------------------------------------*/
-
 
 function showMusique(musique) {
         console.log(musique)
@@ -499,7 +505,7 @@ function showMusique(musique) {
 
         $(".flex-page").append('<div class="flex-boutons-musique>"')
         
-        if (musique["like"]===false) {
+        if (musique["like"]===false) {  //si c'est pas like, coeur vide, possibilité de like
             $(".flex-page").append(
                 '<button type="button" class="like-musique like-recherche-page" value="' + musique["id_musique"] + '">' + 
                   '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">' +
@@ -508,7 +514,7 @@ function showMusique(musique) {
                 '</button>'
             
             )
-            $(".like-musique").click(function (event) {
+            $(".like-musique").click(function (event) { //si c'est like, coeur plein, possibilité de unlike
                 let id = $(event.target).closest('.like-musique').attr('value')
                 console.log(id);
                 ajaxRequest("POST", "request.php/like/" + id,()=>{
@@ -518,7 +524,7 @@ function showMusique(musique) {
         }
 
         else{
-            $(".flex-page").append( //bouton coeur
+            $(".flex-page").append( //sinon bouton coeur plein pour unlike
                 
                 '<button type="button" class="unlike-musique" value="' + musique["id_musique"] + '">'+
                   '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">'+
@@ -536,7 +542,7 @@ function showMusique(musique) {
             })
         }
 
-        $(".flex-page").append( //bouton +
+        $(".flex-page").append( //bouton ajouter à une playlist
             
             '<button type="button" class="add-playlist" id="add-playlist" value="'+musique["id_musique"]+'">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">' +
@@ -546,9 +552,9 @@ function showMusique(musique) {
             '</button>'
         
         )
-        $(".flex-page").append( //bouton jouer
+        $(".flex-page").append( //bouton jouer la musique
             
-            '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\' )">' +
+            '<button type="button" class="play-musique" value="' + musique["id_musique"] + '" onClick="playPauseFrom(\'' + musique["lien_musique"] + '\', \'' + musique["photo_album"] + '\', \'' + musique["titre_musique"] + '\', \'' + musique["pseudo_artiste"] + '\' )">' +
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">'+
                 '<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'+
                 '<path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>'+
@@ -559,17 +565,20 @@ function showMusique(musique) {
 
         $(".flex-page").append('</div>')
 
-        $(".play-musique").click(function (event) {
+
+        $(".play-musique").click(function (event) { //jouer musique
             let id = $(event.target).closest('.play-musique').attr('value')
             console.log(id);
             ajaxRequest("POST", "request.php/historique/" + id,()=>{
                 ajaxRequest("GET", "request.php/musique/" + id + "?id_user="+id_user, showMusique)
             },"id_user="+id_user)
         })
-        $("#add-playlist").click(function (event){
+        $("#add-playlist").click(function (event){  //envoie sur la page pour ajouter la musique à une playlist
+
             let id = $(event.target).closest('#add-playlist').attr('value')   // id de la musique
             console.log(id)
             ajaxRequest("GET", "request.php/playlist_list/" + id_user + "?musique="+JSON.stringify(musique), loadPlaylistsMain)
+            //récupère la liste des playlists de l'utilisateur et garde les informations de la musique pour la callback
         })
 
         $(".album-bouton").click(function (event) {
@@ -586,7 +595,10 @@ function showMusique(musique) {
 
 }
 
-
+/**
+ * Affiche la liste de playlist de l'utilisateur
+ * @param playlists les playlists
+ */
 function loadPlaylistsMain(playlists){
     console.log(playlists)
     $(".flex-page").html(
@@ -621,11 +633,10 @@ function loadPlaylistsMain(playlists){
         )
     }
 
-/*--------------------------------------------------------------------------------------------------------------*/
-/* Permet d'afficher les détails sur les albums */
-/*--------------------------------------------------------------------------------------------------------------*/
-
-
+/**
+ * Permet d'afficher les détails sur les albums
+ * @param album l'album
+ */
 function showAlbum(album) {
         console.log(album)
         let html =
@@ -683,9 +694,6 @@ function showAlbum(album) {
 
 }
 
-$("#id-bouton-user").click(function (event) {
-        ajaxRequest("GET", "request.php/profil/" + id_user, loadProfil)
-})
 
 function loadProfil(profil) {
         console.log(profil)
@@ -809,7 +817,7 @@ function showArtiste(artiste) {
             '<div class="flex-card-musique page-album-card">'
         artiste["albums"].forEach(function (album){
             html +=
-                '<div class="card " id="id-card" style="width: 17%;">' + // Amélioration, mettre les derniers morceaux à gauches
+                '<div class="card " id="id-card" style="width: 17%;">' +
                   '<div class="card-body album">' +
                     '<div class="id_musique" style="display: none">' + album["id_album"] + '</div>' +
                       '<h5 class="card-title">' + album["titre_album"] + '</h5>' +
@@ -870,12 +878,13 @@ function showArtiste(artiste) {
 /* Fonctions relié à la balise audio */
 /*--------------------------------------------------------------------------------------------------------------*/
 
-let playing = false;
+let playing = false; // permet de savoir si un morceau est jouer
 
-function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
-
+function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){ // met à jour le footer et lance un nouvelle musique
     document.getElementById('player').innerHTML = '<source src="' + lien_musique + '" >';
     
+    console.log("test");
+    console.log(lien_photo);
     document.getElementById('musique-info').innerHTML = '<img id="photo-album" src="' + lien_photo + '">';
 
     document.getElementById('musique-info').innerHTML += '<p>Titre&ensp;:&ensp;' + titre_musique + '</p>'
@@ -891,7 +900,7 @@ function playPauseFrom(lien_musique, lien_photo, titre_musique, nom_artiste){
 
 }
 
-function playPause(){
+function playPause(){ // lance ou met en pause la musique
     if(!playing){
         lancer();
     }
@@ -900,17 +909,17 @@ function playPause(){
     }
 }
 
-function lancer(){
+function lancer(){ // lance la musique
     playing = true;
 
     document.getElementById('btn-lancer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/></svg>';
 
-    myInterval = setInterval(updateMusiqueBar, 1001);
+    myInterval = setInterval(updateMusiqueBar, 1001); // met a jour la bar de progression chaque seconde
 
     document.getElementById('player').play();
 }
 
-function pause(){
+function pause(){ // met en paus la musique
     playing = false;
 
     document.getElementById('btn-lancer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg>';
@@ -919,7 +928,7 @@ function pause(){
     document.getElementById('player').pause();
 }
 
-function updateMusiqueBar(){
+function updateMusiqueBar(){ // met a jour la bar de progression et met a jour la musique lorsqu'on l'avance
 
     let max = getDuration()-1;
     document.getElementById('range-test').max = max;
@@ -937,7 +946,7 @@ function updateMusiqueBar(){
     });
 }
 
-function boucle(){
+function boucle(){ // rejoue la musique un fois fini ou non
     if(document.getElementById('player').loop == true){
         console.log('false');
         document.getElementById('player').loop = false;
@@ -950,37 +959,37 @@ function boucle(){
     }
 }
 
-function getDuration(){
+function getDuration(){ // retourne la durrée de la musique
     let x = document.getElementById('player');
     x.play();
     return parseInt(x.duration);
 }
 
-function getCurrentTime(){
+function getCurrentTime(){ // retourne le temps auquel on est
     let x = document.getElementById('player');
     x.play();
     return parseInt(x.currentTime);
 }
 
-function setCurrentTime(k){
+function setCurrentTime(k){ // change le temps auquel on est
     let x = document.getElementById('player');
     x.play();
     x.currentTime = k;
 }
 
-function plus5s(){
+function plus5s(){ // avance de 5 seconde dans le morceau
     let x = document.getElementById('player');
     x.play();
     x.currentTime += 5;
 }
 
-function moins5s(){
+function moins5s(){ // recule de 5 seconde dans le morceau
     let x = document.getElementById('player');
     x.play();
     x.currentTime -= 5;
 }
 
-function setVolume(){
+function setVolume(){ // gère la barre de volume
     
     volume_bar.addEventListener("change", () => {
         const vol = volume_bar.value ;
@@ -1001,6 +1010,4 @@ function setVolume(){
 let volume_bar = document.getElementById('volume-bar');
 volume_bar.value = document.getElementById('player').volume*10;
 
-console.log(volume_bar.value);
-
-setInterval(setVolume, 100);
+setInterval(setVolume, 100); // met a jour le volume
